@@ -4,9 +4,12 @@ using System.Collections;
 public class ClickTest: MonoBehaviour {
     
 
-
+	public string lastClick;
+	public GameObject our_button;
 	// Use this for initialization
 	void Start () {
+		our_button = GameObject.Find("Button");
+		our_button.SetActive (false);
 	
 	}
 	// Update is called once per frame
@@ -19,18 +22,21 @@ public class ClickTest: MonoBehaviour {
             {
                 Debug.Log("object clicked: "+hit.collider.name);
                 checkWindow0 = true;
+				lastClick = hit.collider.name;
+				our_button.SetActive (true);
             }
             if(hit.collider == null)
             {
                 Debug.Log("null");
                 checkWindow0 = false;
+				our_button.SetActive (false);
             }
         }
 	
 	}
 
     public bool checkWindow0 = false;
-
+	/*
     void OnGUI()
     {
         if (checkWindow0)
@@ -39,11 +45,14 @@ public class ClickTest: MonoBehaviour {
 
     void DoWindow0(int windowID)
     {
-        GUI.Button(new Rect(10, 30, 150, 20), "Increase Popularity");
+		if (GUI.RepeatButton(new Rect (10, 30, 150, 20), "Increase Popularity")) {
+			Debug.Log ("clicked");
+		}
+			
         GUI.Button(new Rect(160, 30, 150, 20), "Increase Money");
     }
 
-
+*/
 
    
 }
