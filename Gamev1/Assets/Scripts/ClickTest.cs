@@ -8,8 +8,8 @@ public class ClickTest: MonoBehaviour {
 	public GameObject our_button;
 	// Use this for initialization
 	void Start () {
-		our_button = GameObject.Find("Button");
-		our_button.SetActive (false);
+		our_button = GameObject.Find("PopupRegion");
+		our_button.SetActive (true);
 	
 	}
 	// Update is called once per frame
@@ -23,13 +23,13 @@ public class ClickTest: MonoBehaviour {
                 Debug.Log("object clicked: "+hit.collider.name);
                 checkWindow0 = true;
 				lastClick = hit.collider.name;
-				our_button.SetActive (true);
+                our_button.transform.localPosition = new Vector3(0, 0, 0);
             }
             if(hit.collider == null)
             {
                 Debug.Log("null");
                 checkWindow0 = false;
-				our_button.SetActive (false);
+                our_button.transform.localPosition = new Vector3(300, 300, 0);
             }
         }
 	
