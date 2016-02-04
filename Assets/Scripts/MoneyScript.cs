@@ -15,10 +15,10 @@ public class MoneyScript : MonoBehaviour {
 	}
 
 	private void UpdateMoneyText () {
-		int monVal = GameObject.Find ("West").GetComponent<RegionScript> ().moneyValue;
-		monVal += GameObject.Find ("South").GetComponent<RegionScript> ().moneyValue;
-		GameObject scoreTextObject = this.gameObject;
-		Text textComponent = scoreTextObject.GetComponent<Text>();
-		textComponent.text = string.Format("Money: {0}", monVal);
+//		int monVal = GameObject.Find ("West").GetComponent<RegionScript> ().moneyValue;
+//		monVal += GameObject.Find ("South").GetComponent<RegionScript> ().moneyValue;
+//		GameObject scoreTextObject = this.gameObject;
+//		Text textComponent = scoreTextObject.GetComponent<Text>();
+//		textComponent.text = string.Format("Money: {0}", monVal);
 	}
 }

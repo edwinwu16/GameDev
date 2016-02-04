@@ -16,11 +16,11 @@ public class PopularityScript : MonoBehaviour {
 	}
 
 	private void UpdatePopularityText () {
-		int popVal = GameObject.Find ("West").GetComponent<RegionScript> ().popularityValue;
-		popVal += GameObject.Find ("South").GetComponent<RegionScript> ().popularityValue;
-		GameObject scoreTextObject = this.gameObject;
-		Text textComponent = scoreTextObject.GetComponent<Text>();
-		textComponent.text = string.Format("Popularity: {0}", popVal);
+//		int popVal = GameObject.Find ("West").GetComponent<RegionScript> ().popularityValue;
+//		popVal += GameObject.Find ("South").GetComponent<RegionScript> ().popularityValue;
+//		GameObject scoreTextObject = this.gameObject;
+//		Text textComponent = scoreTextObject.GetComponent<Text>();
+//		textComponent.text = string.Format("Popularity: {0}", popVal);
 	}
 		
 }

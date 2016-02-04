@@ -24,6 +24,7 @@ public class ClickTest: MonoBehaviour {
             {
                 Debug.Log("object clicked: "+hit.collider.name);
 				lastClick = hit.collider.name;
+				Debug.Log ("LastClick " + lastClick);
                 popupregion.transform.localPosition = new Vector3(0, 0, 0);
 				_popupisup = true;
             }
@@ -36,23 +37,4 @@ public class ClickTest: MonoBehaviour {
         }
 	
 	}
-			/*
-    void OnGUI()
-    {
-        if (checkWindow0)
-            GUI.Window(0, new Rect(110, 10, 310, 60), DoWindow0, "Basic Window");
-    }
-
-    void DoWindow0(int windowID)
-    {
-		if (GUI.RepeatButton(new Rect (10, 30, 150, 20), "Increase Popularity")) {
-			Debug.Log ("clicked");
-		}
-			
-        GUI.Button(new Rect(160, 30, 150, 20), "Increase Money");
-    }
-
-*/
-
-   
 }
