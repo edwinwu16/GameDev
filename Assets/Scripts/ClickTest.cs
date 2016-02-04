@@ -5,38 +5,38 @@ public class ClickTest: MonoBehaviour {
     
 
 	public string lastClick;
-	public GameObject our_button;
+	public GameObject popupregion;
+	private bool _popupisup;
 	// Use this for initialization
 	void Start () {
-		our_button = GameObject.Find("PopupRegion");
-		our_button.SetActive (true);
-	
+		popupregion = GameObject.Find("PopupRegion");
+		popupregion.SetActive (true);
+		popupregion.transform.localPosition = new Vector3 (500.0F, 500.0F, 0.0F);
+		_popupisup = false;
 	}
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0)){
+		if (Input.GetMouseButtonDown(0)){
             Debug.Log("Pressed left click.");
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
  
-            if(hit.collider != null)
+			if(hit.collider != null && !_popupisup)
             {
                 Debug.Log("object clicked: "+hit.collider.name);
-                checkWindow0 = true;
 				lastClick = hit.collider.name;
-                our_button.transform.localPosition = new Vector3(0, 0, 0);
+                popupregion.transform.localPosition = new Vector3(0, 0, 0);
+				_popupisup = true;
             }
             if(hit.collider == null)
             {
                 Debug.Log("null");
-                checkWindow0 = false;
-                our_button.transform.localPosition = new Vector3(300, 300, 0);
+				_popupisup = false;
+                popupregion.transform.localPosition = new Vector3(500, 500, 0);
             }
         }
 	
 	}
-
-    public bool checkWindow0 = false;
-	/*
+			/*
     void OnGUI()
     {
         if (checkWindow0)
