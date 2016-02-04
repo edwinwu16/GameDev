@@ -6,7 +6,7 @@ public class RegionScript : MonoBehaviour {
 	public int popularityValue;
 	public int moneyValue;
 	public Button region;
-//	public GameObject maincamera;
+	public GameObject maincamera;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +21,7 @@ public class RegionScript : MonoBehaviour {
 	}
 
 	private void sendClick() {
-//		maincamera.SendMessage ("ShowBox");
+		maincamera.SendMessage ("ShowBox");
 		Debug.Log (region.name + "clicked");
 	}
 }
