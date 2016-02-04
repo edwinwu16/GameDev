@@ -42,7 +42,7 @@ public class PopupScript : MonoBehaviour {
 		Debug.Log (regions [clickedregion].money);
 	}
 
-	public int getTotalPopularity() {
+	public void getTotalPopularity() {
 		int popularity = 0;
 		foreach(KeyValuePair<string, Region> entry in regions) {
 			popularity += entry.Value.popularity;
@@ -50,7 +50,7 @@ public class PopupScript : MonoBehaviour {
 		return popularity;
 	}
 
-	public int getTotalMoney() {
+	public void getTotalMoney() {
 		int money = 0;
 		foreach(KeyValuePair<string, Region> entry in regions) {
 			money += entry.Value.money;
