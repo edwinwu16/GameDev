@@ -43,7 +43,19 @@ public class PopupScript : MonoBehaviour {
 	}
 
 	public int getTotalPopularity() {
-		return 0;
+		int popularity = 0;
+		foreach(KeyValuePair<string, Region> entry in regions) {
+			popularity += entry.Value.popularity;
+		}
+		return popularity;
+	}
+
+	public int getTotalMoney() {
+		int money = 0;
+		foreach(KeyValuePair<string, Region> entry in regions) {
+			money += entry.Value.money;
+		}
+		return money;
 	}
 
 	public void SetClickedRegion(string region) {
