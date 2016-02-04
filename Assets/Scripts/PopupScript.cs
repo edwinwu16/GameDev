@@ -7,10 +7,11 @@ public class PopupScript : MonoBehaviour {
     public GameObject popupregion;
     public int totalmoney;
     public int totalpop;
-    private string currentregion;
+    private string clickedregion;
 	public Region west = new Region(0, 0, "West");
 	public Region south = new Region(0, 0, "South");
-	public Dictionary<string, Region> regions = new Dictionary<string, Region> (); 
+	public Dictionary<string, Region> regions = new Dictionary<string, Region> ();
+
 	// Use this for initialization
 	void Start () {
 		var index = 10; 
@@ -29,21 +30,26 @@ public class PopupScript : MonoBehaviour {
     public void onClick()
     {
         Debug.Log("clicked button");
-//        GameObject.Find(currentregion).GetComponent<RegionScript>().moneyValue += moneyinc;
-//        GameObject.Find(currentregion).GetComponent<RegionScript>().popularityValue += popinc;
-//        popupregion.transform.localPosition = new Vector3(300, 300, 0);
     }
 
 	public void IncreasePopularity(int amount) {
-		currentregion = maincamera.GetComponent<ClickTest>().lastClick;
-		Debug.Log (currentregion);
-		regions [currentregion].popularity += amount;
-		Debug.Log (currentregion + regions [currentregion].popularity);
+		regions [clickedregion].popularity += amount;
+		Debug.Log (regions [clickedregion].popularity);
+	}
+
+	public void IncreaseMoney(int amount) {
+		regions [clickedregion].money += amount;
+		Debug.Log (regions [clickedregion].money);
 	}
 
 	public int getTotalPopularity() {
 		return 0;
 	}
+
+	public void SetClickedRegion(string region) {
+		clickedregion = region;
+	}
+			
 }
 	
 public class Region {
