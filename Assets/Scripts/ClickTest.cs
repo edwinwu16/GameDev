@@ -8,10 +8,11 @@ public class ClickTest: MonoBehaviour {
 	public GameObject popupregion;
 	private bool _popupisup;
 	// Use this for initialization
+	private Vector3 _hidelocation = new Vector3 (800.0F, 800.0F, 0.0F);
 	void Start () {
 		popupregion = GameObject.Find("PopupRegion");
 		popupregion.SetActive (true);
-		popupregion.transform.localPosition = new Vector3 (500.0F, 500.0F, 0.0F);
+		popupregion.transform.localPosition = _hidelocation;
 		_popupisup = false;
 	}
 	// Update is called once per frame
@@ -42,7 +43,7 @@ public class ClickTest: MonoBehaviour {
 		_popupisup = true;
 	}
 	void HideBox() {
-		popupregion.transform.localPosition = new Vector3 (500, 500, 0);
+		popupregion.transform.localPosition = _hidelocation;
 		_popupisup = false;
 	}
 }

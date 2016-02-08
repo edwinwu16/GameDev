@@ -1,47 +1,37 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+ty
+Temp/
+Obj/
+Library/
+UnityPlayer_Symbols.pdb
 
-# Folder config file
-Desktop.ini
+# MonoDevelop user-specific
+*.userprefs
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Visual Studio build artifacts
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Visual Studio user-specific
+*.suo
+*.user
+*.sln.docstates
 
-# Windows shortcuts
-*.lnk
+# Debug artifacts
+*.mdb
+*.mdb.meta
+*.pdb
+*.pdb.meta
 
-# =========================
-# Operating System Files
-# =========================
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
 
-# OSX
-# =========================
-
+# OS metadata
 .DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+Thumbs.db
+Thumbs.db.meta
+Desktop.ini
+*~
