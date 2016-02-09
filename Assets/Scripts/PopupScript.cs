@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PopupScript : MonoBehaviour {
+	public string string1;
     public GameObject maincamera;
     public GameObject popupregion;
     public int totalmoney;
