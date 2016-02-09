@@ -45,14 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ClickTest.cs" />
-     <Compile Include="Assets\Scripts\IncreasePopularityorMoneyScript.cs" />
-     <Compile Include="Assets\Scripts\MoneyScript.cs" />
-     <Compile Include="Assets\Scripts\PopularityScript.cs" />
-     <Compile Include="Assets\Scripts\PopupScript.cs" />
-     <Compile Include="Assets\Scripts\RegionScript.cs" />
-     <Compile Include="Assets\Scripts\USAScript.cs" />
-     <Compile Include="Assets\Scripts\XPopupRegionScript.cs" />
+     <Compile Include="Assets\Scripts\Battle Scripts\BattleScript.cs" />
+     <Compile Include="Assets\Scripts\Battle Scripts\FighterScript.cs" />
+     <Compile Include="Assets\Scripts\Battle Scripts\HealthBarScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\ClickTest.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\IncreasePopularityorMoneyScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\MoneyScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\PopularityScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\PopupScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\RegionScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\USAScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\XPopupRegionScript.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
