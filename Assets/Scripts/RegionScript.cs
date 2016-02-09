@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class RegionScript : MonoBehaviour {
 	public int popularityValue;
-	public int moneyValue;
 	public Button region;
 	public GameObject maincamera;
 	public GameObject popup;
@@ -12,7 +11,6 @@ public class RegionScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		popularityValue = 70;
-		moneyValue = 69;
 		region.onClick.AddListener(() => sendClick());
 	}
 	

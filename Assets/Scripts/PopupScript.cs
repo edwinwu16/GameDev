@@ -7,6 +7,7 @@ public class PopupScript : MonoBehaviour {
     public GameObject popupregion;
     public int totalmoney;
     public int totalpop;
+	public GameObject USA;
     private string clickedregion;
 	public Region west = new Region(0, 0, "West");
 	public Region south = new Region(0, 0, "South");
@@ -38,8 +39,7 @@ public class PopupScript : MonoBehaviour {
 	}
 
 	public void IncreaseMoney(int amount) {
-		regions [clickedregion].money += amount;
-		Debug.Log (regions [clickedregion].money);
+		USA.GetComponent<USAScript>().money += amount;
 	}
 
 	public int getTotalPopularity() {
@@ -51,11 +51,7 @@ public class PopupScript : MonoBehaviour {
 	}
 
 	public int getTotalMoney() {
-		int money = 0;
-		foreach(KeyValuePair<string, Region> entry in regions) {
-			money += entry.Value.money;
-		}
-		return money;
+		return USA.GetComponent<USAScript>().money;
 	}
 
 	public void SetClickedRegion(string region) {

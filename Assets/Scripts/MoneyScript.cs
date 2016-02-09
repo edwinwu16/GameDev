@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class MoneyScript : MonoBehaviour {
-	public GameObject popup;
+	public GameObject USA;
 	// Use this for initialization
 	void Start () {
 		UpdateMoneyText ();
@@ -15,7 +15,7 @@ public class MoneyScript : MonoBehaviour {
 	}
 
 	private void UpdateMoneyText () {
-		int money = popup.GetComponent<PopupScript> ().getTotalMoney ();
+		int money = USA.GetComponent<USAScript> ().money;
 		GameObject scoreTextObject = this.gameObject;
 		Text textComponent = scoreTextObject.GetComponent<Text>();
 		textComponent.text = string.Format("Money: {0}", money);
