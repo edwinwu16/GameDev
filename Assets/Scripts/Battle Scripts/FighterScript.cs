@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FighterScript : MonoBehaviour {
 	public float health = 1f;
 	public GameObject fighter;
+
 	// Use this for initialization
 	void Start () {
 	
