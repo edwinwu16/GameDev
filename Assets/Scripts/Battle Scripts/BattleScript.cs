@@ -74,11 +74,15 @@ public class BattleScript : MonoBehaviour {
 //			StartCoroutine (BlinkArrow ());
 			} else {
 				if (_myturn) {
-					if (Input.GetKeyDown (KeyCode.A)) {
-						GenerateMyAttack (0, trump, hilary);
+//					if (Input.GetKeyDown (KeyCode.UpArrow))
+//						NavigateMoveMenu (KeyCode.UpArrow);
+//					if (Input.GetKeyDown (KeyCode.DownArrow))
+//						NavigateMoveMenu (KeyCode.DownArrow);
+//					if (Input.GetKeyDown (KeyCode.Return))
+//						NavigateMoveMenu (KeyCode.Return);
 //					EndMyTurn ();
 //					GenerateOpponentAttack (trump);
-					}
+
 					if (Input.GetKeyDown (KeyCode.S)) {
 						GenerateMyAttack (1, trump, hilary);
 //					EndMyTurn ();
@@ -158,6 +162,14 @@ public class BattleScript : MonoBehaviour {
 			}
 					vibecount += 1;
 		}
+	}
+	void NavigateMoveMenu(KeyCode key){
+		Debug.Log (key);
+
+	}
+	void HideMoveMenu(){
+	}
+	void ShowMoveMenu(){
 	}
 //	IEnumerator BlinkArrow() {
 //		bool _hasarrow = false;

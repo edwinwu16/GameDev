@@ -12,6 +12,10 @@ public class PopupScript : MonoBehaviour {
 	private string clickedregion;
 	public Button incpopbutton;
 	public Button incmoneybutton;
+
+	public Text daysuntilelection;
+	public GameObject gameoverpopup;
+
 	public Region west = new Region(0.0F, "West");
 	public Region south = new Region(0.0F, "South");
 	public Dictionary<string, Region> regions = new Dictionary<string, Region> ();
@@ -22,7 +26,7 @@ public class PopupScript : MonoBehaviour {
 		new KeyValuePair<string, float[]>("Television Campaign", new float[] {-150.0F, 40F}),
 		new KeyValuePair<string, float[]>("Print Campaign", new float[]{-200.0F, 50F}),
 		new KeyValuePair<string, float[]>("General Uplifting Talk at School", new float []{-10, 150F}),
-		new KeyValuePair<string, float[]>("Environmental Talk", new float []{-150.0F, .20F})
+		new KeyValuePair<string, float[]>("Environmental Talk", new float []{-150.0F, 20F})
 	};
 
 	private List<KeyValuePair<string, float[]>> buttons_general_incmon = new List<KeyValuePair<string, float[]>>(){
@@ -48,18 +52,7 @@ public class PopupScript : MonoBehaviour {
 		regions.Add ("West", west);
 		regions.Add ("South", south);
 		Debug.Log (regions ["South"].popularity);
-
-		int incpopoption = Random.Range(0, buttons_general_incpop.Count);
-		int incmonoption = Random.Range(0, buttons_general_incmon.Count);
-
-
-		incpopbutton.GetComponentInChildren<Text>().text = buttons_general_incpop[incpopoption].Key;
-		incpopbutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreaseMoney = buttons_general_incpop[incpopoption].Value[0];
-		incpopbutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incpop[incpopoption].Value[1];
-		incmoneybutton.GetComponentInChildren<Text>().text = buttons_general_incmon[incmonoption].Key;
-		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreaseMoney = buttons_general_incmon[incmonoption].Value[0];
-		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incmon[incmonoption].Value[1];
-
+		newButtons();
 
 	}
 
@@ -67,6 +60,9 @@ public class PopupScript : MonoBehaviour {
 	void Update () {
 
 	}
+
+
+
 
 	public void onClick()
 	{
@@ -101,6 +97,33 @@ public class PopupScript : MonoBehaviour {
 
 	public void SetClickedRegion(string region) {
 		clickedregion = region;
+	}
+	public void newButtons()
+	{
+		int incpopoption = Random.Range(0, buttons_general_incpop.Count);
+		int incmonoption = Random.Range(0, buttons_general_incmon.Count);
+
+
+		incpopbutton.GetComponentInChildren<Text>().text = buttons_general_incpop[incpopoption].Key;
+		incpopbutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreaseMoney = buttons_general_incpop[incpopoption].Value[0];
+		incpopbutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incpop[incpopoption].Value[1];
+		incmoneybutton.GetComponentInChildren<Text>().text = buttons_general_incmon[incmonoption].Key;
+		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreaseMoney = buttons_general_incmon[incmonoption].Value[0];
+		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incmon[incmonoption].Value[1];
+	}
+
+	public void decrementDaysLeft()
+	{
+		daysuntilelection.GetComponent<DaysUntilElectionScript>().daysLeft -= 1;
+	}
+
+	public void gameOver()
+	{
+		gameoverpopup.GetComponent<GameOverPopupScript>().gameOver(getTotalPopularity());
+	}
+	public void switchtoBattleScene()
+	{
+		Application.LoadLevel(1);
 	}
 
 }

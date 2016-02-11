@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\Battle Scripts\FighterScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\HealthBarScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\ClickTest.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\DaysUntilElectionScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\GameOverPopupScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\IncreasePopularityorMoneyScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\MoneyScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\PopularityScript.cs" />
