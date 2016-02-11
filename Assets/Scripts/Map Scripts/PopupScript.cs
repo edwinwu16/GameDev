@@ -18,6 +18,8 @@ public class PopupScript : MonoBehaviour {
 
 	public Region west = new Region(0.0F, "West");
 	public Region south = new Region(0.0F, "South");
+	public Region midwest = new Region (0.0F, "Midwest");
+	public Region newengland = new Region (0.0F, "NewEngland");
 	public Dictionary<string, Region> regions = new Dictionary<string, Region> ();
 	private List<KeyValuePair<string, float[]>> buttons_general_incpop = new List<KeyValuePair<string, float[]>>()
 	{
@@ -51,6 +53,8 @@ public class PopupScript : MonoBehaviour {
 		south.popularity = 15.0F;
 		regions.Add ("West", west);
 		regions.Add ("South", south);
+		regions.Add ("Midwest", midwest);
+		regions.Add ("NewEngland", newengland);
 		Debug.Log (regions ["South"].popularity);
 		newButtons();
 
