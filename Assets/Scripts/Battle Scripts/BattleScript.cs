@@ -11,7 +11,10 @@ public class BattleScript : MonoBehaviour {
 	private Dictionary<GameObject, List<Attack>> movelist = new Dictionary<GameObject,  List<Attack>>();
 	private bool _myturn;
 	public Text poketext;
+	public Text hilaryHealthText;
+	public Text trumpHealthText;
 	private bool _pausestate = false;
+	public bool _gameover = false;
 	public class Attack{
 		public string name;
 		public float dmg;
@@ -25,17 +28,17 @@ public class BattleScript : MonoBehaviour {
 	void Start () {
 		_myturn = false;
 		List<Attack> hilaryattacks = new List<Attack> ();
-		hilaryattacks.Add(new Attack ("h1", 0.1f));
-		hilaryattacks.Add(new Attack ("h2!", 0.2f));
-		hilaryattacks.Add(new Attack ("h3", 0.18f));
-		hilaryattacks.Add(new Attack ("h4", 0.1f));
+		hilaryattacks.Add(new Attack ("h1", 100f));
+		hilaryattacks.Add(new Attack ("h2!", 20f));
+		hilaryattacks.Add(new Attack ("h3", 18f));
+		hilaryattacks.Add(new Attack ("h4", 10f));
 		movelist.Add(hilary, hilaryattacks);
 
 		List<Attack> trumpattacks = new List<Attack> ();
-		trumpattacks.Add(new Attack ("t1", 0.1f));
-		trumpattacks.Add(new Attack ("t2", 0.2f));
-		trumpattacks.Add(new Attack ("t3", 0.18f));
-		trumpattacks.Add(new Attack ("t4", 0.21f));
+		trumpattacks.Add(new Attack ("t1", 10f));
+		trumpattacks.Add(new Attack ("t2", 20f));
+		trumpattacks.Add(new Attack ("t3", 18f));
+		trumpattacks.Add(new Attack ("t4", 25f));
 		movelist.Add(trump, trumpattacks);
 
 		BeginMyTurn ();
@@ -43,42 +46,57 @@ public class BattleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (_pausestate) {
-			if (Input.GetKeyDown (KeyCode.Space)) {
-				Debug.Log ("SPACEY");
-				_pausestate = false;
-				if (_myturn) {
-					EndMyTurn ();
-					GenerateOpponentAttack (trump);
-				} else {
-					BeginMyTurn ();
+		HealthUpdate (hilary, hilaryHealthText);
+		HealthUpdate (trump, trumpHealthText);
+		if (!_gameover) {
+			if (_pausestate) {
+				if (Input.GetKeyDown (KeyCode.Space)) {
+					Debug.Log ("SPACEY");
+					_pausestate = false;
+					if (hilary.GetComponent<FighterScript> ().health <= 0) {
+						StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
+						Debug.Log ("someone lost");
+						_gameover = true;
+					} else if (trump.GetComponent<FighterScript> ().health <= 0) {
+						StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
+						_gameover = true;
+						Debug.Log ("someone lost");
+					} else {
+						if (_myturn) {
+							EndMyTurn ();
+							GenerateOpponentAttack (trump);
+						} else {
+							BeginMyTurn ();
+						}
+					}
 				}
-			}
+
 //			StartCoroutine (BlinkArrow ());
-		} else {
-			if (_myturn) {
-				if (Input.GetKeyDown (KeyCode.A)) {
-					GenerateMyAttack (0, trump, hilary);
+			} else {
+				if (_myturn) {
+					if (Input.GetKeyDown (KeyCode.A)) {
+						GenerateMyAttack (0, trump, hilary);
 //					EndMyTurn ();
 //					GenerateOpponentAttack (trump);
-				}
-				if (Input.GetKeyDown (KeyCode.S)) {
-					GenerateMyAttack (1, trump, hilary);
+					}
+					if (Input.GetKeyDown (KeyCode.S)) {
+						GenerateMyAttack (1, trump, hilary);
 //					EndMyTurn ();
 //					GenerateOpponentAttack (trump);
-				}
-				if (Input.GetKeyDown (KeyCode.D)) {
-					GenerateMyAttack (2, trump, hilary);
+					}
+					if (Input.GetKeyDown (KeyCode.D)) {
+						GenerateMyAttack (2, trump, hilary);
 //					EndMyTurn ();
 //					GenerateOpponentAttack (trump);
-				}
-				if (Input.GetKeyDown (KeyCode.F)) {
-					GenerateMyAttack (3, trump, hilary);
+					}
+					if (Input.GetKeyDown (KeyCode.F)) {
+						GenerateMyAttack (3, trump, hilary);
 //					EndMyTurn ();
 //					GenerateOpponentAttack (trump);
+					}
 				}
 			}
-		} 
+		}
 	}
 	void BeginMyTurn() {
 		_myturn = true;
@@ -94,14 +112,16 @@ public class BattleScript : MonoBehaviour {
 		Debug.Log (randi);
 		Attack randattack = movelist [opponent] [randi];
 		hilary.GetComponent<FighterScript> ().health -= randattack.dmg;
-		string opponentname = opponent.GetComponent<FighterScript> ().name;
+		string opponentname = opponent.GetComponent<FighterScript> ().fightername;
 		StartCoroutine(AnimateText(opponentname + " used " + randattack.name + "\u25BC"));
+		StartCoroutine(AnimateSprite (hilary));
 	}
 
 	void GenerateMyAttack(int attackindex, GameObject opponent, GameObject me) {
 		Attack attack = movelist [me] [attackindex];
 		opponent.GetComponent<FighterScript> ().health -= attack.dmg;
 		StartCoroutine(AnimateText("You used " + attack.name + "\u25BC"));
+		StartCoroutine(AnimateSprite (opponent));
 		_pausestate = true;
 	}
 
@@ -112,6 +132,31 @@ public class BattleScript : MonoBehaviour {
 			str += strComplete[i++];
 			poketext.GetComponent<Text> ().text = str;
 			yield return new WaitForSeconds(0.03F);
+		}
+	}
+
+	void HealthUpdate(GameObject fighter, Text fightertext){
+		if (fighter.GetComponent<FighterScript> ().health <= 0)
+			fighter.GetComponent<FighterScript> ().health = 0;
+		fightertext.GetComponent<Text> ().text = fighter.GetComponent<FighterScript> ().health + "/" + fighter.GetComponent<FighterScript> ().maxhealth;
+
+	}
+	IEnumerator AnimateSprite(GameObject fighter){
+		int vibecount = 0;
+		bool lastright = true;
+		while (vibecount < 8) {
+			if (lastright) {
+				fighter.transform.Translate (20, 0, 0);
+				lastright = false;
+				yield return new WaitForSeconds(0.1f);
+
+			}
+			else {
+				fighter.transform.Translate (-20, 0, 0);
+				lastright = true;
+				yield return new WaitForSeconds(0.05f);
+			}
+					vibecount += 1;
 		}
 	}
 //	IEnumerator BlinkArrow() {
