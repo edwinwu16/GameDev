@@ -7,6 +7,19 @@ public class FighterScript : MonoBehaviour {
 	public float maxhealth = 100f;
 	public GameObject fighter;
 	public string fightername;
+
+	public string attack1name;
+	public float attack1damage;
+
+	public string attack2name;
+	public float attack2damage;
+
+	public string attack3name;
+	public float attack3damage;
+
+	public string attack4name;
+	public float attack4damage;
+
 	// Use this for initialization
 	void Start () {
 	

@@ -10,10 +10,8 @@ public class HealthBarScript : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
+//	 Update is called once per frame
 	void Update () {
 		healthBarSlider.value = fighter.GetComponent<FighterScript> ().health / fighter.GetComponent<FighterScript>().maxhealth;
-
 	}
-
 }
