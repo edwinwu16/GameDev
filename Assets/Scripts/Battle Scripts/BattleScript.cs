@@ -26,6 +26,14 @@ public class BattleScript : MonoBehaviour {
 
 	public GameObject attackselector;
 
+	private Vector3 attack1textselectionlocation = new Vector3(16.2f, -29.2f, 0f);
+	private Vector3 attack2textselectionlocation = new Vector3(16.2f, -47.6f, 0f);
+	private Vector3 attack3textselectionlocation = new Vector3(16.2f, -71.8f, 0f);
+	private Vector3 attack4textselectionlocation = new Vector3(16.2f, -90.2f, 0f);
+
+	public int currentattackselectorchoice = 1;
+
+	public List<Vector3> attacktextselectionlocations = new List<Vector3>();
 
 	public class Attack{
 		public string name;
@@ -38,6 +46,13 @@ public class BattleScript : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		attacktextselectionlocations.Add(attack1textselectionlocation);
+		attacktextselectionlocations.Add(attack2textselectionlocation);
+		attacktextselectionlocations.Add(attack3textselectionlocation);
+		attacktextselectionlocations.Add(attack4textselectionlocation);
+
+		attackselector.transform.localPosition = attacktextselectionlocations [currentattackselectorchoice];
+
 		_myturn = false;
 		List<GameObject> opponents = new List<GameObject> ();
 		opponents.Add (trump);
@@ -84,40 +99,17 @@ public class BattleScript : MonoBehaviour {
 //			StartCoroutine (BlinkArrow ());
 			} else {
 				if (_myturn) {
-//					if (Input.GetKeyDown (KeyCode.UpArrow))
-//						NavigateMoveMenu (KeyCode.UpArrow);
-//					if (Input.GetKeyDown (KeyCode.DownArrow))
-//						NavigateMoveMenu (KeyCode.DownArrow);
-//					if (Input.GetKeyDown (KeyCode.Return))
-//						NavigateMoveMenu (KeyCode.Return);
-//					EndMyTurn ();
-//					GenerateOpponentAttack (trump);
+					if (Input.GetKeyDown (KeyCode.UpArrow))
+						NavigateMoveMenu (KeyCode.UpArrow);
+					if (Input.GetKeyDown (KeyCode.DownArrow))
+						NavigateMoveMenu (KeyCode.DownArrow);
+					if (Input.GetKeyDown (KeyCode.Return))
+						NavigateMoveMenu (KeyCode.Return);
 
-					if (Input.GetKeyDown (KeyCode.S)) {
-						GenerateMyAttack (1, trump, hilary);
-						HideMoveMenu ();
-						ShowPokeText ();
-//					EndMyTurn ();
-//					GenerateOpponentAttack (trump);
-					}
-					if (Input.GetKeyDown (KeyCode.D)) {
-						GenerateMyAttack (2, trump, hilary);
-						HideMoveMenu ();
-						ShowPokeText ();
-//					EndMyTurn ();
-//					GenerateOpponentAttack (trump);
-					}
-					if (Input.GetKeyDown (KeyCode.F)) {
-						GenerateMyAttack (3, trump, hilary);
-						HideMoveMenu ();
-						ShowPokeText ();
-//					EndMyTurn ();
-//					GenerateOpponentAttack (trump);
 					}
 				}
 			}
 		}
-	}
 	void BeginMyTurn() {
 		_myturn = true;
 		ShowMoveMenu ();
@@ -183,7 +175,27 @@ public class BattleScript : MonoBehaviour {
 		}
 	}
 	void NavigateMoveMenu(KeyCode key){
-		Debug.Log (key);
+//		Debug.Log ("CURKEY" + key);
+//		Debug.Log ("CURRATACKSELECTOR" + currentattackselectorchoice);
+		if (key == KeyCode.DownArrow) {
+			currentattackselectorchoice += 1;
+			if (currentattackselectorchoice == 4) {
+				currentattackselectorchoice = 3;
+			}
+		}
+		if (key == KeyCode.UpArrow) {
+			currentattackselectorchoice -= 1;
+			if (currentattackselectorchoice == -1) {
+				currentattackselectorchoice = 0;
+			}
+		}
+		attackselector.transform.localPosition = attacktextselectionlocations [currentattackselectorchoice];
+		if (key == KeyCode.Return) {
+			GenerateMyAttack (currentattackselectorchoice, trump, hilary);
+//			Debug.Log ("HIT RETURN YO");
+			HideMoveMenu ();
+			ShowPokeText ();
+		}
 	}
 	void HideMoveMenu(){
 		attackmenu.SetActive (false);
