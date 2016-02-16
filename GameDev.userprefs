@@ -2,9 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Battle Scripts/BattleScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/Battle Scripts/BattleScript.cs" Line="10" Column="21" />
-      <File FileName="Assets/Scripts/Battle Scripts/FighterScript.cs" Line="8" Column="21" />
-      <File FileName="Assets/Scripts/Battle Scripts/HealthBarScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Map Scripts/DaysUntilElectionScript.cs" Line="29" Column="15" />
+      <File FileName="Assets/Scripts/Battle Scripts/HealthBarScript.cs" Line="12" Column="2" />
+      <File FileName="Assets/Scripts/Battle Scripts/BattleScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Battle Scripts/FighterScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Map Scripts/PopupScript.cs" Line="86" Column="43" />
+      <File FileName="Assets/Scripts/Map Scripts/IncreasePopularityorMoneyScript.cs" Line="25" Column="1" />
+      <File FileName="Assets/Scripts/Map Scripts/GameOverPopupScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Map Scripts/ClickTest.cs" Line="19" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

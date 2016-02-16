@@ -24,11 +24,11 @@ public class DaysUntilElectionScript : MonoBehaviour {
             _gameovercalled = true;
             popup.GetComponent<PopupScript>().gameOver();
         }
-        if (daysLeft % 10 != 0 & _scenenotswitched)
+        else if (daysLeft % 10 != 0 & _scenenotswitched)
         {
             _scenenotswitched = false;
         }
-        if (daysLeft % 10 ==0 & !_scenenotswitched)
+        else if (daysLeft % 10 ==0 & !_scenenotswitched)
         {
             _scenenotswitched = true;
             popup.GetComponent<PopupScript>().switchtoBattleScene();

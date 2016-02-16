@@ -26,12 +26,14 @@ public class BattleScript : MonoBehaviour {
 
 	public GameObject attackselector;
 
-	private Vector3 attack1textselectionlocation = new Vector3(16.2f, -29.2f, 0f);
-	private Vector3 attack2textselectionlocation = new Vector3(16.2f, -47.6f, 0f);
-	private Vector3 attack3textselectionlocation = new Vector3(16.2f, -71.8f, 0f);
-	private Vector3 attack4textselectionlocation = new Vector3(16.2f, -90.2f, 0f);
+	private Vector3 attack1textselectionlocation = new Vector3(-83f, -135f, 0f);
+	private Vector3 attack2textselectionlocation = new Vector3(-83f, -156f, 0f);
+	private Vector3 attack3textselectionlocation = new Vector3(-83f, -177f, 0f);
+	private Vector3 attack4textselectionlocation = new Vector3(-83f, -198f, 0f);
 
 	public int currentattackselectorchoice = 1;
+	public GameObject maincanvas;
+	public GameObject battlecanvas;
 
 	public List<Vector3> attacktextselectionlocations = new List<Vector3>();
 
@@ -82,10 +84,14 @@ public class BattleScript : MonoBehaviour {
 						StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
 						Debug.Log ("someone lost");
 						_gameover = true;
+						maincanvas.SetActive (true);
+						battlecanvas.SetActive (false);
 					} else if (trump.GetComponent<FighterScript> ().health <= 0) {
 						StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
 						_gameover = true;
 						Debug.Log ("someone lost");
+						maincanvas.SetActive (true);
+						battlecanvas.SetActive (false);
 					} else {
 						if (_myturn) {
 							EndMyTurn ();

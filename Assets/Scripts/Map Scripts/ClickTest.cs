@@ -3,21 +3,24 @@ using System.Collections;
 
 public class ClickTest: MonoBehaviour {
 
-
+	public GameObject maincanvas;
+	public GameObject battlecanvas;
 	public string lastClick;
 	public GameObject popupregion;
 	private bool _popupisup;
 	// Use this for initialization
 	private Vector3 _hidelocation = new Vector3 (800.0F, 800.0F, 0.0F);
 	void Start () {
-		popupregion = GameObject.Find("PopupRegion");
-		popupregion.SetActive (true);
-		popupregion.transform.localPosition = _hidelocation;
 		_popupisup = false;
+		maincanvas.SetActive (true);
+		battlecanvas.SetActive (false);
+
+
 	}
 
 	public void ButtonClicked()
 	{
+		popupregion.SetActive (true);
 		popupregion.transform.localPosition = _hidelocation;
 		_popupisup = false;
 	}

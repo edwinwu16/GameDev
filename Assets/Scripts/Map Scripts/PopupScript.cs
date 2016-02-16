@@ -12,9 +12,11 @@ public class PopupScript : MonoBehaviour {
 	private string clickedregion;
 	public Button incpopbutton;
 	public Button incmoneybutton;
-
+	public GameObject maincanvas;
 	public Text daysuntilelection;
 	public GameObject gameoverpopup;
+	private bool initializedalready = false;
+	public GameObject battlecanvas;
 
 	public Region west = new Region(0.0F, "West");
 	public Region south = new Region(0.0F, "South");
@@ -49,14 +51,10 @@ public class PopupScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		var index = 10; 
-		south.popularity = 15.0F;
-		regions.Add ("West", west);
-		regions.Add ("South", south);
-		regions.Add ("Midwest", midwest);
-		regions.Add ("NewEngland", newengland);
-		Debug.Log (regions ["South"].popularity);
-		newButtons();
+		if (!initializedalready) {
+			InitializeShit ();
+			initializedalready = true;
+		}
 
 	}
 
@@ -65,7 +63,16 @@ public class PopupScript : MonoBehaviour {
 
 	}
 
-
+	void InitializeShit() {
+		var index = 10; 
+		south.popularity = 15.0F;
+		regions.Add ("West", west);
+		regions.Add ("South", south);
+		regions.Add ("Midwest", midwest);
+		regions.Add ("NewEngland", newengland);
+		Debug.Log (regions ["South"].popularity);
+		newButtons();
+	}
 
 
 	public void onClick()
@@ -127,7 +134,9 @@ public class PopupScript : MonoBehaviour {
 	}
 	public void switchtoBattleScene()
 	{
-		Application.LoadLevel(1);
+		battlecanvas.SetActive (true);
+		maincanvas.SetActive (false);
+		//maincanvas.SetActive (false);
 	}
 
 }
