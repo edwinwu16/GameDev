@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class XPopupRegionScript : MonoBehaviour {
 	public Button xButton;
 	public GameObject maincamera;
+	public GameObject campaignspopup;
 
 
 	// Use this for initialization
@@ -20,6 +21,8 @@ public class XPopupRegionScript : MonoBehaviour {
 	}
 	private void sendClick() {
 		maincamera.SendMessage ("HideBox");
+		campaignspopup.SendMessage("deleteCreated");
+		campaignspopup.SendMessage("deletePurchased");
 	}
 
 }
