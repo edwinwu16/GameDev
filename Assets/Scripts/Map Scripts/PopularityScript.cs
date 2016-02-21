@@ -21,7 +21,7 @@ public class PopularityScript : MonoBehaviour {
 		int popularity = popup.GetComponent<PopupScript> ().getTotalPopularity ();
 		GameObject scoreTextObject = this.gameObject;
 		Text textComponent = scoreTextObject.GetComponent<Text>();
-		textComponent.text = string.Format("Popularity: {0}", popularity);
+		textComponent.text = string.Format("Votes: {0}", popularity);
 
 	}
 		

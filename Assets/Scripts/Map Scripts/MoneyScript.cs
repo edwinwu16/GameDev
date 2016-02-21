@@ -15,9 +15,9 @@ public class MoneyScript : MonoBehaviour {
 	}
 
 	private void UpdateMoneyText () {
-		int money = USA.GetComponent<USAScript> ().money;
+		float money = USA.GetComponent<USAScript> ().money;
 		GameObject scoreTextObject = this.gameObject;
 		Text textComponent = scoreTextObject.GetComponent<Text>();
-		textComponent.text = string.Format("Money: {0}", money);
+		textComponent.text = string.Format("Money: {0:C}", money);
 	}
 }

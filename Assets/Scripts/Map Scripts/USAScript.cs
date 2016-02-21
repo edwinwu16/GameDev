@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class USAScript : MonoBehaviour {
-	public int money;
+	public float money;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,7 +14,7 @@ public class USAScript : MonoBehaviour {
 	
 	}
 
-	public int getMoney() {
+	public float getMoney() {
 		return money;
 	}
 	void increaseMoney(int amount) {

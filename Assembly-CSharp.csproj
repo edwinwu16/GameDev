@@ -45,19 +45,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Battle Scripts\BattleCanvasScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\BattleScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\FighterScript.cs" />
+     <Compile Include="Assets\Scripts\Battle Scripts\FinishBattleScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\HealthBarScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\AddAdvisorScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\AddCorpScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\AdvisorScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\ClickTest.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\CorpScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\DaysUntilElectionScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\GameOverPopupScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\IncreasePopularityorMoneyScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\IncrementWeekButton.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\ManageAdvisersButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\ManageCorporationsButtonScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\MoneyScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\PopularityScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\PopupScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\RegionScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\RemoveAdvisorScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\RemoveScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\USAScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\VoteBuyScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\VoteMarketPlaceButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\VoteScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\XAdviserPanelScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\XCorpPanelScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\XPopupRegionScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\XVotePanelScript.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

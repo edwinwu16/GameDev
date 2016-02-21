@@ -32,8 +32,7 @@ public class BattleScript : MonoBehaviour {
 	private Vector3 attack4textselectionlocation = new Vector3(-83f, -198f, 0f);
 
 	public int currentattackselectorchoice = 1;
-	public GameObject maincanvas;
-	public GameObject battlecanvas;
+	public GameObject finishbattlepanel;
 
 	public List<Vector3> attacktextselectionlocations = new List<Vector3>();
 
@@ -84,14 +83,15 @@ public class BattleScript : MonoBehaviour {
 						StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
 						Debug.Log ("someone lost");
 						_gameover = true;
-						maincanvas.SetActive (true);
-						battlecanvas.SetActive (false);
+						finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
+						finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
 					} else if (trump.GetComponent<FighterScript> ().health <= 0) {
 						StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
 						_gameover = true;
+						finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
+						finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
+
 						Debug.Log ("someone lost");
-						maincanvas.SetActive (true);
-						battlecanvas.SetActive (false);
 					} else {
 						if (_myturn) {
 							EndMyTurn ();
