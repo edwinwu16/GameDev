@@ -6,26 +6,47 @@ using System;
 
 public class Advisor{
 	public string name;
-	public string type;
+	public List<string> type;
 	public float price;
 	//public float weeklycost;
+    public List<int> tier;
 	public bool hired;
 
 
-	public Advisor(string n, string typ, float pr, bool isHired) {
+	public Advisor(string n, List<string> typ, float pr, List<int> ter) {
 		name = n;
 		type = typ;
 		price = pr;
+        tier = ter;
 		//weeklycost = wkcost;
-		hired = isHired;
 	}
 }
+
 
 public class AdvisorScript : MonoBehaviour {
 	
 
 	public List<Advisor> myAdvisors = new List<Advisor> ();
-	private List<Advisor> availableAdvisors = new List<Advisor> ();
+	public List<Advisor> availableAdvisors = new List<Advisor> ()
+    {
+        new Advisor("Charmander", new List<string>(){"Environment"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Bob", new List<string>(){"Finance"}, 100090.0F, new List<int>(){2}),
+        new Advisor("James", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
+        new Advisor("Charmander", new List<string>(){"Environment", "Finance"}, 100090.0F, new List<int>(){1, 2}),
+        new Advisor("imm", new List<string>(){"Immigration"}, 100090.0F, new List<int>(){2}),
+        new Advisor("John", new List<string>(){"Immigration"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Koch", new List<string>(){"Finance"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Oliver", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
+        new Advisor("W.", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
+        new Advisor("James Bond", new List<string>(){"Environment", "Healthcare"}, 100090.0F, new List<int>(){1, 1}),
+        new Advisor("Robert", new List<string>(){"Healthcare", "Finance"}, 100090.0F, new List<int>(){1, 1}),
+        new Advisor("asdf", new List<string>(){"Environment", "Immigration"}, 100090.0F, new List<int>(){1, 2}),
+        new Advisor("Asshat", new List<string>(){"Finance"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Tomorrow", new List<string>(){"Environment"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Espn", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){2}),
+        new Advisor("Fuego", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
+
+    };
 
 	public GameObject colski;
 	public GameObject rowski;
@@ -88,10 +109,6 @@ public class AdvisorScript : MonoBehaviour {
 
 
 	void PopulateAdvisors(){
-		myAdvisors.Add(new Advisor("Charmander", "Environment", 1000, false));
-		myAdvisors.Add(new Advisor("Squirtle", "Finance", 1500, false));
-		myAdvisors.Add(new Advisor("Bulbasaur", "Healthcare", 2000, false));
-		myAdvisors.Add(new Advisor("Pikachu", "Immigration", 3000, false));
 		}
 
 	public float GetTotalAdvisorCost(){
@@ -117,16 +134,22 @@ public class AdvisorScript : MonoBehaviour {
 			col2.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.name);
 			col2.transform.parent = newrowski.transform;
 			GameObject col3 = Instantiate (colski);
-			col3.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.type);
+            string type = "";
+            for (int k = 0; k < curadvisor.type.Count; k++)
+            {
+                type = type + curadvisor.type[k] + "(" + curadvisor.tier[k] + ") ";
+            }
+            col3.GetComponent<Text>().text = String.Format("{0:C}", type);
 			col3.transform.parent = newrowski.transform;
 			GameObject remove = Instantiate (removeadvisorbtn);
 			remove.GetComponent<RemoveAdvisorScript> ().index = i;
 			remove.GetComponent<RemoveAdvisorScript> ().advisorpanel = advisorpanel;
 			remove.transform.parent = newrowski.transform;
-		}
+		} 
 		GameObject blankrowski = Instantiate (rowski);
 		blankrowski.transform.parent = tableski.transform;
-		for (int i = 0; i < availableAdvisors.Count; i++) {
+		for (int j = 0; j < 3; j++) {
+            int i = UnityEngine.Random.Range(0, availableAdvisors.Count - 1);
 			Debug.Log ("availableAdvisors: " + availableAdvisors.Count);
 			GameObject newrowski = Instantiate (rowski);
 			Advisor curadvisor = availableAdvisors [i];
@@ -138,7 +161,14 @@ public class AdvisorScript : MonoBehaviour {
 			col2.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.name);
 			col2.transform.parent = newrowski.transform;
 			GameObject col3 = Instantiate (colski);
-			col3.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.type);
+            string type = "";
+            for (int k = 0; k < curadvisor.type.Count; k++)
+            {
+                Debug.Log(curadvisor.type[k]);
+                Debug.Log(curadvisor.tier[k]);
+                type = type + curadvisor.type[k] + "(" + curadvisor.tier[k] + ") ";
+            }
+			col3.GetComponent<Text> ().text = String.Format("{0:C}", type);
 			col3.transform.parent = newrowski.transform;
 			GameObject add = Instantiate (addadvisorbtn);
 			add.GetComponent<AddAdvisorScript> ().index = i;

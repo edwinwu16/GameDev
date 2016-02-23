@@ -10,15 +10,19 @@ public class FighterScript : MonoBehaviour {
 
 	public string attack1name;
 	public float attack1damage;
+	public int attack1accuracy;
 
 	public string attack2name;
 	public float attack2damage;
+	public int attack2accuracy;
 
 	public string attack3name;
 	public float attack3damage;
+	public int attack3accuracy;
 
 	public string attack4name;
 	public float attack4damage;
+	public int attack4accuracy;
 
 	// Use this for initialization
 	void Start () {

@@ -17,13 +17,13 @@ public class CorpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Corporation exxon = new Corporation (1000000, 10000, "Environment", "Exxon");
+		Corporation exxon = new Corporation (1000000, 300000, "Environment", "Exxon");
 		corporationsowned.Add (exxon);
-		Corporation goldman = new Corporation (2700000, 10000, "Finance", "Goldman Sachs");
+		Corporation goldman = new Corporation (2700000, 350000, "Finance", "Goldman Sachs");
 		corporationsowned.Add (goldman);
-		Corporation fencecorp = new Corporation (50000000, 7500, "Immigration", "FenceCorp");
+		Corporation fencecorp = new Corporation (50000000, 75000, "Immigration", "FenceCorp");
 		corporationstobuy.Add (fencecorp);
-		Corporation jp = new Corporation (27000000, 8000, "Finance", "JP Morgan");
+		Corporation jp = new Corporation (27000000, 80000, "Finance", "JP Morgan");
 		corporationstobuy.Add (jp);
 		makeRows ();
 	}
