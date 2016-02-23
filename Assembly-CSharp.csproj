@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Battle Scripts\FighterScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\FinishBattleScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\HealthBarScript.cs" />
+     <Compile Include="Assets\Scripts\Daily Summary Scripts\GeneralSummaryScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\AddAdvisorScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\AddCorpScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\AdvisorScript.cs" />
