@@ -7,8 +7,6 @@ using System;
 public class PopupScript : MonoBehaviour {
 	public GameObject maincamera;
 	public GameObject popupregion;
-	public int totalmoney;
-	public int totalpop;
 	public GameObject USA;
 	public GameObject maincanvas;
 	public Text daysuntilelection;
@@ -31,8 +29,9 @@ public class PopupScript : MonoBehaviour {
 	public float environmentboost;
 	public float generalboost;
 	public float immigrationboost;
-	public float healthcarecampaign;	
-
+	public float healthcarecampaign;
+    public List<float> moneyovertime = new List<float>();
+    public List<float> votesovertime = new List<float>();
 
 	public Region west = new Region(0.0F, "West", 100000);
 	public Region south = new Region(0.0F, "South", 100000);
@@ -42,6 +41,7 @@ public class PopupScript : MonoBehaviour {
 	public Dictionary<string, List<Campaign>> activecampaigns = new Dictionary<string, List<Campaign>>();
 	public Dictionary<string, List<Campaign>> allcampaigns = new Dictionary<string, List<Campaign>>();
 	private Dictionary<string, bool> newday = new Dictionary<string, bool>();
+
 
 	private List<Campaign> generalcampaigns = new List<Campaign>(){
 		new Campaign("Television", 200, 25, 150, 20, "General"),
@@ -174,6 +174,7 @@ public class PopupScript : MonoBehaviour {
 			Button addbutton = Instantiate (genericbutton);
 			addbutton.transform.parent = newrowski.transform;
 			addbutton.onClick.AddListener(delegate{suspendClick(region, campaign);});
+            addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
 			addbutton.GetComponentInChildren<Text> ().text = "Suspend";
 		}
 	}
@@ -220,6 +221,7 @@ public class PopupScript : MonoBehaviour {
 			Button addbutton = Instantiate (genericbutton);
 			addbutton.transform.parent = newrowski.transform;
 			addbutton.onClick.AddListener(delegate{startClick(region, campaign);});
+            addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
 		}
 	}
 
@@ -261,7 +263,8 @@ public class PopupScript : MonoBehaviour {
 		activecampaigns[region].Add(campaign);
 		deleteCreated();
 		makeRowsActive(region);
-	}
+        
+    }
 
 	public void onClick()
 	{
@@ -321,20 +324,37 @@ public class PopupScript : MonoBehaviour {
 	{
 
 		daysuntilelection.GetComponent<DaysUntilElectionScript>().daysLeft -= 1;
+        float ttlmoneytoincrement = 0.0F;
+        float ttlvotestoincrement = 0.0F;
 
 
 		foreach (Region region in regions.Values){
 			foreach (Campaign campaign in activecampaigns[region.name])
 			{
 				float cost = -GenerateFromGaussian(campaign.averagecost, campaign.volcost);
-				IncreaseMoney(cost);
+                campaign.costovertimecamp.Add(campaign.costovertimecamp[campaign.costovertimecamp.Count - 1] + cost);
+                ttlmoneytoincrement += cost;
 				float votes = GenerateFromGaussian(campaign.avgvotes, campaign.volvotes);
-				IncreasePopularity(votes, region.name);
-				IncreaseMoney(corporatepanel.GetComponent<CorpScript> ().GetWeeklyMoneyFromCorporations());
-				IncreaseMoney (-adviserspanel.GetComponent<AdvisorScript> ().GetTotalAdvisorCost());
-
+                campaign.costovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
+                IncreasePopularity(votes, region.name);
+                ttlvotestoincrement += votes;
+                ttlmoneytoincrement += corporatepanel.GetComponent<CorpScript>().GetWeeklyMoneyFromCorporations();
+                ttlvotestoincrement += -adviserspanel.GetComponent<AdvisorScript>().GetTotalAdvisorCost();
 			}
 		}
+
+        IncreaseMoney(ttlmoneytoincrement);
+        moneyovertime.Add(getTotalMoney());
+        votesovertime.Add(getTotalPopularity());
+        foreach (float value in moneyovertime)
+            Debug.Log(value);
+        foreach (float value in votesovertime)
+            Debug.Log(value);
+        foreach (Campaign campaign in activecampaigns["West"])
+        {
+            Debug.Log(campaign.votesovertimecamp);
+            Debug.Log(campaign.costovertimecamp);
+        }
 
 
 	}
@@ -389,6 +409,8 @@ public class Campaign {
 	public int volvotes;
 	public string region;
 	public bool active;
+    public List<float> costovertimecamp = new List<float>();
+    public List<float> votesovertimecamp = new List<float>();
 
 	public Campaign()
 	{
@@ -406,6 +428,8 @@ public class Campaign {
 		avgvotes = a;
 		volvotes = vvotes;
 		type = t;
+        costovertimecamp.Add(0.0F);
+        votesovertimecamp.Add(0.0F);
 
 	}
 
