@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 
 public class AddAdvisorScript : MonoBehaviour {
 
 	public int index;
 	public GameObject advisorpanel;
+    public GameObject popup;
+
 	public Button self;
 	// Use this for initialization
 	void Start () {
+        popup = GameObject.Find("PopupRegion");
 		advisorpanel = GameObject.Find ("Adviser Panel");
 		self.onClick.AddListener(() => { onClickAdd(index);}); 
 	}
@@ -21,6 +25,9 @@ public class AddAdvisorScript : MonoBehaviour {
 
 	public void onClickAdd(int i) {
 		Debug.Log ("CLICKY Add");
-		advisorpanel.GetComponent<AdvisorScript> ().AddAdvisor (i);
+        if (popup.GetComponent<PopupScript>().getTotalMoney() < advisorpanel.GetComponent<AdvisorScript>().availableAdvisors[i].price)
+            EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
+        else
+            advisorpanel.GetComponent<AdvisorScript> ().AddAdvisor (i);
 	}
 }
