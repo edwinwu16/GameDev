@@ -7,8 +7,6 @@ using System;
 public class PopupScript : MonoBehaviour {
 	public GameObject maincamera;
 	public GameObject popupregion;
-	public int totalmoney;
-	public int totalpop;
 	public GameObject USA;
 	public GameObject maincanvas;
 	public Text daysuntilelection;
@@ -31,8 +29,11 @@ public class PopupScript : MonoBehaviour {
 	public float environmentboost;
 	public float generalboost;
 	public float immigrationboost;
-	public float healthcarecampaign;	
-
+	public float healthcarecampaign;
+    public List<float> moneyovertime = new List<float>();
+    public List<int> votesovertime = new List<int>();
+    public int votestowin = 300000000;
+    public Player Hilary;
 
 	public Region west = new Region(0.0F, "West", 100000);
 	public Region south = new Region(0.0F, "South", 100000);
@@ -52,7 +53,7 @@ public class PopupScript : MonoBehaviour {
 		new Campaign("College Tour", 200, 25, 150, 20, "General"),
 		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 	};
-	private List<Campaign> environmentcampaigns = new List<Campaign>(){
+    private List<Campaign> environmentcampaigns = new List<Campaign>(){
 		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
 		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
 		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
@@ -61,7 +62,16 @@ public class PopupScript : MonoBehaviour {
 		new Campaign("Television", 200, 25, 150, 20, "Environment"),
 		new Campaign("Television", 200, 25, 150, 20, "Environment")
 	};
-	private List<Campaign> financecampaigns = new List<Campaign>(){
+    private List<Campaign> environmentcampaigns1 = new List<Campaign>(){
+		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
+		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
+		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
+		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment")
+	};
+    private List<Campaign> financecampaigns = new List<Campaign>(){
 		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
 		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
 		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
@@ -70,7 +80,16 @@ public class PopupScript : MonoBehaviour {
 		new Campaign("Television", 200, 25, 150, 20, "Finance"),
 		new Campaign("Television", 200, 25, 150, 20, "Finance")
 	};
-	private List<Campaign> immigrationcampaigns = new List<Campaign>(){
+    private List<Campaign> financecampaigns1 = new List<Campaign>(){
+		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
+		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
+		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance")
+	};
+    private List<Campaign> immigrationcampaigns = new List<Campaign>(){
 		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
 		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
 		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
@@ -79,7 +98,97 @@ public class PopupScript : MonoBehaviour {
 		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
 		new Campaign("Television", 200, 25, 150, 20, "Immigration")
 	};
-	private List<Campaign> healthcarecampaigns = new List<Campaign>(){
+    private List<Campaign> immigrationcampaigns1 = new List<Campaign>(){
+		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Grassroots in Hispanic comm.", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration")
+	};
+    private List<Campaign> healthcarecampaigns = new List<Campaign>(){
+		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare")
+	};
+    private List<Campaign> healthcarecampaigns1 = new List<Campaign>(){
+		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare")
+	};
+    private List<Campaign> environmentcampaigns2 = new List<Campaign>(){
+		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
+		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
+		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
+		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment")
+	};
+    private List<Campaign> environmentcampaigns3 = new List<Campaign>(){
+		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
+		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
+		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
+		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment"),
+		new Campaign("Television", 200, 25, 150, 20, "Environment")
+	};
+    private List<Campaign> financecampaigns2 = new List<Campaign>(){
+		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
+		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
+		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance")
+	};
+    private List<Campaign> financecampaigns3 = new List<Campaign>(){
+		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
+		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
+		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance"),
+		new Campaign("Television", 200, 25, 150, 20, "Finance")
+	};
+    private List<Campaign> immigrationcampaigns2 = new List<Campaign>(){
+		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Grassroots in Hispanic comm.", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration")
+	};
+    private List<Campaign> immigrationcampaigns3 = new List<Campaign>(){
+		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Grassroots in Hispanic comm.", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration"),
+		new Campaign("Television", 200, 25, 150, 20, "Immigration")
+	};
+    private List<Campaign> healthcarecampaigns2 = new List<Campaign>(){
+		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare"),
+		new Campaign("Television", 200, 25, 150, 20, "Healthcare")
+	};
+    private List<Campaign> healthcarecampaigns3 = new List<Campaign>(){
 		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
 		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
 		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
@@ -97,6 +206,7 @@ public class PopupScript : MonoBehaviour {
 			InitializeShit ();
 			InitializeCampaigns();
 			initializedalready = true;
+            Hilary = new Player();
 		}
 
 	}
@@ -166,14 +276,15 @@ public class PopupScript : MonoBehaviour {
 			typecol.GetComponent<Text> ().text = String.Format("{0}", campaign.type);
 			typecol.transform.parent = newrowski.transform;
 			GameObject cost2buycol = Instantiate (colski);
-			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost);
+			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost*1000.0F);
 			cost2buycol.transform.parent = newrowski.transform;
 			GameObject averagevotesw = Instantiate (colski);
-			averagevotesw.GetComponent<Text> ().text = String.Format("{0:C}", campaign.avgvotes);
+			averagevotesw.GetComponent<Text> ().text = String.Format("{0}", campaign.avgvotes*1000.0F);
 			averagevotesw.transform.parent = newrowski.transform;
 			Button addbutton = Instantiate (genericbutton);
 			addbutton.transform.parent = newrowski.transform;
 			addbutton.onClick.AddListener(delegate{suspendClick(region, campaign);});
+            addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
 			addbutton.GetComponentInChildren<Text> ().text = "Suspend";
 		}
 	}
@@ -200,8 +311,9 @@ public class PopupScript : MonoBehaviour {
 		GameObject fifthcol = Instantiate (colski);
 		fifthcol.GetComponent<Text>().text = "";
 		fifthcol.transform.parent = firstrow.transform;
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
+            
 			GameObject newrowski = Instantiate (rowski);
 			Campaign campaign =  allcampaigns[region][campaignnum];
 			newrowski.transform.parent = purchasecampaignstable.transform;
@@ -212,14 +324,15 @@ public class PopupScript : MonoBehaviour {
 			typecol.GetComponent<Text> ().text = String.Format("{0}", campaign.type);
 			typecol.transform.parent = newrowski.transform;
 			GameObject cost2buycol = Instantiate (colski);
-			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost);
+			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost * 1000.0F);
 			cost2buycol.transform.parent = newrowski.transform;
 			GameObject averagevotesw = Instantiate (colski);
-			averagevotesw.GetComponent<Text> ().text = String.Format("{0:C}", campaign.avgvotes);
+			averagevotesw.GetComponent<Text> ().text = String.Format("{0}", campaign.avgvotes * 1000.0F);
 			averagevotesw.transform.parent = newrowski.transform;
 			Button addbutton = Instantiate (genericbutton);
 			addbutton.transform.parent = newrowski.transform;
 			addbutton.onClick.AddListener(delegate{startClick(region, campaign);});
+            addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
 		}
 	}
 
@@ -242,9 +355,8 @@ public class PopupScript : MonoBehaviour {
 		newday.Add("Midwest", true);
 		newday.Add("South", true);
 		newday.Add("NewEngland", true);
-		Campaign westg = new Campaign("Television", 200, 25, 150, 20, "Environment");
-		activecampaigns["West"].Add(westg);
-		activecampaigns["West"].Add(westg);
+        moneyovertime.Add(getTotalMoney());
+        votesovertime.Add(getTotalPopularity());
 	}
 
 	private void suspendClick(string region, Campaign campaign){
@@ -261,7 +373,8 @@ public class PopupScript : MonoBehaviour {
 		activecampaigns[region].Add(campaign);
 		deleteCreated();
 		makeRowsActive(region);
-	}
+        
+    }
 
 	public void onClick()
 	{
@@ -317,24 +430,59 @@ public class PopupScript : MonoBehaviour {
 		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incmon[incmonoption].Value[1];
 	}*/
 
+    void generateBoosters(){
+        
+
+        foreach (Advisor advisor in adviserspanel.GetComponent<AdvisorScript>().myAdvisors)
+        {
+            
+        }
+        foreach (Corporation corporation in corporatepanel.GetComponent<CorpScript>().corporationsowned)
+        {
+            Hilary.campaignboosts[corporation.type] -= 0.15F;
+        }
+    }
+
 	public void decrementDaysLeft()
 	{
 
 		daysuntilelection.GetComponent<DaysUntilElectionScript>().daysLeft -= 1;
+        float ttlmoneytoincrement = 0.0F;
+        float ttlvotestoincrement = 0.0F;
+        generateBoosters();
 
 
 		foreach (Region region in regions.Values){
 			foreach (Campaign campaign in activecampaigns[region.name])
 			{
-				float cost = -GenerateFromGaussian(campaign.averagecost, campaign.volcost);
-				IncreaseMoney(cost);
-				float votes = GenerateFromGaussian(campaign.avgvotes, campaign.volvotes);
-				IncreasePopularity(votes, region.name);
-				IncreaseMoney(corporatepanel.GetComponent<CorpScript> ().GetWeeklyMoneyFromCorporations());
-				IncreaseMoney (-adviserspanel.GetComponent<AdvisorScript> ().GetTotalAdvisorCost());
-
+				float cost = -GenerateFromGaussian(campaign.averagecost*1000.0F, campaign.volcost*1000.0F);
+                campaign.costovertimecamp.Add(campaign.costovertimecamp[campaign.costovertimecamp.Count - 1] + cost);
+                ttlmoneytoincrement += cost;
+                float votes = GenerateFromGaussian(campaign.avgvotes*1000.0F, campaign.volvotes*1000.0F);
+                if (campaign.type !="General")
+				    votes = (1.0F + Hilary.campaignboosts[campaign.type]) *votes;
+                
+                campaign.costovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
+                IncreasePopularity(votes, region.name);
+                ttlvotestoincrement += votes;
 			}
 		}
+        ttlmoneytoincrement += corporatepanel.GetComponent<CorpScript>().GetWeeklyMoneyFromCorporations();
+        ttlmoneytoincrement += -adviserspanel.GetComponent<AdvisorScript>().GetTotalAdvisorCost();
+
+
+        IncreaseMoney(ttlmoneytoincrement);
+        moneyovertime.Add(getTotalMoney());
+        votesovertime.Add(getTotalPopularity());
+        foreach (float value in moneyovertime)
+            Debug.Log(value);
+        foreach (float value in votesovertime)
+            Debug.Log(value);
+        foreach (Campaign campaign in activecampaigns["West"])
+        {
+            Debug.Log(campaign.votesovertimecamp);
+            Debug.Log(campaign.costovertimecamp);
+        }
 
 
 	}
@@ -380,6 +528,28 @@ public class Region {
 	}
 }
 
+public class Player
+{
+    public Dictionary<String, float> campaignboosts = new Dictionary<String, float>();
+    public Dictionary<String, float> corporateboosts = new Dictionary<String, float>();
+    public string firstname;
+    public string lastname;
+    public Player()
+    {
+        firstname = "Hilary";
+        lastname = "Clinton";
+        campaignboosts["Environment"] = 0.0F;
+        campaignboosts["Finance"] = 0.0F;
+        campaignboosts["Immigration"] = 0.0F;
+        campaignboosts["Healthcare"] = 0.0F;
+        corporateboosts["Environment"] = 0.0F;
+        corporateboosts["Finance"] = 0.0F;
+        corporateboosts["Immigration"] = 0.0F;
+        corporateboosts["Healthcare"] = 0.0F;
+    }
+
+}
+
 public class Campaign {
 	public string name;
 	public string type;
@@ -389,6 +559,8 @@ public class Campaign {
 	public int volvotes;
 	public string region;
 	public bool active;
+    public List<float> costovertimecamp = new List<float>();
+    public List<float> votesovertimecamp = new List<float>();
 
 	public Campaign()
 	{
@@ -406,6 +578,8 @@ public class Campaign {
 		avgvotes = a;
 		volvotes = vvotes;
 		type = t;
+        costovertimecamp.Add(0.0F);
+        votesovertimecamp.Add(0.0F);
 
 	}
 
