@@ -12,9 +12,11 @@ public class GeneralSummaryScript : MonoBehaviour {
 	public Text votestext;
 	public Text moneyearnedlosttext;
 	public Text votesearnedlosttext;
-
+	public Slider votesslider;
+	public Slider moneyslider;
 	public GameObject popup;
 
+	public int votestowin = 10000000;
 
 	private float moneydiff;
 	private float votesdiff;
@@ -28,8 +30,6 @@ public class GeneralSummaryScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-
 		daysuntilelectiontext.GetComponent<Text>().text = daysuntilelection + " Days Until Election";
 		Debug.Log (moneylist.Count);
 
@@ -69,5 +69,7 @@ public class GeneralSummaryScript : MonoBehaviour {
 				dollarstext.GetComponent<Text>().text = String.Format("{0}", votesdiff);
 			}
 		}
+		if (voteslist.Count != 0)
+			votesslider.value = voteslist [voteslist.Count - 1];
 	}
 }
