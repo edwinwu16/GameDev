@@ -23,8 +23,6 @@ public class WelcomeBattleScript : MonoBehaviour {
 
 	void sendClick (){
 		self.transform.localPosition = new Vector3 (-1000.0F, -1000.0F, 0.0F);
-		maincanvas.SetActive (false);
-		battlecanvas.SetActive (true);
 
 	}
 

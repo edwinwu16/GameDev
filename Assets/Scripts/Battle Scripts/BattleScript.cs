@@ -79,7 +79,8 @@ public class BattleScript : MonoBehaviour {
 		attack3text.GetComponent<Text>().text = movedict [hilary][2].name;
 		attack4text.GetComponent<Text>().text = movedict [hilary][3].name;
 
-		updateAttackDescription (currentattackselectorchoice);
+		attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
+			+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
 		BeginMyTurn ();
 	}
 	
@@ -98,14 +99,12 @@ public class BattleScript : MonoBehaviour {
 						_gameover = true;
 						finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 						finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
-						resetBattle ();  // move call to popupscript
 					} else if (trump.GetComponent<FighterScript> ().health <= 0) {
 						StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
 						_gameover = true;
 						finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 						finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
 						Debug.Log ("someone lost");
-						resetBattle ();   // move call to popupscript
 					} else {
 						if (_myturn) {
 							EndMyTurn ();
@@ -121,11 +120,13 @@ public class BattleScript : MonoBehaviour {
 				if (_myturn) {
 					if (Input.GetKeyDown (KeyCode.UpArrow)) {
 						NavigateMoveMenu (KeyCode.UpArrow);
-						updateAttackDescription (currentattackselectorchoice);
+						attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
+							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
 					}
 					if (Input.GetKeyDown (KeyCode.DownArrow)) {
 						NavigateMoveMenu (KeyCode.DownArrow);
-						updateAttackDescription(currentattackselectorchoice);
+						attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
+							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
 					}
 					if (Input.GetKeyDown (KeyCode.Space)) {
 						NavigateMoveMenu (KeyCode.Space);

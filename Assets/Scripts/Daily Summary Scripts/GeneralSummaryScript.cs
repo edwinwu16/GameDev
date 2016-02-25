@@ -16,16 +16,17 @@ public class GeneralSummaryScript : MonoBehaviour {
 	public Slider moneyslider;
 	public GameObject popup;
 
-	public int votestowin = 10000000;
+	public int votestowin;
 
 	private float moneydiff;
 	private float votesdiff;
 	private List<float> moneylist = new List<float> ();
-	private List<float> voteslist = new List<float> ();
+	private List<int> voteslist = new List<int> ();
 	// Use this for initialization
 	void Start () {
 		moneylist = popup.GetComponent<PopupScript>().moneyovertime;
 		voteslist = popup.GetComponent<PopupScript>().votesovertime;
+		votestowin = popup.GetComponent<PopupScript>().votestowin;
 	}
 	
 	// Update is called once per frame
@@ -70,6 +71,6 @@ public class GeneralSummaryScript : MonoBehaviour {
 			}
 		}
 		if (voteslist.Count != 0)
-			votesslider.value = voteslist [voteslist.Count - 1];
+			votesslider.value = voteslist [voteslist.Count - 1]/(float)votestowin;
 	}
 }

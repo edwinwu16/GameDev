@@ -22,7 +22,9 @@ public class PopupScript : MonoBehaviour {
 	public GameObject purchasecampaignstable;
 	public Button genericbutton;
 	public GameObject adviserspanel;
+	public GameObject dailysummarypanel;
 	public GameObject corporatepanel;
+	public GameObject battleobject;
 	private List<Corporation> activecorporations;
 	private List<Advisor> activeadvisers;
 	public float financeboost;
@@ -33,6 +35,7 @@ public class PopupScript : MonoBehaviour {
     public List<float> moneyovertime = new List<float>();
     public List<int> votesovertime = new List<int>();
     public int votestowin = 300000000;
+	public int daystostartwith = 100;
     public Player Hilary;
 
 	public Region west = new Region(0.0F, "West", 100000);
@@ -474,15 +477,7 @@ public class PopupScript : MonoBehaviour {
         IncreaseMoney(ttlmoneytoincrement);
         moneyovertime.Add(getTotalMoney());
         votesovertime.Add(getTotalPopularity());
-        foreach (float value in moneyovertime)
-            Debug.Log(value);
-        foreach (float value in votesovertime)
-            Debug.Log(value);
-        foreach (Campaign campaign in activecampaigns["West"])
-        {
-            Debug.Log(campaign.votesovertimecamp);
-            Debug.Log(campaign.costovertimecamp);
-        }
+		dailysummarypanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 
 
 	}
@@ -505,6 +500,7 @@ public class PopupScript : MonoBehaviour {
 	}
 	public void switchtoBattleScene()
 	{
+		battleobject.GetComponent<BattleScript> ().resetBattle ();
 		battlecanvas.SetActive (true);
 		battlecanvas.GetComponent<BattleCanvasScript> ().movePanel ();
 		maincanvas.SetActive (false);

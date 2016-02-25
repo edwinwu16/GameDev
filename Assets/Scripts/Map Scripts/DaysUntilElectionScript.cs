@@ -5,12 +5,14 @@ using System.Collections;
 public class DaysUntilElectionScript : MonoBehaviour {
 
     public GameObject popup;
-    public int daysLeft = 100;
+	public int daysstartwith = 100;
+    public int daysLeft;
     private bool _gameovercalled;
     private bool _scenenotswitched;
 
 	// Use this for initialization
 	void Start () {
+		daysLeft = daysstartwith;
         updateDaysLeftText();
         _gameovercalled = false;
         _scenenotswitched = true;
