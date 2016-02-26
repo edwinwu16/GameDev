@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class AddCorpScript: MonoBehaviour {
 	public int index;
@@ -23,7 +25,11 @@ public class AddCorpScript: MonoBehaviour {
 
 	public void onClickAdd(int i) {
         if (popup.GetComponent<PopupScript>().getTotalMoney() < corppanel.GetComponent<CorpScript>().corporationstobuy[i].costtobuy)
+        {
+#if UNITY_EDITOR
             EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
+#endif
+        }
         else
         {
             corppanel.GetComponent<CorpScript>().AddCorporation(i);

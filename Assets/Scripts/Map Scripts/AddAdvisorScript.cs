@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEditor;
+#if UNITY_EDITOR 
+    using UnityEditor;
+#endif
 
 
 public class AddAdvisorScript : MonoBehaviour {
@@ -26,8 +28,14 @@ public class AddAdvisorScript : MonoBehaviour {
 	public void onClickAdd(int i) {
 		Debug.Log ("CLICKY Add");
         if (popup.GetComponent<PopupScript>().getTotalMoney() < advisorpanel.GetComponent<AdvisorScript>().availableAdvisors[i].price)
+        {
+#if UNITY_EDITOR
             EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
+#endif
+        }
         else
-            advisorpanel.GetComponent<AdvisorScript> ().AddAdvisor (i);
+        {
+            advisorpanel.GetComponent<AdvisorScript>().AddAdvisor(i);
+        }
 	}
 }
