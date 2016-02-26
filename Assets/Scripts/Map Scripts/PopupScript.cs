@@ -38,6 +38,12 @@ public class PopupScript : MonoBehaviour {
 	public int daystostartwith = 100;
     public Player Hilary;
 
+    public float preferredwidth1;
+    public float preferredwidth2;
+    public float preferredwidth3;
+    public float preferredwidth4;
+    public float preferredwidth5;
+
 	public Region west = new Region(0.0F, "West", 100000);
 	public Region south = new Region(0.0F, "South", 100000);
 	public Region midwest = new Region (0.0F, "Midwest", 100000);
@@ -248,6 +254,14 @@ public class PopupScript : MonoBehaviour {
 
 
 	void makeRowsActive(string region) {
+        float totalscreenwidth = RectTransformExtensions.GetWidth(activecampaignstable.GetComponent<RectTransform>());
+        preferredwidth1 = totalscreenwidth * 0.3F;
+        preferredwidth2 = totalscreenwidth * 0.2F;
+        preferredwidth3 = totalscreenwidth * 0.2F;
+        preferredwidth4 = totalscreenwidth * 0.2F;
+        preferredwidth5 = totalscreenwidth * 0.1F;
+
+        
 		var children = new List<GameObject>();
 		foreach (Transform child in activecampaignstable.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
@@ -268,6 +282,16 @@ public class PopupScript : MonoBehaviour {
 		GameObject fifthcol = Instantiate (colski);
 		fifthcol.GetComponent<Text>().text = "";
 		fifthcol.transform.parent = firstrow.transform;
+        firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+        secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+        thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+        fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+        fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
+
+
+
+
+
 		for (int i = 0; i < activecampaigns[region].Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
 			Campaign campaign =  activecampaigns[region][i];
@@ -289,11 +313,17 @@ public class PopupScript : MonoBehaviour {
 			addbutton.onClick.AddListener(delegate{suspendClick(region, campaign);});
             addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
 			addbutton.GetComponentInChildren<Text> ().text = "Suspend";
+            namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+            typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+            cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+            averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+
 		}
 	}
 
 
 	void makeRowsPurchase(string region) {
+        float totalscreenwidth = RectTransformExtensions.GetWidth(activecampaignstable.GetComponent<RectTransform>());
 		var children = new List<GameObject>();
 		foreach (Transform child in purchasecampaignstable.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
@@ -314,6 +344,12 @@ public class PopupScript : MonoBehaviour {
 		GameObject fifthcol = Instantiate (colski);
 		fifthcol.GetComponent<Text>().text = "";
 		fifthcol.transform.parent = firstrow.transform;
+        firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+        secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+        thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+        fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+        fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
+
 		for (int i = 0; i < 4; i++) {
 			int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
             
@@ -336,6 +372,11 @@ public class PopupScript : MonoBehaviour {
 			addbutton.transform.parent = newrowski.transform;
 			addbutton.onClick.AddListener(delegate{startClick(region, campaign);});
             addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
+            namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+            typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+            cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+            averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+
 		}
 	}
 
