@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Map Scripts\AddAdvisorScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\AddCorpScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\AdvisorScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\AttackMarketplaceScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\ClickTest.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\CorpScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\DaysUntilElectionScript.cs" />
