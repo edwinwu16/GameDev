@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Behaviour;
+//using UnityEngine.Behaviour;
 using UnityEngine.UI;
 using System;
 
@@ -58,7 +58,7 @@ public class PopupScript : MonoBehaviour {
 		new Campaign("Television", 200, 25, 150, 20, "General"),
 		new Campaign("Radio", 200, 25, 150, 20, "General"),
 		new Campaign("Social Media", 200, 25, 150, 20, "General"),
-		new Campaign("Newspaper", 200, 25, 150, 20, "General"),
+		new Campaign("Newspaper", 200, 	25, 150, 20, "General"),
 		new Campaign("Grassroots", 200, 25, 150, 20, "General"),
 		new Campaign("College Tour", 200, 25, 150, 20, "General"),
 		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
