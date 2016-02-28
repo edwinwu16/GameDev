@@ -20,7 +20,7 @@ public class BattleScript : MonoBehaviour {
 	public GameObject trump;
 	public GameObject hilary;
 //	private bool _textisavailable = true;
-	private Dictionary<GameObject, List<Attack>> movedict = new Dictionary<GameObject,  List<Attack>>();
+	public Dictionary<GameObject, List<Attack>> movedict = new Dictionary<GameObject,  List<Attack>>();
 	private bool _myturn;
 	public Text poketext;
 	public GameObject poketextobject;
@@ -342,6 +342,14 @@ public class BattleScript : MonoBehaviour {
 			return true;
 		else
 			return false;
+	}
+
+	public List<Attack> GimmeMyAttacks() {
+		return movedict [hilary];
+	}
+
+	public void SwapMyAttack(int index, Attack newattack) {
+		movedict [hilary] [index] = newattack;
 	}
 
 	public float GenerateFromGaussian(float mean, float stdDev)

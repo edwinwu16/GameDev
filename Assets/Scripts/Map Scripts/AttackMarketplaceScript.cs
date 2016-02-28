@@ -8,15 +8,15 @@ public class AttackMarketplaceScript : MonoBehaviour {
 	public GameObject rowski;
 	public GameObject colski;
 	public GameObject activeattackstbl;
-//	public GameObject availablecorpstbl;
+	public GameObject availableattackstbl;
 //	public GameObject removecorpbtn;
 //	public GameObject addcorpbtn;
 	public GameObject attackapnel;
 //	public GameObject popupregion;
 	public GameObject hilary;
 	public GameObject battleobj;
-//	public List<Attack> attacksowned = new List<Attack>();
-	public List<Corporation> attackstobuy = new List<Corporation>();
+	public List<Attack> attacksowned = new List<Attack>();
+	public List<Attack> attackstobuy = new List<Attack>();
 	public float preferredwidth1 = 0.3F;
 	public float preferredwidth2 = 0.3F;
 	public float preferredwidth3 = 0.2F;
@@ -25,7 +25,8 @@ public class AttackMarketplaceScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		attacksowned = battleobj.GetComponent<BattleScript> ().movedict[hilary.GetComponent<FighterScript>().fightername];
+//		Debug.Log (battleobj.GetComponent<BattleScript> ().movedict);
+//		attacksowned = battleobj.GetComponent<BattleScript> ().movedict[hilary];
 //		Corporation exxon = new Corporation (1000000, 300000, "Environment", "Exxon");
 //		corporationsowned.Add (exxon);
 //		Corporation goldman = new Corporation (2000000, 350000, "Finance", "Goldman Sachs");
@@ -34,11 +35,18 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //		corporationstobuy.Add (fencecorp);
 //		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
 //		corporationstobuy.Add (jp);
+		attackstobuy = new List<Attack>() {
+			new Attack("FIrstatttobuy", 10.0F, 70),
+		};
+		attacksowned = battleobj.GetComponent<BattleScript> ().GimmeMyAttacks();
 		makeRows ();
 	}
 
 	// Update is called once per frame
 	void Update () {
+		attacksowned = battleobj.GetComponent<BattleScript> ().GimmeMyAttacks();
+		Debug.Log ("ATTACKSOWNED" + attacksowned.Count);
+		makeRows ();
 		//		makeToBuyRows ();
 	}
 
@@ -52,19 +60,38 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		foreach (Transform child in activeattackstbl.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
 //
-		for (int i = 0; i < 2; i++) {
+//		IN THIS PART, WE MAKE THE CURRENT ATTACKS
+
+		GameObject firstrowski = Instantiate (rowski);
+//		Attack curattack = attacksowned [i];
+//		Debug.Log (curattack.name);
+		firstrowski.transform.parent = activeattackstbl.transform;
+		GameObject namecol = Instantiate (colski);
+		namecol.GetComponent<Text> ().text = String.Format ("{0}", "Attack");
+		namecol.transform.parent = firstrowski.transform;
+		GameObject dmgcol = Instantiate (colski);
+		dmgcol.GetComponent<Text> ().text = String.Format("{0}", "Damage");
+		dmgcol.transform.parent = firstrowski.transform;
+		GameObject acccol = Instantiate (colski);
+		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
+		acccol.transform.parent = firstrowski.transform;
+		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+		for (int i = 0; i < attacksowned.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
-//			Attack curattack = attacksowned [i];
-//			Debug.Log (curattack.name);
+			Attack curattack = attacksowned [i];
+			Debug.Log (curattack.name);
 			newrowski.transform.parent = activeattackstbl.transform;
-			GameObject namecol = Instantiate (colski);
-			namecol.GetComponent<Text> ().text = String.Format ("{0:C}", "name");
+			namecol = Instantiate (colski);
+			namecol.GetComponent<Text> ().text = String.Format ("{0}", curattack.name);
 			namecol.transform.parent = newrowski.transform;
-			GameObject dmgcol = Instantiate (colski);
-			dmgcol.GetComponent<Text> ().text = String.Format("{0:C}", "damage");
+			dmgcol = Instantiate (colski);
+			dmgcol.GetComponent<Text> ().text = String.Format("{0}", curattack.dmg);
 			dmgcol.transform.parent = newrowski.transform;
-			GameObject acccol = Instantiate (colski);
-			acccol.GetComponent<Text> ().text = String.Format("{0:C}", "poopoo");
+			acccol = Instantiate (colski);
+			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
 			acccol.transform.parent = newrowski.transform;
 //			GameObject remove = Instantiate (removecorpbtn);
 //			remove.GetComponent<RemoveScript> ().index = i;
@@ -75,6 +102,56 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
 
 		}
+
+		var children2 = new List<GameObject>();
+		foreach (Transform child in availableattackstbl.transform) children2.Add(child.gameObject);
+		children2.ForEach(child => Destroy(child));
+
+		//		IN THIS PART, WE MAKE THE ATTACKS TO BUY
+
+		GameObject firstrowski1 = Instantiate (rowski);
+		//		Attack curattack = attacksowned [i];
+		//		Debug.Log (curattack.name);
+		firstrowski1.transform.parent = availableattackstbl.transform;
+		namecol = Instantiate (colski);
+		namecol.GetComponent<Text> ().text = String.Format ("{0}", "Attack");
+		namecol.transform.parent = firstrowski.transform;
+		dmgcol = Instantiate (colski);
+		dmgcol.GetComponent<Text> ().text = String.Format("{0}", "Damage");
+		dmgcol.transform.parent = firstrowski.transform;
+		acccol = Instantiate (colski);
+		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
+		acccol.transform.parent = firstrowski.transform;
+		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+		for (int i = 0; i < attackstobuy.Count; i++) {
+			GameObject newrowski = Instantiate (rowski);
+			Attack curattack = attackstobuy [i];
+			Debug.Log (curattack.name);
+			newrowski.transform.parent = availableattackstbl.transform;
+			namecol = Instantiate (colski);
+			namecol.GetComponent<Text> ().text = String.Format ("{0}", curattack.name);
+			namecol.transform.parent = newrowski.transform;
+			dmgcol = Instantiate (colski);
+			dmgcol.GetComponent<Text> ().text = String.Format("{0}", curattack.dmg);
+			dmgcol.transform.parent = newrowski.transform;
+			acccol = Instantiate (colski);
+			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
+			acccol.transform.parent = newrowski.transform;
+			//			GameObject remove = Instantiate (removecorpbtn);
+			//			remove.GetComponent<RemoveScript> ().index = i;
+			//			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
+			//			remove.transform.parent = newrowski.transform;
+			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+		}
+
+
+
 ////		GameObject blankrowski = Instantiate (rowski);
 //		totalscreenwidth = RectTransformExtensions.GetWidth(availablecorpstbl.GetComponent<RectTransform>());
 //		firstrowwidth = totalscreenwidth * preferredwidth1;
