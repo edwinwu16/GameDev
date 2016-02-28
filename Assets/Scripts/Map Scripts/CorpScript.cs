@@ -7,23 +7,30 @@ using System;
 public class CorpScript : MonoBehaviour {
 	public GameObject rowski;
 	public GameObject colski;
-	public GameObject corpstbl;
+	public GameObject activecorpstbl;
+    public GameObject availablecorpstbl;
 	public GameObject removecorpbtn;
 	public GameObject addcorpbtn;
 	public GameObject corppanel;
 	public GameObject popupregion;
 	public List<Corporation> corporationsowned = new List<Corporation>();
 	public List<Corporation> corporationstobuy = new List<Corporation>();
+    public float preferredwidth1 = 0.3F;
+    public float preferredwidth2 = 0.3F;
+    public float preferredwidth3 = 0.2F;
+    public float preferredwidth4 = 0.2F;
+    public bool _newday = true;
+
 
 	// Use this for initialization
 	void Start () {
 		Corporation exxon = new Corporation (1000000, 300000, "Environment", "Exxon");
 		corporationsowned.Add (exxon);
-		Corporation goldman = new Corporation (2700000, 350000, "Finance", "Goldman Sachs");
+		Corporation goldman = new Corporation (2000000, 350000, "Finance", "Goldman Sachs");
 		corporationsowned.Add (goldman);
-		Corporation fencecorp = new Corporation (50000000, 75000, "Immigration", "FenceCorp");
+		Corporation fencecorp = new Corporation (100000, 75000, "Immigration", "FenceCorp");
 		corporationstobuy.Add (fencecorp);
-		Corporation jp = new Corporation (27000000, 80000, "Finance", "JP Morgan");
+		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
 		corporationstobuy.Add (jp);
 		makeRows ();
 	}
@@ -34,13 +41,19 @@ public class CorpScript : MonoBehaviour {
 	}
 
 	void makeRows () {
+        float totalscreenwidth = RectTransformExtensions.GetWidth(activecorpstbl.GetComponent<RectTransform>());
+        float firstrowwidth = totalscreenwidth * preferredwidth1;
+        float secondrowwidth = totalscreenwidth * preferredwidth2;
+        float thirdrowwidth = totalscreenwidth * preferredwidth3;
+        float fourthrowwidth = totalscreenwidth * preferredwidth4;
 		var children = new List<GameObject>();
-		foreach (Transform child in corpstbl.transform) children.Add(child.gameObject);
+		foreach (Transform child in activecorpstbl.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
+
 		for (int i = 0; i < corporationsowned.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
 			Corporation curcorp = corporationsowned [i];
-			newrowski.transform.parent = corpstbl.transform;
+			newrowski.transform.parent = activecorpstbl.transform;
 			GameObject cost2buycol = Instantiate (colski);
 			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", curcorp.costtobuy);
 			cost2buycol.transform.parent = newrowski.transform;
@@ -54,28 +67,47 @@ public class CorpScript : MonoBehaviour {
 			remove.GetComponent<RemoveScript> ().index = i;
 			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
 			remove.transform.parent = newrowski.transform;
+            cost2buycol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+            namecol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+            typecol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
 		}
 		GameObject blankrowski = Instantiate (rowski);
-		blankrowski.transform.parent = corpstbl.transform;
+        totalscreenwidth = RectTransformExtensions.GetWidth(availablecorpstbl.GetComponent<RectTransform>());
+        firstrowwidth = totalscreenwidth * preferredwidth1;
+        secondrowwidth = totalscreenwidth * preferredwidth2;
+        thirdrowwidth = totalscreenwidth * preferredwidth3;
+        fourthrowwidth = totalscreenwidth * preferredwidth4;
 
-		for (int i = 0; i < corporationstobuy.Count; i++) {
-			GameObject newrowski = Instantiate (rowski);
-			Corporation curcorp = corporationstobuy [i];
-			newrowski.transform.parent = corpstbl.transform;
-			GameObject cost2buycol = Instantiate (colski);
-			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", curcorp.costtobuy);
-			cost2buycol.transform.parent = newrowski.transform;
-			GameObject namecol = Instantiate (colski);
-			namecol.GetComponent<Text> ().text = String.Format("{0:C}", curcorp.name);
-			namecol.transform.parent = newrowski.transform;
-			GameObject typecol = Instantiate (colski);
-			typecol.GetComponent<Text> ().text = String.Format("{0:C}", curcorp.type);
-			typecol.transform.parent = newrowski.transform;
-			GameObject add = Instantiate (addcorpbtn);
-			add.GetComponent<AddCorpScript> ().index = i;
-			add.GetComponent<AddCorpScript> ().corppanel = corppanel;
-			add.transform.parent = newrowski.transform;
-		}
+        if (_newday)
+        {
+            for (int i = 0; i < corporationstobuy.Count; i++)
+            {
+                foreach (Transform child in availablecorpstbl.transform) children.Add(child.gameObject);
+                children.ForEach(child => Destroy(child));
+
+                GameObject newrowski = Instantiate(rowski);
+                Corporation curcorp = corporationstobuy[i];
+                newrowski.transform.parent = availablecorpstbl.transform;
+                GameObject cost2buycol = Instantiate(colski);
+                cost2buycol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.costtobuy);
+                cost2buycol.transform.parent = newrowski.transform;
+                GameObject namecol = Instantiate(colski);
+                namecol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.name);
+                namecol.transform.parent = newrowski.transform;
+                GameObject typecol = Instantiate(colski);
+                typecol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.type);
+                typecol.transform.parent = newrowski.transform;
+                GameObject add = Instantiate(addcorpbtn);
+                add.GetComponent<AddCorpScript>().index = i;
+                add.GetComponent<AddCorpScript>().corppanel = corppanel;
+                add.transform.parent = newrowski.transform;
+                cost2buycol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+                namecol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+                typecol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+            }
+        }
 	}
 
 	public void RemoveCorporation (int i) {

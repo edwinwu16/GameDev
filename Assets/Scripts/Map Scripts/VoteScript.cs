@@ -11,6 +11,10 @@ public class VoteScript : MonoBehaviour {
 	public GameObject colski;
 	public GameObject self;
 	public GameObject popup;
+    public float preferredwidth1 = 0.3F;
+    public float preferredwidth2 = 0.3F;
+    public float preferredwidth3 = 0.2F;
+    public float preferredwidth4 = 0.2F;
 	public List<Voter> voters = new List<Voter> ();
 	// Use this for initialization
 	void Start () {
@@ -25,6 +29,11 @@ public class VoteScript : MonoBehaviour {
 	}
 
 	void makeRows() {
+        float totalscreenwidth = RectTransformExtensions.GetWidth(votestbl.GetComponent<RectTransform>());
+        float firstrowwidth = totalscreenwidth * preferredwidth1;
+        float secondrowwidth = totalscreenwidth * preferredwidth2;
+        float thirdrowwidth = totalscreenwidth * preferredwidth3;
+        float fourthrowwidth = totalscreenwidth * preferredwidth4;
 		var children = new List<GameObject>();
 		foreach (Transform child in votestbl.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
@@ -42,6 +51,11 @@ public class VoteScript : MonoBehaviour {
 		GameObject fourthcol = Instantiate (colski);
 		fourthcol.GetComponent<Text> ().text = "";
 		fourthcol.transform.parent = firstrow.transform;
+        firstcol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+        secondcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+        thirdcol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+        fourthcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+
 		for (int i = 0; i < voters.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
 			Voter curvoter = voters [i];
@@ -60,6 +74,10 @@ public class VoteScript : MonoBehaviour {
 			buybtn1.GetComponent<VoteBuyScript> ().amount = 1000;
 			buybtn1.GetComponent<VoteBuyScript> ().votespanel = votestbl;
 			buybtn1.transform.parent = newrowski.transform;
+            cost2buycol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+            namecol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+            numownedcol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
 		}
 	}
 

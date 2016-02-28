@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Behaviour;
 using UnityEngine.UI;
 using System;
 
@@ -252,6 +253,9 @@ public class PopupScript : MonoBehaviour {
 
 	}
 
+ 
+    
+
 
 	void makeRowsActive(string region) {
         float totalscreenwidth = RectTransformExtensions.GetWidth(activecampaignstable.GetComponent<RectTransform>());
@@ -323,7 +327,7 @@ public class PopupScript : MonoBehaviour {
 
 
 	void makeRowsPurchase(string region) {
-        float totalscreenwidth = RectTransformExtensions.GetWidth(activecampaignstable.GetComponent<RectTransform>());
+        float totalscreenwidth = RectTransformExtensions.GetWidth(purchasecampaignstable.GetComponent<RectTransform>());
 		var children = new List<GameObject>();
 		foreach (Transform child in purchasecampaignstable.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
@@ -519,6 +523,8 @@ public class PopupScript : MonoBehaviour {
         moneyovertime.Add(getTotalMoney());
         votesovertime.Add(getTotalPopularity());
 		dailysummarypanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
+        adviserspanel.GetComponent<AdvisorScript>()._newday = true;
+        corporatepanel.GetComponent<CorpScript>()._newday = true;
 
 
 	}

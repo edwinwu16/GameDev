@@ -17,7 +17,8 @@ public class AddAdvisorScript : MonoBehaviour {
 	void Start () {
         popup = GameObject.Find("PopupRegion");
 		advisorpanel = GameObject.Find ("Adviser Panel");
-		self.onClick.AddListener(() => { onClickAdd(index);}); 
+		self.onClick.AddListener(() => { onClickAdd(index);});
+        self.onClick.AddListener(() => { self.interactable = false; });
 	}
 
 	// Update is called once per frame

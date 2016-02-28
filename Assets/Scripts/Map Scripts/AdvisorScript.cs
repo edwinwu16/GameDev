@@ -27,6 +27,13 @@ public class AdvisorScript : MonoBehaviour {
 	
 
 	public List<Advisor> myAdvisors = new List<Advisor> ();
+    public float preferredwidth1 = 0.3F;
+    public float preferredwidth2 = 0.3F;
+    public float preferredwidth3 = 0.2F;
+    public float preferredwidth4 = 0.2F;
+    public bool _newday = true;
+
+
 	public List<Advisor> availableAdvisors = new List<Advisor> ()
     {
         new Advisor("Charmander", new List<string>(){"Environment"}, 100090.0F, new List<int>(){1}),
@@ -50,11 +57,12 @@ public class AdvisorScript : MonoBehaviour {
 
 	public GameObject colski;
 	public GameObject rowski;
-	public GameObject tableski;
+	public GameObject activeadviserpane;
 	public GameObject removeadvisorbtn;
 	public GameObject addadvisorbtn;
 	public GameObject advisorpanel;
 	public GameObject popupregion;
+    public GameObject availableadviserpane;
 
 	public float totalAdvisorCost;
 
@@ -120,13 +128,19 @@ public class AdvisorScript : MonoBehaviour {
 	}
 
 	void makeRows () {
+        float totalscreenwidth = RectTransformExtensions.GetWidth(activeadviserpane.GetComponent<RectTransform>());
+        float firstrowwidth = totalscreenwidth * preferredwidth1;
+        float secondrowwidth = totalscreenwidth * preferredwidth2;
+        float thirdrowwidth = totalscreenwidth * preferredwidth3;
+        float fourthrowwidth = totalscreenwidth * preferredwidth4;
 		var children = new List<GameObject>();
-		foreach (Transform child in tableski.transform) children.Add(child.gameObject);
+		foreach (Transform child in activeadviserpane.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
+
 		for (int i = 0; i < myAdvisors.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
 			Advisor curadvisor = myAdvisors [i];
-			newrowski.transform.parent = tableski.transform;
+			newrowski.transform.parent = activeadviserpane.transform;
 			GameObject col1 = Instantiate (colski);
 			col1.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.price);
 			col1.transform.parent = newrowski.transform;
@@ -145,35 +159,53 @@ public class AdvisorScript : MonoBehaviour {
 			remove.GetComponent<RemoveAdvisorScript> ().index = i;
 			remove.GetComponent<RemoveAdvisorScript> ().advisorpanel = advisorpanel;
 			remove.transform.parent = newrowski.transform;
+            col1.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+            col2.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+            col3.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
 		} 
 		GameObject blankrowski = Instantiate (rowski);
-		blankrowski.transform.parent = tableski.transform;
-		for (int j = 0; j < 3; j++) {
-            int i = UnityEngine.Random.Range(0, availableAdvisors.Count - 1);
-			Debug.Log ("availableAdvisors: " + availableAdvisors.Count);
-			GameObject newrowski = Instantiate (rowski);
-			Advisor curadvisor = availableAdvisors [i];
-			newrowski.transform.parent = tableski.transform;
-			GameObject col1 = Instantiate (colski);
-			col1.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.price);
-			col1.transform.parent = newrowski.transform;
-			GameObject col2 = Instantiate (colski);
-			col2.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.name);
-			col2.transform.parent = newrowski.transform;
-			GameObject col3 = Instantiate (colski);
-            string type = "";
-            for (int k = 0; k < curadvisor.type.Count; k++)
-            {
-                Debug.Log(curadvisor.type[k]);
-                Debug.Log(curadvisor.tier[k]);
-                type = type + curadvisor.type[k] + "(" + curadvisor.tier[k] + ") ";
-            }
-			col3.GetComponent<Text> ().text = String.Format("{0:C}", type);
-			col3.transform.parent = newrowski.transform;
-			GameObject add = Instantiate (addadvisorbtn);
-			add.GetComponent<AddAdvisorScript> ().index = i;
-			add.GetComponent<AddAdvisorScript> ().advisorpanel = advisorpanel;
-			add.transform.parent = newrowski.transform;
-		}
+		blankrowski.transform.parent = availableadviserpane.transform;
+        totalscreenwidth = RectTransformExtensions.GetWidth(availableadviserpane.GetComponent<RectTransform>());
+        firstrowwidth = totalscreenwidth * preferredwidth1;
+        secondrowwidth = totalscreenwidth * preferredwidth2;
+        thirdrowwidth = totalscreenwidth * preferredwidth3;
+        fourthrowwidth = totalscreenwidth * preferredwidth4;
+        if (_newday) {
+            foreach (Transform child in availableadviserpane.transform) children.Add(child.gameObject);
+            children.ForEach(child => Destroy(child));
+            _newday = false;
+		    for (int j = 0; j < 3; j++) {
+                int i = UnityEngine.Random.Range(0, availableAdvisors.Count - 1);
+			    Debug.Log ("availableAdvisors: " + availableAdvisors.Count);
+			    GameObject newrowski = Instantiate (rowski);
+			    Advisor curadvisor = availableAdvisors [i];
+			    newrowski.transform.parent = availableadviserpane.transform;
+			    GameObject col1 = Instantiate (colski);
+			    col1.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.price);
+			    col1.transform.parent = newrowski.transform;
+			    GameObject col2 = Instantiate (colski);
+			    col2.GetComponent<Text> ().text = String.Format("{0:C}", curadvisor.name);
+			    col2.transform.parent = newrowski.transform;
+			    GameObject col3 = Instantiate (colski);
+                string type = "";
+                for (int k = 0; k < curadvisor.type.Count; k++)
+                {
+                    Debug.Log(curadvisor.type[k]);
+                    Debug.Log(curadvisor.tier[k]);
+                    type = type + curadvisor.type[k] + "(" + curadvisor.tier[k] + ") ";
+                }
+			    col3.GetComponent<Text> ().text = String.Format("{0:C}", type);
+			    col3.transform.parent = newrowski.transform;
+			    GameObject add = Instantiate (addadvisorbtn);
+			    add.GetComponent<AddAdvisorScript> ().index = i;
+			    add.GetComponent<AddAdvisorScript> ().advisorpanel = advisorpanel;
+			    add.transform.parent = newrowski.transform;
+                col1.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+                col2.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+                col3.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+		    }
+        }
 	}
 }

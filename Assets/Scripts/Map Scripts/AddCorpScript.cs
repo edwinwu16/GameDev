@@ -15,7 +15,8 @@ public class AddCorpScript: MonoBehaviour {
         popup = GameObject.Find("PopupRegion");
 
 		corppanel = GameObject.Find ("Corp Panel");
-		self.onClick.AddListener(() => { onClickAdd(index);}); 
+		self.onClick.AddListener(() => { onClickAdd(index);});
+        self.onClick.AddListener(() => { self.interactable = false; });
 	}
 
 	// Update is called once per frame
