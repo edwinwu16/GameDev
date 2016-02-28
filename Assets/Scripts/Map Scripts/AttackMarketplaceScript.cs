@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 
 public class AttackMarketplaceScript : MonoBehaviour {
-
+	private Attack curattacktoadd;
 	public GameObject dropdownpanel;
 	public Dropdown dropdown;
 	public GameObject rowski;
@@ -205,20 +205,23 @@ public class AttackMarketplaceScript : MonoBehaviour {
 ////		corporationstobuy.Add (corptomove);
 //		makeRows ();
 //	}
-	public void ShowDropdown() {
+	public void ShowDropdown(int i) {
+		Attack attacktoadd = attackstobuy [i];
+		attackstobuy.RemoveAt (i);
+		curattacktoadd = attacktoadd;
 		dropdown.ClearOptions ();
-		for (int i = 0; i < attacksowned.Count; i++) {
-			dropdown.AddOptions(new List<string>(){attacksowned[i].name});
+		for (var j = 0; j < attacksowned.Count; j++) {
+			dropdown.AddOptions(new List<string>(){attacksowned[j].name});
 		}
 		dropdownpanel.SetActive (true);
 	}
-	public void AddAttack (int i) {
-		Attack attacktoadd = attackstobuy [i];
+	public void AddAttack () {
 //		corporationstobuy.RemoveAt (i);
 //		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 //		corporationsowned.Add (corptomove);
-		battleobj.GetComponent<BattleScript>().SwapMyAttack(0, attacktoadd);
+		battleobj.GetComponent<BattleScript>().SwapMyAttack(dropdown.value, curattacktoadd);
 		makeRows ();
+		dropdownpanel.SetActive (false);
 	}
 //
 //	public float GetWeeklyMoneyFromCorporations() {
