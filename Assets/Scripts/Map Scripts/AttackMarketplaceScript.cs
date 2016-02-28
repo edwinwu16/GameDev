@@ -52,29 +52,29 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		foreach (Transform child in activeattackstbl.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
 //
-//		for (int i = 0; i < attacksowned.Count; i++) {
-//			GameObject newrowski = Instantiate (rowski);
+		for (int i = 0; i < 2; i++) {
+			GameObject newrowski = Instantiate (rowski);
 //			Attack curattack = attacksowned [i];
 //			Debug.Log (curattack.name);
-//			newrowski.transform.parent = activeattackstbl.transform;
-//			GameObject namecol = Instantiate (colski);
-//			namecol.GetComponent<Text> ().text = String.Format("{0:C}", curattack.name);
-//			namecol.transform.parent = newrowski.transform;
-//			GameObject dmgcol = Instantiate (colski);
-//			dmgcol.GetComponent<Text> ().text = String.Format("{0:C}", curattack.dmg);
-//			dmgcol.transform.parent = newrowski.transform;
-//			GameObject acccol = Instantiate (colski);
-//			acccol.GetComponent<Text> ().text = String.Format("{0:C}", curattack.acc);
-//			acccol.transform.parent = newrowski.transform;
-////			GameObject remove = Instantiate (removecorpbtn);
-////			remove.GetComponent<RemoveScript> ().index = i;
-////			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
-////			remove.transform.parent = newrowski.transform;
-//			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
-//			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
-//			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-//
-//		}
+			newrowski.transform.parent = activeattackstbl.transform;
+			GameObject namecol = Instantiate (colski);
+			namecol.GetComponent<Text> ().text = String.Format ("{0:C}", "name");
+			namecol.transform.parent = newrowski.transform;
+			GameObject dmgcol = Instantiate (colski);
+			dmgcol.GetComponent<Text> ().text = String.Format("{0:C}", "damage");
+			dmgcol.transform.parent = newrowski.transform;
+			GameObject acccol = Instantiate (colski);
+			acccol.GetComponent<Text> ().text = String.Format("{0:C}", "poopoo");
+			acccol.transform.parent = newrowski.transform;
+//			GameObject remove = Instantiate (removecorpbtn);
+//			remove.GetComponent<RemoveScript> ().index = i;
+//			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
+//			remove.transform.parent = newrowski.transform;
+			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+		}
 ////		GameObject blankrowski = Instantiate (rowski);
 //		totalscreenwidth = RectTransformExtensions.GetWidth(availablecorpstbl.GetComponent<RectTransform>());
 //		firstrowwidth = totalscreenwidth * preferredwidth1;

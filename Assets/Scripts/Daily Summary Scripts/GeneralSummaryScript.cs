@@ -15,6 +15,7 @@ public class GeneralSummaryScript : MonoBehaviour {
 	public Slider votesslider;
 	public Slider moneyslider;
 	public GameObject popup;
+	public GameObject daysleftobj;
 
 	public int votestowin;
 
@@ -31,7 +32,7 @@ public class GeneralSummaryScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		daysuntilelectiontext.GetComponent<Text>().text = daysuntilelection + " Days Until Election";
+		daysuntilelectiontext.GetComponent<Text>().text = (daysleftobj.GetComponent<DaysUntilElectionScript>().daysLeft + 1) + " Days Until Election";
 		Debug.Log (moneylist.Count);
 
 		CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");

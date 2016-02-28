@@ -4,6 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+public class Attack{
+	public string name;
+	public float dmg;
+	public int acc; // range 0-100
+
+	public Attack(string n, float damage, int accuracy) {
+		name = n;
+		dmg = damage;
+		acc = accuracy;
+	}
+}
+
 public class BattleScript : MonoBehaviour {
 	public GameObject trump;
 	public GameObject hilary;
@@ -40,17 +52,8 @@ public class BattleScript : MonoBehaviour {
 
 	public List<Vector3> attacktextselectionlocations = new List<Vector3>();
 
-	public class Attack{
-		public string name;
-		public float dmg;
-		public int acc; // range 0-100
 
-		public Attack(string n, float damage, int accuracy) {
-			name = n;
-			dmg = damage;
-			acc = accuracy;
-		}
-	}
+
 	// Use this for initialization
 	void Start () {
 		// initAttackLocations()
