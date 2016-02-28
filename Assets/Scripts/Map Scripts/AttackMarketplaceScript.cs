@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using System;
 
 public class AttackMarketplaceScript : MonoBehaviour {
+
+	public GameObject dropdownpanel;
+	public Dropdown dropdown;
 	public GameObject rowski;
 	public GameObject colski;
 	public GameObject activeattackstbl;
@@ -13,6 +16,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //	public GameObject addcorpbtn;
 	public GameObject attackapnel;
 //	public GameObject popupregion;
+	public GameObject addattackbutton;
 	public GameObject hilary;
 	public GameObject battleobj;
 	public List<Attack> attacksowned = new List<Attack>();
@@ -38,19 +42,20 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		attackstobuy = new List<Attack>() {
 			new Attack("FIrstatttobuy", 10.0F, 70),
 		};
-		attacksowned = battleobj.GetComponent<BattleScript> ().GimmeMyAttacks();
-		makeRows ();
+		dropdownpanel.SetActive (false);
+//		makeRows ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		attacksowned = battleobj.GetComponent<BattleScript> ().GimmeMyAttacks();
+		dropdownpanel.transform.SetAsLastSibling ();
 		Debug.Log ("ATTACKSOWNED" + attacksowned.Count);
-		makeRows ();
+//		makeRows 	();
 		//		makeToBuyRows ();
 	}
 
-	void makeRows () {
+	public void makeRows () {
+		attacksowned = battleobj.GetComponent<BattleScript> ().GimmeMyAttacks();
 		float totalscreenwidth = RectTransformExtensions.GetWidth(activeattackstbl.GetComponent<RectTransform>());
 		float firstrowwidth = totalscreenwidth * preferredwidth1;
 		float secondrowwidth = totalscreenwidth * preferredwidth2;
@@ -115,16 +120,20 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		firstrowski1.transform.parent = availableattackstbl.transform;
 		namecol = Instantiate (colski);
 		namecol.GetComponent<Text> ().text = String.Format ("{0}", "Attack");
-		namecol.transform.parent = firstrowski.transform;
+		namecol.transform.parent = firstrowski1.transform;
 		dmgcol = Instantiate (colski);
 		dmgcol.GetComponent<Text> ().text = String.Format("{0}", "Damage");
-		dmgcol.transform.parent = firstrowski.transform;
+		dmgcol.transform.parent = firstrowski1.transform;
 		acccol = Instantiate (colski);
 		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
-		acccol.transform.parent = firstrowski.transform;
+		acccol.transform.parent = firstrowski1.transform;
+		GameObject lastcol = Instantiate (colski);
+		lastcol.transform.parent = firstrowski1.transform;
+		lastcol.GetComponent<Text> ().text = "";
 		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+		lastcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 
 		for (int i = 0; i < attackstobuy.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
@@ -140,14 +149,14 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			acccol = Instantiate (colski);
 			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
 			acccol.transform.parent = newrowski.transform;
-			//			GameObject remove = Instantiate (removecorpbtn);
-			//			remove.GetComponent<RemoveScript> ().index = i;
+			GameObject addy = Instantiate (addattackbutton);
+			addy.GetComponent<AddAttackScript> ().index = i;
 			//			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
-			//			remove.transform.parent = newrowski.transform;
+			addy.transform.parent = newrowski.transform;
 			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-
+			addy.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 		}
 
 
@@ -196,13 +205,21 @@ public class AttackMarketplaceScript : MonoBehaviour {
 ////		corporationstobuy.Add (corptomove);
 //		makeRows ();
 //	}
-//	public void AddCorporation (int i) {
-//		Corporation corptomove = corporationstobuy [i];
+	public void ShowDropdown() {
+		dropdown.ClearOptions ();
+		for (int i = 0; i < attacksowned.Count; i++) {
+			dropdown.AddOptions(new List<string>(){attacksowned[i].name});
+		}
+		dropdownpanel.SetActive (true);
+	}
+	public void AddAttack (int i) {
+		Attack attacktoadd = attackstobuy [i];
 //		corporationstobuy.RemoveAt (i);
 //		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 //		corporationsowned.Add (corptomove);
-//		makeRows ();
-//	}
+		battleobj.GetComponent<BattleScript>().SwapMyAttack(0, attacktoadd);
+		makeRows ();
+	}
 //
 //	public float GetWeeklyMoneyFromCorporations() {
 //		float totalmoney=0.0F;

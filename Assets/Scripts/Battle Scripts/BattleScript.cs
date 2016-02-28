@@ -350,6 +350,11 @@ public class BattleScript : MonoBehaviour {
 
 	public void SwapMyAttack(int index, Attack newattack) {
 		movedict [hilary] [index] = newattack;
+
+		attack1text.GetComponent<Text>().text = movedict [hilary][0].name;
+		attack2text.GetComponent<Text>().text = movedict [hilary][1].name;
+		attack3text.GetComponent<Text>().text = movedict [hilary][2].name;
+		attack4text.GetComponent<Text>().text = movedict [hilary][3].name;
 	}
 
 	public float GenerateFromGaussian(float mean, float stdDev)
