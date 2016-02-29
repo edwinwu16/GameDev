@@ -14,7 +14,37 @@ public class CorpScript : MonoBehaviour {
 	public GameObject corppanel;
 	public GameObject popupregion;
 	public List<Corporation> corporationsowned = new List<Corporation>();
-	public List<Corporation> corporationstobuy = new List<Corporation>();
+	public List<Corporation> corporationstobuy = new List<Corporation>(){
+        new Corporation(1000000, 300000, "Environment", "BP"),
+        new Corporation(2000000, 800000, "Environment", "Exxon"),
+        new Corporation(600000, 30000, "Environment", "Cicero"),
+        new Corporation(600000, 90000, "Environment", "Petrobas"),
+        new Corporation(8000000, 200000, "Environment", "Saudi Aramco"),
+        new Corporation(3000000, 300000, "Environment", "PetroChina"),
+        new Corporation(1000000, 300000, "Environment", "Chevron"),
+        new Corporation(80000, 20000, "Immigration", "LittleFenceCo"),
+        new Corporation(160000, 80000, "Immigration", "BiggerFenceCo"),
+        new Corporation (800000, 100000, "Immigration", "BigFenceCo"),
+        new Corporation(1500000, 700000, "Immigration", "TrumpFenceCo"),
+        new Corporation(5000000, 1100000, "Finance", "Citigroup"),
+        new Corporation(3000000, 800000, "Finance", "Barclays"),
+        new Corporation(500000, 100000, "Finance", "First Bank of Boston"),
+        new Corporation(2000000, 800000, "Finance", "Morgan Stanley"),
+        new Corporation(2000000, 800000, "Finance", "Credit Suisse"),
+        new Corporation(2000000, 800000, "Finance", "Deutsche Bank"),
+        new Corporation(1000000, 300000, "Healthcare", "Aetna"),
+        new Corporation(2000000, 800000, "Healthcare", "Anthem"),
+        new Corporation(600000, 30000, "Healthcare", "Blue Cross"),
+        new Corporation(600000, 90000, "Healthcare", "Kaiser"),
+        new Corporation(8000000, 200000, "Healthcare", "Cigna"),
+        new Corporation(3000000, 300000, "Healthcare", "Centene"),
+        new Corporation(1000000, 300000, "Healthcare", "United"),
+
+    }
+
+
+        
+        ;
     public float preferredwidth1 = 0.3F;
     public float preferredwidth2 = 0.3F;
     public float preferredwidth3 = 0.2F;
@@ -24,14 +54,8 @@ public class CorpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Corporation exxon = new Corporation (1000000, 300000, "Environment", "Exxon");
-		corporationsowned.Add (exxon);
-		Corporation goldman = new Corporation (2000000, 350000, "Finance", "Goldman Sachs");
+		Corporation goldman = new Corporation (3000000, 700000, "Finance", "Goldman Sachs");
 		corporationsowned.Add (goldman);
-		Corporation fencecorp = new Corporation (100000, 75000, "Immigration", "FenceCorp");
-		corporationstobuy.Add (fencecorp);
-		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
-		corporationstobuy.Add (jp);
 		makeRows ();
 	}
 	
@@ -81,13 +105,15 @@ public class CorpScript : MonoBehaviour {
 
         if (_newday)
         {
-            for (int i = 0; i < corporationstobuy.Count; i++)
-            {
-                foreach (Transform child in availablecorpstbl.transform) children.Add(child.gameObject);
-                children.ForEach(child => Destroy(child));
+            foreach (Transform child in availablecorpstbl.transform) children.Add(child.gameObject);
+            children.ForEach(child => Destroy(child));
 
+            for (int i = 0; i < 5; i++)
+            {
+                int k = (int) UnityEngine.Random.RandomRange(0.0F, corporationstobuy.Count);
+                Debug.Log(String.Format("k value = {0}", k));
                 GameObject newrowski = Instantiate(rowski);
-                Corporation curcorp = corporationstobuy[i];
+                Corporation curcorp = corporationstobuy[k];
                 newrowski.transform.parent = availablecorpstbl.transform;
                 GameObject cost2buycol = Instantiate(colski);
                 cost2buycol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.costtobuy);
