@@ -125,13 +125,11 @@ public class BattleScript : MonoBehaviour {
 					if (_myturn) {
 						if (Input.GetKeyDown (KeyCode.UpArrow)) {
 							NavigateMoveMenu (KeyCode.UpArrow);
-							attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
-							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
+							updateAttackDescription (currentattackselectorchoice);
 						}
 						if (Input.GetKeyDown (KeyCode.DownArrow)) {
 							NavigateMoveMenu (KeyCode.DownArrow);
-							attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
-							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
+							updateAttackDescription (currentattackselectorchoice);
 						}
 						if (Input.GetKeyDown (KeyCode.Space)) {
 							NavigateMoveMenu (KeyCode.Space);

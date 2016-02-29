@@ -40,7 +40,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
 //		corporationstobuy.Add (jp);
 		attackstobuy = new List<Attack>() {
-			new Attack("FIrstatttobuy", 10.0F, 70),
+			new Attack("Did you see John Oliver last night?", 20.0F, 99),
 		};
 		dropdownpanel.SetActive (false);
 //		makeRows ();
