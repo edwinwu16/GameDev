@@ -26,6 +26,8 @@ public class PopupScript : MonoBehaviour {
 	public GameObject dailysummarypanel;
 	public GameObject corporatepanel;
 	public GameObject battleobject;
+	public GameObject welcomebattlepanel;
+	public GameObject trump;
 	private List<Corporation> activecorporations;
 	private List<Advisor> activeadvisers;
 	public float financeboost;
@@ -547,6 +549,9 @@ public class PopupScript : MonoBehaviour {
 	}
 	public void switchtoBattleScene()
 	{
+		// move call to popupscript
+		welcomebattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
+		welcomebattlepanel.GetComponent<WelcomeBattleScript> ().challenger = trump.GetComponent<FighterScript> ().fightername;
 		battleobject.GetComponent<BattleScript> ().resetBattle ();
 		battlecanvas.SetActive (true);
 		battlecanvas.GetComponent<BattleCanvasScript> ().movePanel ();

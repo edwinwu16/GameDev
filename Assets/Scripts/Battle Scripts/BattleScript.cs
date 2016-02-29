@@ -17,6 +17,7 @@ public class Attack{
 }
 
 public class BattleScript : MonoBehaviour {
+	public bool inbattle = false;
 	public GameObject trump;
 	public GameObject hilary;
 //	private bool _textisavailable = true;
@@ -89,54 +90,56 @@ public class BattleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		HealthUpdate (hilary, hilaryHealthText);
-		HealthUpdate (trump, trumpHealthText);
-		if (!_gameover) {
-			if (_pausestate) {
-				if (Input.GetKeyDown (KeyCode.Space)) {
-					Debug.Log ("space");
-					_pausestate = false;
-					if (hilary.GetComponent<FighterScript> ().health <= 0) {
-						StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
-						Debug.Log ("someone lost");
-						_gameover = true;
-						finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
-						finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
-					} else if (trump.GetComponent<FighterScript> ().health <= 0) {
-						StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
-						_gameover = true;
-						finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
-						finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
-						Debug.Log ("someone lost");
-					} else {
-						if (_myturn) {
-							EndMyTurn ();
-							GenerateOpponentAttack (trump);
+		if (inbattle) {
+			HealthUpdate (hilary, hilaryHealthText);
+			HealthUpdate (trump, trumpHealthText);
+			if (!_gameover) {
+				if (_pausestate) {
+					if (Input.GetKeyDown (KeyCode.Space)) {
+						Debug.Log ("space");
+						_pausestate = false;
+						if (hilary.GetComponent<FighterScript> ().health <= 0) {
+							StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
+							Debug.Log ("someone lost");
+							_gameover = true;
+							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
+							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
+						} else if (trump.GetComponent<FighterScript> ().health <= 0) {
+							StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
+							_gameover = true;
+							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
+							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
+							Debug.Log ("someone lost");
 						} else {
-							BeginMyTurn ();
+							if (_myturn) {
+								EndMyTurn ();
+								GenerateOpponentAttack (trump);
+							} else {
+								BeginMyTurn ();
+							}
+						}
+					}
+
+					//			StartCoroutine (BlinkArrow ());
+				} else {
+					if (_myturn) {
+						if (Input.GetKeyDown (KeyCode.UpArrow)) {
+							NavigateMoveMenu (KeyCode.UpArrow);
+							attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
+							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
+						}
+						if (Input.GetKeyDown (KeyCode.DownArrow)) {
+							NavigateMoveMenu (KeyCode.DownArrow);
+							attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
+							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
+						}
+						if (Input.GetKeyDown (KeyCode.Space)) {
+							NavigateMoveMenu (KeyCode.Space);
 						}
 					}
 				}
-
-//			StartCoroutine (BlinkArrow ());
-			} else {
-				if (_myturn) {
-					if (Input.GetKeyDown (KeyCode.UpArrow)) {
-						NavigateMoveMenu (KeyCode.UpArrow);
-						attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
-							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
-					}
-					if (Input.GetKeyDown (KeyCode.DownArrow)) {
-						NavigateMoveMenu (KeyCode.DownArrow);
-						attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
-							+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
-					}
-					if (Input.GetKeyDown (KeyCode.Space)) {
-						NavigateMoveMenu (KeyCode.Space);
-					}
-				}
-				}
 			}
+		}
 		}
 	void BeginMyTurn() {
 		_myturn = true;

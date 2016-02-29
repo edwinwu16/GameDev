@@ -7,6 +7,7 @@ public class FinishBattleScript : MonoBehaviour {
 	public GameObject self;
 	public GameObject maincanvas;
 	public GameObject battlecanvas;
+	public GameObject battleobj;
 	public string winner;
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,8 @@ public class FinishBattleScript : MonoBehaviour {
 		self.transform.localPosition = new Vector3 (-1000.0F, -1000.0F, 0.0F);
 		maincanvas.SetActive (true);
 		battlecanvas.SetActive (false);
+		battleobj.GetComponent<BattleScript> ().inbattle = false;
+		Debug.Log ("inFinishBattleScript");
 
 	}
 

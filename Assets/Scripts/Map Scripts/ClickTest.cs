@@ -14,7 +14,7 @@ public class ClickTest: MonoBehaviour {
 		_popupisup = false;
 		maincanvas.SetActive (true);
 		battlecanvas.SetActive (false);
-
+		Debug.Log ("IN CLICKTESTSTART");
 
 	}
 
