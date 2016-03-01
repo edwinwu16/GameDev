@@ -229,11 +229,6 @@ public class CorpScript : MonoBehaviour {
 	public void AddCorporation (int i) {
 		Corporation corptomove = corporationstobuy [i];
 		corporationstobuy.RemoveAt (i);
-		GameObject[] corpbuts = GameObject.FindGameObjectsWithTag ("CorpBut");
-		for (int j = 0; j < corpbuts.Length; j++) {
-			if (corpbuts [j].GetComponent<AddCorpScript> ().index == i)
-				Destroy (corpbuts [j].transform.parent.gameObject);
-		}
 		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 		corporationsowned.Add (corptomove);
 		makeRows ();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -16,7 +17,6 @@ public class AddCorpScript: MonoBehaviour {
 
 		corppanel = GameObject.Find ("Corp Panel");
 		self.onClick.AddListener(() => { onClickAdd(index);});
-        self.onClick.AddListener(() => { self.interactable = false; });
 	}
 
 	// Update is called once per frame
@@ -34,7 +34,8 @@ public class AddCorpScript: MonoBehaviour {
         else
         {
             corppanel.GetComponent<CorpScript>().AddCorporation(i);
+			self.interactable = false;
         }
-		Debug.Log ("CLICKY Add");
+		Debug.Log (String.Format("Index, {0}",i));
 	}
 }
