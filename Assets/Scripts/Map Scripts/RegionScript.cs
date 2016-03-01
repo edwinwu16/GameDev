@@ -7,6 +7,7 @@ public class RegionScript : MonoBehaviour {
 	public Button region;
 	public GameObject maincamera;
 	public GameObject popup;
+	public GameObject tutorial;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,9 @@ public class RegionScript : MonoBehaviour {
 	private void sendClick() {
 		maincamera.SendMessage ("ShowBox");
 		popup.SendMessage ("SetClickedRegion", region.name);
+		if (region.name == "West") {
+			tutorial.SendMessage ("ThingClicked", "west");
+		}
 		Debug.Log (region.name + "clicked");
 	}
 }

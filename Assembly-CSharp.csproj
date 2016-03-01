@@ -92,6 +92,8 @@
      <Compile Include="Assets\TSTableView\ITableViewDataSource.cs" />
      <Compile Include="Assets\TSTableView\TableView.cs" />
      <Compile Include="Assets\TSTableView\TableViewCell.cs" />
+     <Compile Include="Assets\Tutorial Stuff\ContinueButtonScript.cs" />
+     <Compile Include="Assets\Tutorial Stuff\TuttyScript.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Accordion.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\AccordionElement.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Tweening\FloatTween.cs" />
