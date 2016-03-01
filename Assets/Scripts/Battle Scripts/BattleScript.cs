@@ -58,13 +58,7 @@ public class BattleScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// initAttackLocations()
-		attacktextselectionlocations.Add(attack1textselectionlocation);
-		attacktextselectionlocations.Add(attack2textselectionlocation);
-		attacktextselectionlocations.Add(attack3textselectionlocation);
-		attacktextselectionlocations.Add(attack4textselectionlocation);
-
-		attackselector.transform.localPosition = attacktextselectionlocations [currentattackselectorchoice];
+		initAttackLocations ();
 
 		_myturn = false;
 		List<GameObject> opponents = new List<GameObject> ();
@@ -78,14 +72,10 @@ public class BattleScript : MonoBehaviour {
 		ImportMe();
 		ImportOpponents(opponents);
 
-		//initAttackText();
-		attack1text.GetComponent<Text>().text = movedict [hilary][0].name;
-		attack2text.GetComponent<Text>().text = movedict [hilary][1].name;
-		attack3text.GetComponent<Text>().text = movedict [hilary][2].name;
-		attack4text.GetComponent<Text>().text = movedict [hilary][3].name;
+		initAttackText();
 
-		attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
-			+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
+		updateAttackDescription (currentattackselectorchoice);
+
 		BeginMyTurn ();
 	}
 	
@@ -318,7 +308,7 @@ public class BattleScript : MonoBehaviour {
 		attackselector.transform.localPosition = attacktextselectionlocations [currentattackselectorchoice];
 
 	}
-	void initAttackNames(){
+	void initAttackText(){
 		attack1text.GetComponent<Text>().text = movedict [hilary][0].name;
 		attack2text.GetComponent<Text>().text = movedict [hilary][1].name;
 		attack3text.GetComponent<Text>().text = movedict [hilary][2].name;

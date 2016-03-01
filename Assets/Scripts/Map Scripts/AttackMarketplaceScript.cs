@@ -15,6 +15,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //	public GameObject removecorpbtn;
 //	public GameObject addcorpbtn;
 	public GameObject attackapnel;
+	public GameObject xButton;
 //	public GameObject popupregion;
 	public GameObject addattackbutton;
 	public GameObject hilary;
@@ -214,6 +215,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			dropdown.AddOptions(new List<string>(){attacksowned[j].name});
 		}
 		dropdownpanel.SetActive (true);
+		xButton.SetActive (false);
 	}
 	public void AddAttack () {
 //		corporationstobuy.RemoveAt (i);
@@ -222,6 +224,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		battleobj.GetComponent<BattleScript>().SwapMyAttack(dropdown.value, curattacktoadd);
 		makeRows ();
 		dropdownpanel.SetActive (false);
+		xButton.SetActive (true);
 	}
 //
 //	public float GetWeeklyMoneyFromCorporations() {
