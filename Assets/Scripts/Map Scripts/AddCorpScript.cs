@@ -1,41 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class AddCorpScript: MonoBehaviour {
-	public int index;
-	public GameObject corppanel;
+public class AddCorpScript : MonoBehaviour
+{
+    public Corporation curcorp;
+    public GameObject corppanel;
     public GameObject popup;
-	public Button self;
-	// Use this for initialization
-	void Start () {
+    public Button self;
+    // Use this for initialization
+    void Start()
+    {
         popup = GameObject.Find("PopupRegion");
 
-		corppanel = GameObject.Find ("Corp Panel");
-		self.onClick.AddListener(() => { onClickAdd(index);});
-	}
+        corppanel = GameObject.Find("Corp Panel");
+        self.onClick.AddListener(() => { onClickAdd(curcorp); });
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
 
-	}
+    }
 
-	public void onClickAdd(int i) {
-        if (popup.GetComponent<PopupScript>().getTotalMoney() < corppanel.GetComponent<CorpScript>().corporationstobuy[i].costtobuy)
+    public void onClickAdd(Corporation curcorp)
+    {
+        if (popup.GetComponent<PopupScript>().getTotalMoney() < curcorp.costtobuy)
         {
 #if UNITY_EDITOR
             EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
 #endif
         }
+       
         else
         {
-            corppanel.GetComponent<CorpScript>().AddCorporation(i);
-			self.interactable = false;
+            corppanel.GetComponent<CorpScript>().AddCorporation(curcorp);
+            self.interactable = false;
+
         }
-		Debug.Log (String.Format("Index, {0}",i));
-	}
+        Debug.Log("CLICKY Add");
+    }
 }
