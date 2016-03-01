@@ -17,6 +17,8 @@ public class GeneralSummaryScript : MonoBehaviour {
 	public GameObject popup;
 	public GameObject daysleftobj;
 
+	public Text votesslidertext;
+
 	public int votestowin;
 
 	private float moneydiff;
@@ -32,6 +34,8 @@ public class GeneralSummaryScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		votesslidertext.GetComponent<Text> ().text = String.Format("{0}", voteslist [voteslist.Count - 1]);
+
 		daysuntilelectiontext.GetComponent<Text>().text = (daysleftobj.GetComponent<DaysUntilElectionScript>().daysLeft + 1) + " Days Until Election";
 		Debug.Log (moneylist.Count);
 
@@ -65,6 +69,7 @@ public class GeneralSummaryScript : MonoBehaviour {
 				votesearnedlosttext.GetComponent<Text> ().text = "Votes Earned";
 				votesearnedlosttext.color = Color.green;
 				votestext.GetComponent<Text> ().text = String.Format("{0}", votesdiff);
+
 			} else {
 				votesearnedlosttext.GetComponent<Text> ().text = "Votes Lost";
 				votesearnedlosttext.color = Color.red;
