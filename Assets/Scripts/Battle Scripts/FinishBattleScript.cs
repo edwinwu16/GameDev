@@ -11,6 +11,7 @@ public class FinishBattleScript : MonoBehaviour {
 	public string winner;
 	// Use this for initialization
 	void Start () {
+		self.SetActive (false);
 		continuebutton.onClick.AddListener(() => sendClick());
 
 	}
@@ -28,6 +29,7 @@ public class FinishBattleScript : MonoBehaviour {
 		maincanvas.SetActive (true);
 		battlecanvas.SetActive (false);
 		battleobj.GetComponent<BattleScript> ().inbattle = false;
+		self.SetActive (false);
 		Debug.Log ("inFinishBattleScript");
 
 	}

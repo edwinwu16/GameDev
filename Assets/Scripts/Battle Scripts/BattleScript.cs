@@ -103,11 +103,13 @@ public class BattleScript : MonoBehaviour {
 							StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
 							Debug.Log ("someone lost");
 							_gameover = true;
+							finishbattlepanel.SetActive (true);
 							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
 						} else if (trump.GetComponent<FighterScript> ().health <= 0) {
 							StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
 							_gameover = true;
+							finishbattlepanel.SetActive (true);
 							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
 							Debug.Log ("someone lost");

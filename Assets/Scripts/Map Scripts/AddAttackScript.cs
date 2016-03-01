@@ -22,6 +22,7 @@ public class AddAttackScript: MonoBehaviour {
 	}
 
 	public void onClickAdd(int i) {
+		Debug.Log ("ONCLICKADD" + i);
 //			attackpanel.GetComponent<AttackMarketplaceScript>().AddAttack(i);
 		attackpanel.GetComponent<AttackMarketplaceScript> ().ShowDropdown (i);
 	}
