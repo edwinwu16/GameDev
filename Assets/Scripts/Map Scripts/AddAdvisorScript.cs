@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class AddAdvisorScript : MonoBehaviour {
 
-	public int index;
+	public Advisor curadvisor;
 	public GameObject advisorpanel;
     public GameObject popup;
 
@@ -17,8 +17,7 @@ public class AddAdvisorScript : MonoBehaviour {
 	void Start () {
         popup = GameObject.Find("PopupRegion");
 		advisorpanel = GameObject.Find ("Adviser Panel");
-		self.onClick.AddListener(() => { onClickAdd(index);});
-        self.onClick.AddListener(() => { self.interactable = false; });
+		self.onClick.AddListener(() => { onClickAdd(curadvisor);});
 	}
 
 	// Update is called once per frame
@@ -26,9 +25,9 @@ public class AddAdvisorScript : MonoBehaviour {
 
 	}
 
-	public void onClickAdd(int i) {
+	public void onClickAdd(Advisor curadvisor) {
 		Debug.Log ("CLICKY Add");
-        if (popup.GetComponent<PopupScript>().getTotalMoney() < advisorpanel.GetComponent<AdvisorScript>().availableAdvisors[i].price)
+        if (popup.GetComponent<PopupScript>().getTotalMoney() < curadvisor.price)
         {
 #if UNITY_EDITOR
             EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
@@ -36,7 +35,8 @@ public class AddAdvisorScript : MonoBehaviour {
         }
         else
         {
-            advisorpanel.GetComponent<AdvisorScript>().AddAdvisor(i);
+            advisorpanel.GetComponent<AdvisorScript>().AddAdvisor(curadvisor);
+            self.interactable = false;
         }
 	}
 }

@@ -57,220 +57,184 @@ public class PopupScript : MonoBehaviour {
 	private Dictionary<string, bool> newday = new Dictionary<string, bool>();
 
 	private List<Campaign> generalcampaigns = new List<Campaign>(){
-		new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
+		new Campaign("Television", 200, 25, 50, 20, "General"),
+		new Campaign("Radio", 150, 15, 35, 10, "General"),
+		new Campaign("Social Media", 300, 25, 75, 20, "General"),
+		new Campaign("Newspaper", 300, 	25, 70, 20, "General"),
+		new Campaign("Grassroots", 250, 25, 60, 20, "General"),
+		new Campaign("College Tour", 300, 25, 75, 20, "General"),
+		new Campaign("Book Tour", 1500, 25, 200, 20, "General")
 	};
     private List<Campaign> environmentcampaigns = new List<Campaign>(){
-		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
-		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
-		new Campaign("Television", 200, 25, 150, 20, "Environment"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "Environment"),
-		new Campaign("College Tour", 300, 25, 150, 20, "Environment"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "Environment")
+		new Campaign("Park Preservation", 200, 25, 50, 20, "Environment"),
+		new Campaign("Clean Water", 200, 25, 40, 20, "Environment"),
+		new Campaign("Clean Air", 150, 25, 36, 20, "Environment"),
+		new Campaign("Save Animals", 300, 25, 70, 20, "Environment")
+	};
 
-	};
-    private List<Campaign> environmentcampaigns1 = new List<Campaign>(){
-		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
-		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
-	};
     private List<Campaign> financecampaigns = new List<Campaign>(){
-		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
-		new Campaign("Support Local Business", 150, 15, 100, 10, "Finance"),
-		new Campaign("Microloan Program", 300, 25, 200, 20, "Finance"),
-		new Campaign("Blue Collar Tour", 300, 25, 150, 20, "Finance"),
-		new Campaign("Open a Soup Kitchen", 250, 25, 150, 20, "Finance"),
-		new Campaign("College Tour", 300, 25, 150, 20, "Finance"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "Finance")
-
+		new Campaign("1% Movement", 200, 25, 50, 20, "Finance"),
+		new Campaign("Support Local Business", 150, 37, 0, 10, "Finance"),
+		new Campaign("Microloan Program", 300, 25, 75, 20, "Finance"),
+		new Campaign("Blue Collar Tour", 300, 25, 70, 20, "Finance"),
+		new Campaign("Open a Soup Kitchen", 250, 25, 62, 20, "Finance"),
 	};
-    private List<Campaign> financecampaigns1 = new List<Campaign>(){
-		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
-		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
-		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
-		new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 
-	};
     private List<Campaign> immigrationcampaigns = new List<Campaign>(){
-		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 150, 15, 100, 10, "Immigration"),
-		new Campaign("Sponsor Ethnic Minorities", 300, 25, 200, 20, "Immigration"),
-		new Campaign("Hispanic Grassroots", 300, 	25, 150, 20, "Immigration"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "Immigration"),
-		new Campaign("Travel to China", 300, 25, 150, 20, "Immigration"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "Immigration")
+		new Campaign("Learn Spanish", 200, 25, 50, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 150, 15, 37, 10, "Immigration"),
+		new Campaign("Sponsor Ethnic Minorities", 300, 25, 70, 20, "Immigration"),
+		new Campaign("Hispanic Grassroots", 300, 	25, 75, 20, "Immigration"),
+		new Campaign("Travel to China", 300, 25, 70, 20, "Immigration"),
+		new Campaign("Book Tour", 1500, 25, 200, 20, "Immigration")
 
 	};
-    private List<Campaign> immigrationcampaigns1 = new List<Campaign>(){
-		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Grassroots in Hispanic comm.", 200, 25, 150, 20, "Immigration"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 
-	};
     private List<Campaign> healthcarecampaigns = new List<Campaign>(){
-		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("ACA Enrollment Clinic", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Open Free Clinic", 1000, 15, 750, 10, "Healthcare"),
-		new Campaign("Social Media", 150, 25, 100, 10, "Healthcare"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "Healthcare")
+		new Campaign("Open Enrollment Help", 200, 25, 50, 20, "Healthcare"),
+		new Campaign("Sponsor Nursing School", 200, 25, 40, 20, "Healthcare"),
+		new Campaign("Sponsor 10k", 250, 25, 62, 20, "Healthcare"),
+		new Campaign("Hold Blood Clinics", 300, 25, 75, 20, "Healthcare"),
+		new Campaign("ACA Enrollment Clinic", 300, 25, 70, 20, "Healthcare"),
+		new Campaign("Open Free Clinic", 1000, 15, 260, 10, "Healthcare")
+	};
+
+    private List<Campaign> financecampaigns1 = new List<Campaign>(){
+        new Campaign("Audit the Fed", 200, 25, 67, 20, "Finance"),
+		new Campaign("Break Up the Banks", 150, 50, 0, 10, "Finance"),
+		new Campaign("Rob the Rich", 300, 25, 90, 20, "Finance"),
+		new Campaign("Occupy Movement", 300, 25, 100, 20, "Finance"),
+		new Campaign("Occupy Wall Street", 250, 25, 70, 20, "Finance"),
+	};
+
+    private List<Campaign> immigrationcampaigns1 = new List<Campaign>(){
+		new Campaign("Getting the best from Mexico", 200, 25, 67, 20, "Immigration"),
+		new Campaign("Promise not to ban Muslims", 150, 50, 0, 10, "Immigration"),
+		new Campaign("Blow up Trump Tower", 300, 25, 90, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 300, 25, 100, 20, "Immigration"),
+		new Campaign("Take Syrian Refuggees", 250, 25, 70, 20, "Immigration"),
+		new Campaign("Visit the Pyramids", 250, 25, 70, 20, "Immigration"),
+
 
 	};
     private List<Campaign> healthcarecampaigns1 = new List<Campaign>(){
-		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
+		new Campaign("Sponsor Single Payer", 200, 25, 66, 20, "Healthcare"),
+		new Campaign("Dedicate Hospital Wings", 200, 25, 67, 20, "Healthcare"),
+		new Campaign("Sponsor Half-Marathon", 250, 25, 80, 20, "Healthcare"),
+        new Campaign("Sponsor Marathon", 250, 25, 85, 20, "Healthcare"),
+
+		new Campaign("ACA Enrollment Clinic", 300, 25, 100, 20, "Healthcare"),
+		new Campaign("Open Free Clinic", 1000, 15, 320, 10, "Healthcare")
+
 
 	};
-    private List<Campaign> environmentcampaigns2 = new List<Campaign>(){
-		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
-		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 
-	};
-    private List<Campaign> environmentcampaigns3 = new List<Campaign>(){
-		new Campaign("Park Preservation", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Water", 200, 25, 150, 20, "Environment"),
-		new Campaign("Clean Air", 200, 25, 150, 20, "Environment"),
-		new Campaign("Save Animals", 200, 25, 150, 20, "Environment"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 
-	};
+    private List<Campaign> environmentcampaigns1 = new List<Campaign>()
+    {
+		new Campaign("Save the Swamps", 200, 25, 67, 20, "Environment"),
+		new Campaign("Wash Oil off Seals", 200, 25, 60, 20, "Environment"),
+		new Campaign("Pour a bunch of water on California", 250, 25, 85, 20, "Envrionment"),
+        new Campaign("Go to Yellowstone", 250, 25, 80, 20, "Environment"),
+		new Campaign("Spend a day with a Hippie", 300, 25, 100, 20, "Environment"),
+		new Campaign("Reenact Woodstock", 1000, 15, 330, 10, "Enviroment")
+
+
+    };
+
     private List<Campaign> financecampaigns2 = new List<Campaign>(){
-		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
-		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
-		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
-
+        new Campaign("Audit the Fed", 200, 25, 80, 20, "Finance"),
+		new Campaign("Break Up the Banks", 150, 60, 0, 10, "Finance"),
+		new Campaign("Rob the Rich", 300, 25, 110, 20, "Finance"),
+		new Campaign("Occupy Movement", 300, 25, 120, 20, "Finance"),
+		new Campaign("Occupy Wall Street", 250, 25, 100, 20, "Finance"),
 	};
-    private List<Campaign> financecampaigns3 = new List<Campaign>(){
-		new Campaign("1% Movement", 200, 25, 150, 20, "Finance"),
-		new Campaign("Microloan Program", 200, 25, 150, 20, "Finance"),
-		new Campaign("Support Local Business", 200, 25, 150, 20, "Finance"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 
-	};
     private List<Campaign> immigrationcampaigns2 = new List<Campaign>(){
-		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Grassroots in Hispanic comm.", 200, 25, 150, 20, "Immigration"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
+		new Campaign("Getting the best from Mexico", 200, 25, 80, 20, "Immigration"),
+		new Campaign("Promise not to ban Muslims", 150, 50, 60, 10, "Immigration"),
+		new Campaign("Blow up Trump Tower", 300, 25, 120, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 300, 25, 120, 20, "Immigration"),
+		new Campaign("Take Syrian Refuggees", 250, 25, 100, 20, "Immigration"),
+		new Campaign("Visit the Pyramids", 250, 25, 90, 20, "Immigration"),
 
-	};
-    private List<Campaign> immigrationcampaigns3 = new List<Campaign>(){
-		new Campaign("Learn Spanish", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Sponsor Ethnic Minorities", 200, 25, 150, 20, "Immigration"),
-		new Campaign("Grassroots in Hispanic comm.", 200, 25, 150, 20, "Immigration"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
 
 	};
     private List<Campaign> healthcarecampaigns2 = new List<Campaign>(){
-		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
+		new Campaign("Sponsor Single Payer", 200, 25, 80, 20, "Healthcare"),
+		new Campaign("Dedicate Hospital Wings", 200, 25, 75, 20, "Healthcare"),
+		new Campaign("Sponsor Half-Marathon", 250, 25, 100, 20, "Healthcare"),
+        new Campaign("Sponsor Marathon", 250, 25, 90, 20, "Healthcare"),
+
+		new Campaign("ACA Enrollment Clinic", 300, 25, 100, 20, "Healthcare"),
+		new Campaign("Open Free Clinic", 1000, 15, 410, 10, "Healthcare")
+
+
+	};
+
+
+    private List<Campaign> environmentcampaigns2 = new List<Campaign>()
+    {
+		new Campaign("Save the Swamps", 200, 25, 75, 20, "Environment"),
+		new Campaign("Dedicate Hospital Wings", 200, 25, 80, 20, "Environment"),
+		new Campaign("Sponsor Half-Marathon", 250, 25, 100, 20, "Envrionment"),
+        new Campaign("Sponsor Marathon", 500, 25, 200, 20, "Environment"),
+
+		new Campaign("ACA Enrollment Clinic", 300, 25, 115, 20, "Environment"),
+		new Campaign("Open Free Clinic", 1000, 15, 390, 10, "Enviroment")
+
+
+    };
+
+    private List<Campaign> financecampaigns3 = new List<Campaign>(){
+        new Campaign("Audit the Fed", 200, 25, 100, 20, "Finance"),
+		new Campaign("Break Up the Banks", 150, 50, 75, 10, "Finance"),
+		new Campaign("Rob the Rich", 300, 25, 150, 20, "Finance"),
+		new Campaign("Occupy Movement", 300, 25, 150, 20, "Finance"),
+		new Campaign("Occupy Wall Street", 250, 25, 120, 20, "Finance"),
+	};
+
+    private List<Campaign> immigrationcampaigns3 = new List<Campaign>(){
+		new Campaign("Getting the best from Mexico", 200, 25, 100, 20, "Immigration"),
+		new Campaign("Promise not to ban Muslims", 150, 50, 75, 10, "Immigration"),
+		new Campaign("Blow up Trump Tower", 300, 25, 150, 20, "Immigration"),
+		new Campaign("Kick Down Walls", 300, 25, 150, 20, "Immigration"),
+		new Campaign("Take Syrian Refuggees", 250, 25, 120, 20, "Immigration"),
+		new Campaign("Visit the Pyramids", 250, 25, 125, 20, "Immigration"),
+
 
 	};
     private List<Campaign> healthcarecampaigns3 = new List<Campaign>(){
-		new Campaign("Open Enrollment Help", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor Nursing School", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Sponsor 10k", 200, 25, 150, 20, "Healthcare"),
-		new Campaign("Hold Blood Clinics", 200, 25, 150, 20, "Healthcare"),
-				new Campaign("Television", 200, 25, 150, 20, "General"),
-		new Campaign("Radio", 150, 15, 100, 10, "General"),
-		new Campaign("Social Media", 300, 25, 200, 20, "General"),
-		new Campaign("Newspaper", 300, 	25, 150, 20, "General"),
-		new Campaign("Grassroots", 250, 25, 150, 20, "General"),
-		new Campaign("College Tour", 300, 25, 150, 20, "General"),
-		new Campaign("Book Tour", 1500, 25, 150, 20, "General")
+		new Campaign("Sponsor Single Payer", 200, 25, 100, 20, "Healthcare"),
+		new Campaign("Dedicate Hospital Wings", 200, 25, 110, 20, "Healthcare"),
+		new Campaign("Sponsor Half-Marathon", 250, 25, 120, 20, "Healthcare"),
+        new Campaign("Sponsor Marathon", 250, 25, 115, 20, "Healthcare"),
+
+		new Campaign("ACA Enrollment Clinic", 300, 25, 150, 20, "Healthcare"),
+		new Campaign("Open Free Clinic", 1000, 15, 510, 10, "Healthcare")
+
 
 	};
+
+
+    private List<Campaign> environmentcampaigns3 = new List<Campaign>()
+    {
+		new Campaign("Save the Swamps", 200, 25, 100, 20, "Environment"),
+		new Campaign("Dedicate Hospital Wings", 200, 25, 89, 20, "Environment"),
+		new Campaign("Sponsor Half-Marathon", 250, 25, 123, 20, "Envrionment"),
+        new Campaign("Sponsor Marathon", 250, 25, 129, 20, "Environment"),
+
+		new Campaign("ACA Enrollment Clinic", 300, 25, 155, 20, "Environment"),
+		new Campaign("Open Free Clinic", 1000, 15, 505, 10, "Enviroment")
+
+
+    };
+    
+
+
+
+
+    
 
 
 	// Use this for initialization
@@ -335,6 +299,14 @@ public class PopupScript : MonoBehaviour {
 
 
 	}
+
+    void updateCampaigns(Advisor advisorremoved, Advisor advisoradded)
+    {
+        foreach (string region in regions.Keys)
+        {
+
+        }
+    }
 
  
     
@@ -593,8 +565,13 @@ public class PopupScript : MonoBehaviour {
                 if (campaign.type !="General")
 				    votes = (1.0F + Hilary.campaignboosts[campaign.type]) *votes;
                 campaign.costovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
-                IncreasePopularity(votes, region.name);
-                ttlvotestoincrement += votes;
+                Debug.Log(String.Format("Votes: {0}", votes));
+                if (votes >= 0)
+                {
+                    IncreasePopularity(votes, region.name);
+                    ttlvotestoincrement += votes;
+
+                }
 			}
 		}
         ttlmoneytoincrement += corporatepanel.GetComponent<CorpScript>().GetWeeklyMoneyFromCorporations();

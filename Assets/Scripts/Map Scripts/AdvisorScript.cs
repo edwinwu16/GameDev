@@ -11,6 +11,7 @@ public class Advisor{
 	//public float weeklycost;
     public List<int> tier;
 	public bool hired;
+    public List<Campaign> campaigns;
 
 
 	public Advisor(string n, List<string> typ, float pr, List<int> ter) {
@@ -18,6 +19,7 @@ public class Advisor{
 		type = typ;
 		price = pr;
         tier = ter;
+        
 		//weeklycost = wkcost;
 	}
 }
@@ -42,8 +44,8 @@ public class AdvisorScript : MonoBehaviour {
         new Advisor("Charmander", new List<string>(){"Environment", "Finance"}, 100090.0F, new List<int>(){1, 2}),
         new Advisor("imm", new List<string>(){"Immigration"}, 100090.0F, new List<int>(){2}),
         new Advisor("John", new List<string>(){"Immigration"}, 100090.0F, new List<int>(){1}),
-        new Advisor("Koch", new List<string>(){"Finance"}, 100090.0F, new List<int>(){1}),
-        new Advisor("Oliver", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Koch Brothers", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
+        new Advisor("John Oliver", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
         new Advisor("W.", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
         new Advisor("James Bond", new List<string>(){"Environment", "Healthcare"}, 100090.0F, new List<int>(){1, 1}),
         new Advisor("Robert", new List<string>(){"Healthcare", "Finance"}, 100090.0F, new List<int>(){1, 1}),
@@ -107,11 +109,17 @@ public class AdvisorScript : MonoBehaviour {
 		availableAdvisors.Add (advisor);
 		makeRows ();
 	}
-	public void AddAdvisor (int i) {
-		Advisor advisor = availableAdvisors [i];
-		availableAdvisors.RemoveAt (i);
-		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-advisor.price);
-		myAdvisors.Add (advisor);
+	public void AddAdvisor (Advisor curadvisor) {
+		availableAdvisors.Remove (curadvisor);
+		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-curadvisor.price);
+        GameObject[] corpbuts = GameObject.FindGameObjectsWithTag("AdvBut");
+        for (int j = 0; j < corpbuts.Length; j++)
+        {
+            if (corpbuts[j].GetComponent<AddAdvisorScript>().curadvisor == curadvisor)
+                Destroy(corpbuts[j].transform.parent.gameObject);
+        }
+
+		myAdvisors.Add (curadvisor);
 		makeRows ();
 	}
 
@@ -136,6 +144,30 @@ public class AdvisorScript : MonoBehaviour {
 		var children = new List<GameObject>();
 		foreach (Transform child in activeadviserpane.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
+
+        GameObject firstrowski = Instantiate(rowski);
+        firstrowski.transform.parent = activeadviserpane.transform;
+
+        GameObject fstcol = Instantiate(colski);
+        fstcol.GetComponent<Text>().text = "Cost to Buy";
+        fstcol.transform.parent = firstrowski.transform;
+        fstcol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+
+        GameObject scndcol = Instantiate(colski);
+        scndcol.GetComponent<Text>().text = "Name";
+        scndcol.transform.parent = firstrowski.transform;
+        scndcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+
+        GameObject thrdcol = Instantiate(colski);
+        thrdcol.GetComponent<Text>().text = "Types (Campaign Tier)";
+        thrdcol.transform.parent = firstrowski.transform;
+        thrdcol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+
+        GameObject lstcol = Instantiate(colski);
+        lstcol.GetComponent<Text>().text = "";
+        lstcol.transform.parent = firstrowski.transform;
+        lstcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 
 		for (int i = 0; i < myAdvisors.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
@@ -174,6 +206,29 @@ public class AdvisorScript : MonoBehaviour {
         if (_newday) {
             foreach (Transform child in availableadviserpane.transform) children.Add(child.gameObject);
             children.ForEach(child => Destroy(child));
+            GameObject firstrowski1 = Instantiate(rowski);
+            firstrowski1.transform.parent = availableadviserpane.transform;
+
+            GameObject fstcol1 = Instantiate(colski);
+            fstcol1.GetComponent<Text>().text = "Cost to Buy";
+            fstcol1.transform.parent = firstrowski1.transform;
+            fstcol1.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+
+            GameObject scndcol1 = Instantiate(colski);
+            scndcol1.GetComponent<Text>().text = "Name";
+            scndcol1.transform.parent = firstrowski1.transform;
+            scndcol1.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+
+            GameObject thrdcol1 = Instantiate(colski);
+            thrdcol1.GetComponent<Text>().text = "Types (Campaign Tier)";
+            thrdcol1.transform.parent = firstrowski1.transform;
+            thrdcol1.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+
+
+            GameObject lstcol1 = Instantiate(colski);
+            lstcol1.GetComponent<Text>().text = "";
+            lstcol1.transform.parent = firstrowski1.transform;
+            lstcol1.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
             _newday = false;
 		    for (int j = 0; j < 3; j++) {
                 int i = UnityEngine.Random.Range(0, availableAdvisors.Count - 1);
@@ -198,12 +253,13 @@ public class AdvisorScript : MonoBehaviour {
 			    col3.GetComponent<Text> ().text = String.Format("{0:C}", type);
 			    col3.transform.parent = newrowski.transform;
 			    GameObject add = Instantiate (addadvisorbtn);
-			    add.GetComponent<AddAdvisorScript> ().index = i;
+			    add.GetComponent<AddAdvisorScript> ().curadvisor = curadvisor;
 			    add.GetComponent<AddAdvisorScript> ().advisorpanel = advisorpanel;
 			    add.transform.parent = newrowski.transform;
                 col1.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
                 col2.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
                 col3.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+                add.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 
 		    }
         }
