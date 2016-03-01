@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ManageCorporationsButtonScript : MonoBehaviour {
 	public Button self;
 	public GameObject corppanel;
+	public GameObject tutorial;
 	// Use this for initialization
 	void Start () {
 		self.onClick.AddListener(() => { onClickCorp(); });
@@ -17,6 +18,7 @@ public class ManageCorporationsButtonScript : MonoBehaviour {
 	void onClickCorp() {
 		corppanel.GetComponent<RectTransform>().anchoredPosition = new Vector2 (0f, 0f);
 		corppanel.GetComponent<CorpScript> ().makeRows ();
+		tutorial.SendMessage ("ThingClicked", "managecorps");
 		//		self.transform.localPosition (false);
 	}
 }

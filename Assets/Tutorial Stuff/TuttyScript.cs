@@ -29,6 +29,10 @@ public class TuttyScript : MonoBehaviour {
 		"You can run up to 3 campaigns in a region. Each campaign has a category: \n Environmental, \n Immigration, \n Healthcare, \n and Finance.",
 		"Specific campaigns help you get certain types of voters: \n Environmental - Hippies, \n Immigration - Immigrants, \n Healthcare - Geriatrics, \n Finance - Businessmen.",
 		"Go ahead, click on the West to see what campaigns you can add.",
+		"Add a campaign if you'd like. Campaigns will only charge you on a daily basis, not upfront. The prices and votes listed are a daily average, however they fluctuate for various reasons.",
+		"Let's go back to the main page.",
+		"The way to make money in a campaign, of course, is to have control over corporations that anonymously give you money since corporations are people.",
+		"Anyway, let's check out the manage corporations pane.",
 		"You have 100 days",
 		};
 
@@ -45,6 +49,10 @@ public class TuttyScript : MonoBehaviour {
 		null,
 		null,
 		"west",
+		null,
+		"popupx",
+		null,
+		"managecorps",
 		null,
 	};
 //	Vector2 goodby = ;
@@ -63,7 +71,12 @@ public class TuttyScript : MonoBehaviour {
 			null,
 			null,
 			null,
+			null,
+			null,
+			null,
+			null,
 			daystutarrow};
+		Debug.Assert ((arrows.Count == thingstoproceed.Count) & (thingstoproceed.Count == textlist.Count));
 		refreshTut ();
 	}
 
