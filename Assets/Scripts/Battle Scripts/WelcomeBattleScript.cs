@@ -17,7 +17,7 @@ public class WelcomeBattleScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		self.GetComponentInChildren<Text> ().text = "";
-		self.GetComponentInChildren<Text> ().text = challenger + "Challenges YOU";
+		self.GetComponentInChildren<Text> ().text = challenger + " Challenges YOU";
 
 
 	}

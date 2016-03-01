@@ -41,10 +41,11 @@ public class BattleScript : MonoBehaviour {
 
 	public GameObject attackselector;
 
-	private Vector3 attack1textselectionlocation = new Vector3(-83f, -135f, 0f);
-	private Vector3 attack2textselectionlocation = new Vector3(-83f, -156f, 0f);
-	private Vector3 attack3textselectionlocation = new Vector3(-83f, -177f, 0f);
-	private Vector3 attack4textselectionlocation = new Vector3(-83f, -198f, 0f);
+
+	private Vector3 attack1textselectionlocation = new Vector3(-156f, 47f, 0f);
+	private Vector3 attack2textselectionlocation = new Vector3(-156f, 26f, 0f);
+	private Vector3 attack3textselectionlocation = new Vector3(-156f, 5f, 0f);
+	private Vector3 attack4textselectionlocation = new Vector3(-156f, -16f, 0f);
 
 	public int currentattackselectorchoice = 0;
 	public GameObject finishbattlepanel;

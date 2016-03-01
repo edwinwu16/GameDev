@@ -127,7 +127,7 @@ public class AdvisorScript : MonoBehaviour {
 		return totalAdvisorCost;
 	}
 
-	void makeRows () {
+	public void makeRows () {
         float totalscreenwidth = RectTransformExtensions.GetWidth(activeadviserpane.GetComponent<RectTransform>());
         float firstrowwidth = totalscreenwidth * preferredwidth1;
         float secondrowwidth = totalscreenwidth * preferredwidth2;

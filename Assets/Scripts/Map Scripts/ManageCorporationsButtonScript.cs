@@ -16,6 +16,7 @@ public class ManageCorporationsButtonScript : MonoBehaviour {
 	}
 	void onClickCorp() {
 		corppanel.GetComponent<RectTransform>().anchoredPosition = new Vector2 (0f, 0f);
+		corppanel.GetComponent<CorpScript> ().makeRows ();
 		//		self.transform.localPosition (false);
 	}
 }

@@ -16,6 +16,7 @@ public class ManageAdvisersButtonScript : MonoBehaviour {
 	}
 	void onClickAdviser() {
 		adviserpanel.GetComponent<RectTransform>().anchoredPosition = new Vector2 (0f, 0f);
+		adviserpanel.GetComponent<AdvisorScript> ().makeRows ();
 		//		self.transform.localPosition (false);
 	}
 }

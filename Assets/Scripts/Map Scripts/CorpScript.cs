@@ -65,7 +65,7 @@ public class CorpScript : MonoBehaviour {
 //		makeToBuyRows ();
 	}
 
-	void makeRows () {
+	public void makeRows () {
         float totalscreenwidth = RectTransformExtensions.GetWidth(activecorpstbl.GetComponent<RectTransform>());
         float firstrowwidth = totalscreenwidth * preferredwidth1;
         float secondrowwidth = totalscreenwidth * preferredwidth2;
@@ -144,18 +144,13 @@ public class CorpScript : MonoBehaviour {
 
 
 		}
-		GameObject blankrowski = Instantiate (rowski);
-        totalscreenwidth = RectTransformExtensions.GetWidth(availablecorpstbl.GetComponent<RectTransform>());
-        firstrowwidth = totalscreenwidth * preferredwidth1;
-        secondrowwidth = totalscreenwidth * preferredwidth2;
-        thirdrowwidth = totalscreenwidth * preferredwidth3;
-        fourthrowwidth = totalscreenwidth * preferredwidth4;
+
 
         if (_newday)
         {
+			foreach (Transform child in availablecorpstbl.transform) children.Add(child.gameObject);
+			children.ForEach(child => Destroy(child));
             _newday = false;
-            foreach (Transform child in availablecorpstbl.transform) children.Add(child.gameObject);
-            children.ForEach(child => Destroy(child));
 			firstrowski = Instantiate (rowski);
 			firstrowski.transform.parent = availablecorpstbl.transform;
 
@@ -220,6 +215,7 @@ public class CorpScript : MonoBehaviour {
                 add.GetComponent<AddCorpScript>().corppanel = corppanel;
                 add.transform.parent = newrowski.transform;
 
+
             }
         }
 	}
@@ -233,6 +229,11 @@ public class CorpScript : MonoBehaviour {
 	public void AddCorporation (int i) {
 		Corporation corptomove = corporationstobuy [i];
 		corporationstobuy.RemoveAt (i);
+		GameObject[] corpbuts = GameObject.FindGameObjectsWithTag ("CorpBut");
+		for (int j = 0; j < corpbuts.Length; j++) {
+			if (corpbuts [j].GetComponent<AddCorpScript> ().index == i)
+				Destroy (corpbuts [j].transform.parent.gameObject);
+		}
 		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 		corporationsowned.Add (corptomove);
 		makeRows ();
