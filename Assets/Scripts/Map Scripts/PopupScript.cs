@@ -511,7 +511,7 @@ public class PopupScript : MonoBehaviour {
 	{
 		Debug.Log("clicked button");
 	}
-
+     
 	public void IncreasePopularity(float amount, string region) {
 		regions[region].popularity += amount;
 	}
@@ -589,10 +589,9 @@ public class PopupScript : MonoBehaviour {
 				float cost = -GenerateFromGaussian(campaign.averagecost*1000.0F, campaign.volcost*1000.0F);
                 campaign.costovertimecamp.Add(campaign.costovertimecamp[campaign.costovertimecamp.Count - 1] + cost);
                 ttlmoneytoincrement += cost;
-                float votes = GenerateFromGaussian(campaign.avgvotes*1000.0F, campaign.volvotes*1000.0F);
+                float votes = GenerateFromGaussian (campaign.avgvotes*1000.0F, campaign.volvotes*1000.0F);
                 if (campaign.type !="General")
 				    votes = (1.0F + Hilary.campaignboosts[campaign.type]) *votes;
-                
                 campaign.costovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
                 IncreasePopularity(votes, region.name);
                 ttlvotestoincrement += votes;

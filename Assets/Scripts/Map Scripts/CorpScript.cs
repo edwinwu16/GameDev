@@ -81,6 +81,9 @@ public class CorpScript : MonoBehaviour {
 			GameObject cost2buycol = Instantiate (colski);
 			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", curcorp.costtobuy);
 			cost2buycol.transform.parent = newrowski.transform;
+            GameObject moneyperweek = Instantiate(colski);
+            moneyperweek.GetComponent<Text>().text = String.Format("{0:C}", curcorp.moneyperweek);
+            moneyperweek.transform.parent = newrowski.transform;
 			GameObject namecol = Instantiate (colski);
 			namecol.GetComponent<Text> ().text = String.Format("{0:C}", curcorp.name);
 			namecol.transform.parent = newrowski.transform;
@@ -105,6 +108,7 @@ public class CorpScript : MonoBehaviour {
 
         if (_newday)
         {
+            _newday = false;
             foreach (Transform child in availablecorpstbl.transform) children.Add(child.gameObject);
             children.ForEach(child => Destroy(child));
 
@@ -118,6 +122,9 @@ public class CorpScript : MonoBehaviour {
                 GameObject cost2buycol = Instantiate(colski);
                 cost2buycol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.costtobuy);
                 cost2buycol.transform.parent = newrowski.transform;
+                GameObject moneyperweek = Instantiate(colski);
+                moneyperweek.GetComponent<Text>().text = String.Format("{0:C}", curcorp.moneyperweek);
+                moneyperweek.transform.parent = newrowski.transform;
                 GameObject namecol = Instantiate(colski);
                 namecol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.name);
                 namecol.transform.parent = newrowski.transform;
@@ -125,7 +132,7 @@ public class CorpScript : MonoBehaviour {
                 typecol.GetComponent<Text>().text = String.Format("{0:C}", curcorp.type);
                 typecol.transform.parent = newrowski.transform;
                 GameObject add = Instantiate(addcorpbtn);
-                add.GetComponent<AddCorpScript>().index = i;
+                add.GetComponent<AddCorpScript>().index = k;
                 add.GetComponent<AddCorpScript>().corppanel = corppanel;
                 add.transform.parent = newrowski.transform;
                 cost2buycol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
