@@ -49,7 +49,7 @@ public class GeneralSummaryScript : MonoBehaviour {
 				moneyearnedlosttext.color = Color.green;
 				dollarstext.GetComponent<Text> ().text = String.Format (culture, "{0:C}", moneydiff);
 			} else {
-				moneyearnedlosttext.GetComponent<Text> ().text = "Lost";
+				moneyearnedlosttext.GetComponent<Text> ().text = "Spent";
 				moneyearnedlosttext.color = Color.red;
 				dollarstext.GetComponent<Text>().text = String.Format(culture, "{0:C}", moneydiff).Substring(1);
 			}
