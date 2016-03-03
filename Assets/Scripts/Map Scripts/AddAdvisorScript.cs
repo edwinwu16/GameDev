@@ -27,6 +27,7 @@ public class AddAdvisorScript : MonoBehaviour {
 
 	public void onClickAdd(Advisor curadvisor) {
 		Debug.Log ("CLICKY Add");
+        
         if (popup.GetComponent<PopupScript>().getTotalMoney() < curadvisor.price)
         {
 #if UNITY_EDITOR

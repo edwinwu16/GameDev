@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System;
 
 public class Advisor{
+
+
 	public string name;
 	public List<string> type;
 	public float price;
 	//public float weeklycost;
     public List<int> tier;
 	public bool hired;
-    public List<Campaign> campaigns;
+    public List<Campaign> campaigns = new List<Campaign>();
 
 
 	public Advisor(string n, List<string> typ, float pr, List<int> ter) {
@@ -120,11 +122,22 @@ public class AdvisorScript : MonoBehaviour {
         }
 
 		myAdvisors.Add (curadvisor);
+        popupregion.GetComponent<PopupScript>().addToAllCampaigns(curadvisor);
 		makeRows ();
 	}
 
 
 	void PopulateAdvisors(){
+        foreach (Advisor adviser in availableAdvisors)
+        {
+            for (int i = 0; i < adviser.type.Count; i ++ )
+            {
+                for (int j = 0; j < adviser.tier[i]; j++)
+                {
+                    adviser.campaigns.AddRange(popupregion.GetComponent<PopupScript>().specialcampaigns[adviser.type[i]][j]);
+                }
+            }
+        }
 		}
 
 	public float GetTotalAdvisorCost(){
