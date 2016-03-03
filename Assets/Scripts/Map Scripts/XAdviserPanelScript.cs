@@ -5,7 +5,7 @@ using System.Collections;
 public class XAdviserPanelScript : MonoBehaviour {
 	public Button xButton;
 	public GameObject adviserpanel;
-
+	public GameObject tutorial;
 
 	// Use this for initialization
 	void Start () {
@@ -18,5 +18,6 @@ public class XAdviserPanelScript : MonoBehaviour {
 	}
 	private void sendClick() {
 		adviserpanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(3000f, 3000f, 0);
+		tutorial.SendMessage ("ThingClicked", "adviserx");
 	}
 }

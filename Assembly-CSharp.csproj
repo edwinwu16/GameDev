@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ActiveCampsScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\BattleCanvasScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\BattleScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\FighterScript.cs" />

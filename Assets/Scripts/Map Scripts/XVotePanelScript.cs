@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class XVotePanelScript : MonoBehaviour {
 	public Button xButton;
 	public GameObject votepanel;
-
+	public GameObject tutorial;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,7 @@ public class XVotePanelScript : MonoBehaviour {
 	}
 	private void sendClick() {
 		votepanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(3000f, 3000f, 0);
+		tutorial.SendMessage ("ThingClicked", "votesx");
 	}
 
 }
