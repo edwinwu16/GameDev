@@ -24,6 +24,7 @@ public class RegionScript : MonoBehaviour {
 		maincamera.SendMessage ("ShowBox");
 		popup.SendMessage ("SetClickedRegion", region.name);
 		if (region.name == "West") {
+			Debug.Log ("SENDITBRAAA");
 			tutorial.SendMessage ("ThingClicked", "west");
 		}
 		Debug.Log (region.name + "clicked");

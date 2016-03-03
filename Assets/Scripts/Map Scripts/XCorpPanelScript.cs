@@ -5,7 +5,7 @@ using System.Collections;
 public class XCorpPanelScript : MonoBehaviour {
 		public Button xButton;
 		public GameObject corppanel;
-
+	public GameObject tutorial;
 		// Use this for initialization
 		void Start () {
 			xButton.onClick.AddListener(() => sendClick());
@@ -17,6 +17,7 @@ public class XCorpPanelScript : MonoBehaviour {
 		}
 		private void sendClick() {
 		corppanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(3000f, 3000f, 0);
+		tutorial.SendMessage ("ThingClicked", "corpx");
 		}
 
 }
