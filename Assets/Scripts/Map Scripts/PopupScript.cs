@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 //using UnityEngine.Behaviour;
 using UnityEngine.UI;
 using System;
@@ -46,6 +48,7 @@ public class PopupScript : MonoBehaviour {
     public bool _tutorial = true;
     public bool _newday = true;
     public Dictionary<string, List<Campaign>> storedcampaigns = new Dictionary<string, List<Campaign>>();
+    public int belowzero = 0;
 
     public float preferredwidth1;
     public float preferredwidth2;
@@ -700,11 +703,15 @@ public class PopupScript : MonoBehaviour {
 
         foreach (Advisor advisor in adviserspanel.GetComponent<AdvisorScript>().myAdvisors)
         {
-            
+            for (int i = 0; i < advisor.type.Count; i++)
+            {
+                Hilary.campaignboosts[advisor.type[i]] += 0.10F * advisor.tier[i];
+                Hilary.corporateboosts[advisor.type[i]] += 0.10F * advisor.tier[i];
+            }
         }
         foreach (Corporation corporation in corporatepanel.GetComponent<CorpScript>().corporationsowned)
         {
-            Hilary.campaignboosts[corporation.type] -= 0.15F;
+            Hilary.campaignboosts[corporation.type] -= 0.15F * corporation.costtobuy/1000000.0F;
         }
     }
 
@@ -746,10 +753,30 @@ public class PopupScript : MonoBehaviour {
 		dailysummarypanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
         adviserspanel.GetComponent<AdvisorScript>()._newday = true;
         corporatepanel.GetComponent<CorpScript>()._newday = true;
-        foreach (KeyValuePair<string, bool> entry in newday)
+        List<string> keys = newday.Keys.ToList();
+        foreach (string key in keys)
         {
-            newday[entry.Key] = true;
-            storedcampaigns[entry.Key].Clear();
+            newday[key] = true;
+            storedcampaigns[key].Clear();
+        }
+        if (getTotalMoney() < 0.0F && belowzero < 3)
+        {
+            #if UNITY_EDITOR
+
+                EditorUtility.DisplayDialog("Ran Out of Money", "Don't worry Goldman just extended you a loan for 1M! Just try not to forget about the little guys on Wall Street, aight?", "Okay");
+            #endif
+                IncreaseMoney(1000000.0F);
+
+        }
+        if (getTotalMoney() < 0.0F && belowzero >= 3)
+        {
+#if UNITY_EDITOR
+            string str = String.Format("Ran Out of Money: {0:n0}", getTotalMoney());
+            if (EditorUtility.DisplayDialog(str, "Goldman doesn't think you're worth it.", "Okay"))
+            {
+                gameOver();
+            }
+#endif
         }
 
 
@@ -814,10 +841,10 @@ public class Player
         campaignboosts["Finance"] = 0.0F;
         campaignboosts["Immigration"] = 0.0F;
         campaignboosts["Healthcare"] = 0.0F;
-        corporateboosts["Environment"] = 0.0F;
-        corporateboosts["Finance"] = 0.0F;
-        corporateboosts["Immigration"] = 0.0F;
-        corporateboosts["Healthcare"] = 0.0F;
+        corporateboosts["Environment"] = 0.1F;
+        corporateboosts["Finance"] = 0.1F;
+        corporateboosts["Immigration"] = 0.1F;
+        corporateboosts["Healthcare"] = 0.1F;
     }
 
 }
