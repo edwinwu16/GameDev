@@ -13,6 +13,7 @@ public class PopupScript : MonoBehaviour {
 	public Text daysuntilelection;
 	public GameObject gameoverpopup;
 	private bool initializedalready = false;
+    public GameObject tutorial;
 	public GameObject battlecanvas;
 	private string clickedregion;
 	public List<GameObject> createdCampaigns = new List<GameObject>();
@@ -40,6 +41,9 @@ public class PopupScript : MonoBehaviour {
     public int votestowin = 300000000;
 	public int daystostartwith = 100;
     public Player Hilary;
+    public bool _tutorial = true;
+    public bool _newday = true;
+    public Dictionary<string, bool> clickedonregion = new Dictionary<string, bool>();
 
     public float preferredwidth1;
     public float preferredwidth2;
@@ -55,6 +59,8 @@ public class PopupScript : MonoBehaviour {
 	public Dictionary<string, List<Campaign>> activecampaigns = new Dictionary<string, List<Campaign>>();
 	public Dictionary<string, List<Campaign>> allcampaigns = new Dictionary<string, List<Campaign>>();
 	private Dictionary<string, bool> newday = new Dictionary<string, bool>();
+    public Dictionary<string, List<List<Campaign>>> specialcampaigns = new Dictionary <string, List<List<Campaign>>>();
+    public Campaign tutorialcampaign = new Campaign("Flier at the Library", 10, 5, 10, 5, "General");
 
 	private List<Campaign> generalcampaigns = new List<Campaign>(){
 		new Campaign("Television", 200, 25, 50, 20, "General"),
@@ -289,11 +295,7 @@ public class PopupScript : MonoBehaviour {
 
 	void InitializeCampaigns(){	
 		foreach (string region in regions.Keys){
-			allcampaigns[region].AddRange(generalcampaigns);
-			allcampaigns[region].AddRange(financecampaigns);
-			allcampaigns[region].AddRange(environmentcampaigns);
-			allcampaigns[region].AddRange(immigrationcampaigns);
-			allcampaigns[region].AddRange(healthcarecampaigns);
+            allcampaigns[region].AddRange(generalcampaigns);
 			Debug.Log(allcampaigns[region].Count);
 		}
 
@@ -365,7 +367,7 @@ public class PopupScript : MonoBehaviour {
 			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost*1000.0F);
 			cost2buycol.transform.parent = newrowski.transform;
 			GameObject averagevotesw = Instantiate (colski);
-			averagevotesw.GetComponent<Text> ().text = String.Format("{0}", campaign.avgvotes*1000.0F);
+			averagevotesw.GetComponent<Text> ().text = String.Format("{0:n0}", campaign.avgvotes*5000.0F);
 			averagevotesw.transform.parent = newrowski.transform;
 			Button addbutton = Instantiate (genericbutton);
 			addbutton.transform.parent = newrowski.transform;
@@ -382,6 +384,8 @@ public class PopupScript : MonoBehaviour {
 
 
 	void makeRowsPurchase(string region) {
+        if (_newday ){
+            _newday = false;
         float totalscreenwidth = RectTransformExtensions.GetWidth(purchasecampaignstable.GetComponent<RectTransform>());
 		var children = new List<GameObject>();
 		foreach (Transform child in purchasecampaignstable.transform) children.Add(child.gameObject);
@@ -410,7 +414,36 @@ public class PopupScript : MonoBehaviour {
         fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
 
 		for (int i = 0; i < 4; i++) {
-			int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
+            if (_tutorial && i == 0 && region == "West")
+            {
+                _tutorial = false;
+                GameObject newrowski = Instantiate(rowski);
+                Campaign campaign = tutorialcampaign;
+                newrowski.transform.parent = purchasecampaignstable.transform;
+                GameObject namecol = Instantiate(colski);
+                namecol.GetComponent<Text>().text = String.Format("{0}", campaign.name);
+                namecol.transform.parent = newrowski.transform;
+                GameObject typecol = Instantiate(colski);
+                typecol.GetComponent<Text>().text = String.Format("{0}", campaign.type);
+                typecol.transform.parent = newrowski.transform;
+                GameObject cost2buycol = Instantiate(colski);
+                cost2buycol.GetComponent<Text>().text = String.Format("{0:C}", campaign.averagecost * 1000.0F);
+                cost2buycol.transform.parent = newrowski.transform;
+                GameObject averagevotesw = Instantiate(colski);
+                averagevotesw.GetComponent<Text>().text = String.Format("{0:n0}", campaign.avgvotes * 5000.0F);
+                averagevotesw.transform.parent = newrowski.transform;
+                Button addbutton = Instantiate(genericbutton);
+                addbutton.transform.parent = newrowski.transform;
+                addbutton.onClick.AddListener(delegate { startClick(region, campaign); });
+                addbutton.onClick.AddListener(delegate { tutorial.SendMessage("ThingClicked", "addcampaign"); });
+                addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
+                namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+                typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+                cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+                averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+            }
+            else{
+                int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
             
 			GameObject newrowski = Instantiate (rowski);
 			Campaign campaign =  allcampaigns[region][campaignnum];
@@ -425,7 +458,7 @@ public class PopupScript : MonoBehaviour {
 			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost * 1000.0F);
 			cost2buycol.transform.parent = newrowski.transform;
 			GameObject averagevotesw = Instantiate (colski);
-			averagevotesw.GetComponent<Text> ().text = String.Format("{0}", campaign.avgvotes * 1000.0F);
+			averagevotesw.GetComponent<Text> ().text = String.Format("{0:n0}", campaign.avgvotes * 5000.0F);
 			averagevotesw.transform.parent = newrowski.transform;
 			Button addbutton = Instantiate (genericbutton);
 			addbutton.transform.parent = newrowski.transform;
@@ -435,8 +468,12 @@ public class PopupScript : MonoBehaviour {
             typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
             cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
             averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+            }
+
+			
 
 		}
+        }
 	}
 
 
@@ -454,6 +491,44 @@ public class PopupScript : MonoBehaviour {
 		allcampaigns.Add("Midwest", new List<Campaign>());
 		allcampaigns.Add("South", new List<Campaign>());
 		allcampaigns.Add("NewEngland", new List<Campaign>());
+        List<List<Campaign>> financecampaignslist = new List<List<Campaign>>()
+        {
+            financecampaigns,
+            financecampaigns1,
+            financecampaigns2,
+            financecampaigns3
+
+        };
+
+        List<List<Campaign>> environmentcampaignslist = new List<List<Campaign>>()
+        {
+            environmentcampaigns,
+            environmentcampaigns1,
+            environmentcampaigns2,
+            environmentcampaigns3
+
+        };
+        List<List<Campaign>> healthcarecampaignslist = new List<List<Campaign>>()
+        {
+            healthcarecampaigns,
+            healthcarecampaigns1,
+            healthcarecampaigns2,
+            healthcarecampaigns3
+
+        };
+
+        List<List<Campaign>> immigrationcampaignslist = new List<List<Campaign>>(){
+            immigrationcampaigns,
+            immigrationcampaigns1,
+            immigrationcampaigns2,
+            immigrationcampaigns3
+        };
+        
+
+        specialcampaigns.Add("Healthcare", healthcarecampaignslist);
+        specialcampaigns.Add("Immigration", immigrationcampaignslist);
+        specialcampaigns.Add("Finance", financecampaignslist);
+        specialcampaigns.Add("Environment", environmentcampaignslist);
 		newday.Add("West", true);
 		newday.Add("Midwest", true);
 		newday.Add("South", true);
@@ -561,7 +636,7 @@ public class PopupScript : MonoBehaviour {
 				float cost = -GenerateFromGaussian(campaign.averagecost*1000.0F, campaign.volcost*1000.0F);
                 campaign.costovertimecamp.Add(campaign.costovertimecamp[campaign.costovertimecamp.Count - 1] + cost);
                 ttlmoneytoincrement += cost;
-                float votes = GenerateFromGaussian (campaign.avgvotes*1000.0F, campaign.volvotes*1000.0F);
+                float votes = GenerateFromGaussian (campaign.avgvotes*5000.0F, campaign.volvotes*5000.0F);
                 if (campaign.type !="General")
 				    votes = (1.0F + Hilary.campaignboosts[campaign.type]) *votes;
                 campaign.costovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
@@ -584,6 +659,7 @@ public class PopupScript : MonoBehaviour {
 		dailysummarypanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
         adviserspanel.GetComponent<AdvisorScript>()._newday = true;
         corporatepanel.GetComponent<CorpScript>()._newday = true;
+        _newday = true;
 
 
 	}
