@@ -44,6 +44,7 @@ public class PopupScript : MonoBehaviour {
     public List<int> votesovertime = new List<int>();
     public int votestowin = 300000000;
 	public int daystostartwith = 100;
+    public GameObject voterpanel;
     public Player Hilary;
     public bool _tutorial = true;
     public bool _newday = true;
@@ -637,7 +638,9 @@ public class PopupScript : MonoBehaviour {
 
 	private void startClick(string region, Campaign campaign){
 		allcampaigns[region].Remove(campaign);
-		activecampaigns[region].Add(campaign);
+        campaign.region = region;
+        activecampaigns[region].Add(campaign);
+        
 		deleteCreated();
 		makeRowsActive(region);
         
@@ -711,7 +714,9 @@ public class PopupScript : MonoBehaviour {
         foreach (Corporation corporation in corporatepanel.GetComponent<CorpScript>().corporationsowned)
         {
             Hilary.campaignboosts[corporation.type] -= 0.15F * corporation.costtobuy/1000000.0F;
+            Debug.Log(Hilary.campaignboosts[corporation.type]);  
         }
+
     }
 
 	public void decrementDaysLeft()
@@ -723,6 +728,8 @@ public class PopupScript : MonoBehaviour {
         generateBoosters();
 
 
+
+
 		foreach (Region region in regions.Values){
 			foreach (Campaign campaign in activecampaigns[region.name])
 			{
@@ -732,13 +739,18 @@ public class PopupScript : MonoBehaviour {
                 float votes = GenerateFromGaussian (campaign.avgvotes*5000.0F, campaign.volvotes*5000.0F);
                 if (campaign.type !="General")
 				    votes = (1.0F + Hilary.campaignboosts[campaign.type]) *votes;
-				campaign.votesovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
                 Debug.Log(String.Format("Votes: {0}", votes));
                 if (votes >= 0)
                 {
                     IncreasePopularity(votes, region.name);
                     ttlvotestoincrement += votes;
+                    campaign.votesovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
 
+
+                }
+                else
+                {
+                    campaign.votesovertimecamp.Add(0.0F);
                 }
 			}
 		}
@@ -752,6 +764,7 @@ public class PopupScript : MonoBehaviour {
 		dailysummarypanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
         adviserspanel.GetComponent<AdvisorScript>()._newday = true;
         corporatepanel.GetComponent<CorpScript>()._newday = true;
+        voterpanel.GetComponent<VoteScript>()._newday = true;
         List<string> keys = newday.Keys.ToList();
         foreach (string key in keys)
         {

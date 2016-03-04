@@ -21,10 +21,11 @@ public class CampaignBreakdownScript : MonoBehaviour {
 
 	public void MakeRows() {
 		float totalscreenwidth = RectTransformExtensions.GetWidth(breakdowntable.GetComponent<RectTransform>());
-		float preferredwidth1 = totalscreenwidth * 0.25F;
-		float preferredwidth2 = totalscreenwidth * 0.25F;
-		float preferredwidth3 = totalscreenwidth * 0.25F;
-		float preferredwidth4 = totalscreenwidth * 0.25F;
+		float preferredwidth1 = totalscreenwidth * 0.20F;
+		float preferredwidth2 = totalscreenwidth * 0.20F;
+		float preferredwidth3 = totalscreenwidth * 0.20F;
+		float preferredwidth4 = totalscreenwidth * 0.20F;
+        float preferredwidth5 = totalscreenwidth * 0.20F;
 
 		var children = new List<GameObject>();
 		foreach (Transform child in breakdowntable.transform) children.Add(child.gameObject);
@@ -35,20 +36,26 @@ public class CampaignBreakdownScript : MonoBehaviour {
 		GameObject firstcol = Instantiate (colski);
 		firstcol.GetComponent<Text> ().text = "Name";
 		firstcol.transform.parent = firstrow.transform;
-		GameObject secondcol = Instantiate (colski);
+        GameObject firstseccol = Instantiate(colski);
+        firstseccol.GetComponent<Text>().text = "Campaign Region";
+        firstseccol.transform.parent = firstrow.transform;
+        GameObject secondcol = Instantiate (colski);
 		secondcol.GetComponent<Text> ().text = "Campaign Type";
 		secondcol.transform.parent = firstrow.transform;
-		GameObject thirdcol = Instantiate (colski);
-		thirdcol.GetComponent<Text> ().text = "Votes Earned";
+		
+        GameObject thirdcol = Instantiate (colski);
+		thirdcol.GetComponent<Text> ().text = "Votes Earned (1D)";
 		thirdcol.transform.parent = firstrow.transform;
 		GameObject fourthcol = Instantiate (colski);
-		fourthcol.GetComponent<Text> ().text = "Money Spent";
+		fourthcol.GetComponent<Text> ().text = "Money Spent (1D)";
 		fourthcol.transform.parent = firstrow.transform;
 
 		firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
-		secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+        firstseccol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
+        secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
 		thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
 		fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+
 
 
 		foreach(KeyValuePair<string, Region> entry in popup.GetComponent<PopupScript>().regions)
@@ -62,6 +69,9 @@ public class CampaignBreakdownScript : MonoBehaviour {
 					firstcol = Instantiate (colski);
 					firstcol.GetComponent<Text> ().text = camp.name;
 					firstcol.transform.parent = firstrow.transform;
+                    firstseccol = Instantiate(colski);
+                    firstseccol.GetComponent<Text>().text = camp.region;
+                    firstseccol.transform.parent = firstrow.transform;
 					secondcol = Instantiate (colski);
 					secondcol.GetComponent<Text> ().text = camp.type;
 					secondcol.transform.parent = firstrow.transform;
@@ -88,6 +98,7 @@ public class CampaignBreakdownScript : MonoBehaviour {
 
 
 					firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+                    firstseccol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
 					secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
 					thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
 					fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;

@@ -14,12 +14,19 @@ public class VoteScript : MonoBehaviour {
     public float preferredwidth1 = 0.3F;
     public float preferredwidth2 = 0.3F;
     public float preferredwidth3 = 0.2F;
+    public bool _newday = true;
     public float preferredwidth4 = 0.2F;
-	public List<Voter> voters = new List<Voter> ();
+    public List<Voter> voters = new List<Voter>()
+    {
+        new Voter (1000000, "Leak Information that Trump is Bald", 1500000),
+        new Voter (10000000, "Make a Wild Promise (i.e. Free Education, Single-Payer, Breaking up the Banks", 5000000),
+        new Voter (1000000, "Stuff Ballet Boxes", 1000000),
+        new Voter (10000000, "Start a Cult, Blow up Trump Tower Fight Club Style", 8000000),
+        new Voter (50000000, "Note that Trump Hates Immigrations but Has a Slovenian Wife", 50000000)
+    };
 	// Use this for initialization
 	void Start () {
-		Voter hisp = new Voter (1000, "Hispanic", 10000);
-		voters.Add (hisp);
+		
 		makeRows ();
 	}
 	
@@ -29,6 +36,8 @@ public class VoteScript : MonoBehaviour {
 	}
 
 	void makeRows() {
+        if (_newday) {
+            _newday = false;
         float totalscreenwidth = RectTransformExtensions.GetWidth(votestbl.GetComponent<RectTransform>());
         float firstrowwidth = totalscreenwidth * preferredwidth1;
         float secondrowwidth = totalscreenwidth * preferredwidth2;
@@ -56,36 +65,38 @@ public class VoteScript : MonoBehaviour {
         thirdcol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
         fourthcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 
-		for (int i = 0; i < voters.Count; i++) {
-			GameObject newrowski = Instantiate (rowski);
-			Voter curvoter = voters [i];
-			newrowski.transform.parent = votestbl.transform;
-			GameObject cost2buycol = Instantiate (colski);
-			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", curvoter.costtobuy);
-			cost2buycol.transform.parent = newrowski.transform;
-			GameObject namecol = Instantiate (colski);
-			namecol.GetComponent<Text> ().text = String.Format("{0}", curvoter.name);
-			namecol.transform.parent = newrowski.transform;
-			GameObject numownedcol = Instantiate (colski);
-			numownedcol.GetComponent<Text> ().text = String.Format("{0}", curvoter.numowned);
-			numownedcol.transform.parent = newrowski.transform;
-			GameObject buybtn1 = Instantiate (buybtn);
-			buybtn1.GetComponent<VoteBuyScript> ().index = i;
-			buybtn1.GetComponent<VoteBuyScript> ().amount = 1000;
-			buybtn1.GetComponent<VoteBuyScript> ().votespanel = votestbl;
-			buybtn1.transform.parent = newrowski.transform;
+        for (int i = 0; i < 3; i++)
+        {
+            int j = UnityEngine.Random.Range(0, voters.Count - 1);
+            GameObject newrowski = Instantiate(rowski);
+            Voter curvoter = voters[j];
+            newrowski.transform.parent = votestbl.transform;
+            GameObject cost2buycol = Instantiate(colski);
+            cost2buycol.GetComponent<Text>().text = String.Format("{0:C}", curvoter.costtobuy);
+            cost2buycol.transform.parent = newrowski.transform;
+            GameObject namecol = Instantiate(colski);
+            namecol.GetComponent<Text>().text = String.Format("{0}", curvoter.name);
+            namecol.transform.parent = newrowski.transform;
+            GameObject numownedcol = Instantiate(colski);
+            numownedcol.GetComponent<Text>().text = String.Format("{0}", curvoter.numowned);
+            numownedcol.transform.parent = newrowski.transform;
+            GameObject buybtn1 = Instantiate(buybtn);
+            buybtn1.GetComponent<VoteBuyScript>().index = curvoter;
+            buybtn1.GetComponent<VoteBuyScript>().amount = curvoter.costtobuy;
+            buybtn1.GetComponent<VoteBuyScript>().votespanel = votestbl;
+            buybtn1.transform.parent = newrowski.transform;
             cost2buycol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
             namecol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
             numownedcol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-
+        }
 		}
 	}
 
-	public void buyVotes(int index, int amount){
+	public void buyVotes(Voter index, int amount){
 		Debug.Log ("INBUYVOTES");
-		voters [index].numowned += amount;
-		popup.GetComponent<PopupScript>().IncreaseMoney (-amount);
-		popup.GetComponent<PopupScript> ().IncreasePopularityGeneral (amount);
+        voters.Remove(index);
+		popup.GetComponent<PopupScript>().IncreaseMoney (-index.costtobuy);
+		popup.GetComponent<PopupScript> ().IncreasePopularityGeneral (index.numowned);
 		makeRows ();
 	}
 }
