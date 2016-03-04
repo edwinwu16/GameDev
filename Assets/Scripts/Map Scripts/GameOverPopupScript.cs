@@ -21,7 +21,7 @@ public class GameOverPopupScript : MonoBehaviour {
     {
         self.SetActive(true);
         self.transform.localPosition = new Vector3(0, 0, 0);
-        if (popularity > 50)
+        if (popularity > 150000000)
         {
             self.GetComponentInChildren<Text>().text = "You beat Trump";
         }

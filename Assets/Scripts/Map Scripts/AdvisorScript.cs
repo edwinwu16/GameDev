@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System;
 
 public class Advisor{
+
+
 	public string name;
 	public List<string> type;
 	public float price;
 	//public float weeklycost;
     public List<int> tier;
 	public bool hired;
-    public List<Campaign> campaigns;
+    public List<Campaign> campaigns = new List<Campaign>();
 
 
 	public Advisor(string n, List<string> typ, float pr, List<int> ter) {
@@ -22,6 +24,17 @@ public class Advisor{
         
 		//weeklycost = wkcost;
 	}
+
+    public Advisor(string n, List<string> typ, float pr, List<int> ter, List<Campaign> camp)
+    {
+        name = n;
+        type = typ;
+        price = pr;
+        tier = ter;
+        campaigns = camp;
+
+        //weeklycost = wkcost;
+    }
 }
 
 
@@ -38,7 +51,23 @@ public class AdvisorScript : MonoBehaviour {
 
 	public List<Advisor> availableAdvisors = new List<Advisor> ()
     {
-        new Advisor("Charmander", new List<string>(){"Environment"}, 100090.0F, new List<int>(){1}),
+        new Advisor("Bulbasaur", new List<string>(){"Environment"}, 500000.0F, new List<int>(){1}),
+        new Advisor("Charmander", new List<string>(){"Finance"}, 500000.0F, new List<int>(){1}),
+        new Advisor("Pikachu", new List<string>(){"Immigration"}, 500000.0F, new List<int>(){1}),
+        new Advisor("Squirtle", new List<string>(){"Healthcare"}, 500000.0F, new List<int>(){1}),
+        new Advisor("Ivysaur", new List<string>(){"Environment"}, 750000.0F, new List<int>(){2}),
+        new Advisor("Charmeleon", new List<string>(){"Finance"}, 750000.0F, new List<int>(){2}),
+        new Advisor("Raichu", new List<string>(){"Immigration"}, 750000.0F, new List<int>(){2}),
+        new Advisor("Wartortle", new List<string>(){"Healthcare"}, 750000.0F, new List<int>(){2}),
+        new Advisor("Venosaur", new List<string>(){"Environment"}, 1000000.0F, new List<int>(){3}),
+        new Advisor("Charmeleon", new List<string>(){"Finance"}, 1000000.0F, new List<int>(){3}),
+        new Advisor("Shiny Pikachu", new List<string>(){"Immigration"}, 1000000.0F, new List<int>(){3}),
+        new Advisor("Blastoise", new List<string>(){"Healthcare"}, 1000000.0F, new List<int>(){3}),
+        
+        new Advisor("Koch Brothers", new List<string>(){"Finance"}, 1250000.0F, new List<int>(){3}),
+        new Advisor("John Oliver", new List<string>(){"Healthcare"}, 550000.0F, new List<int>(){1}, new List<Campaign>(){new Campaign ("Last Week Tonight Interviews", 100, 25, 50, 20, "General")}),
+
+
         new Advisor("Bob", new List<string>(){"Finance"}, 100090.0F, new List<int>(){2}),
         new Advisor("James", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
         new Advisor("Charmander", new List<string>(){"Environment", "Finance"}, 100090.0F, new List<int>(){1, 2}),
@@ -120,11 +149,22 @@ public class AdvisorScript : MonoBehaviour {
         }
 
 		myAdvisors.Add (curadvisor);
+        popupregion.GetComponent<PopupScript>().addToAllCampaigns(curadvisor);
 		makeRows ();
 	}
 
 
 	void PopulateAdvisors(){
+        foreach (Advisor adviser in availableAdvisors)
+        {
+            for (int i = 0; i < adviser.type.Count; i ++ )
+            {
+                for (int j = 0; j < adviser.tier[i]; j++)
+                {
+                    adviser.campaigns.AddRange(popupregion.GetComponent<PopupScript>().specialcampaigns[adviser.type[i]][j]);
+                }
+            }
+        }
 		}
 
 	public float GetTotalAdvisorCost(){
