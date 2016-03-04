@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 //using UnityEngine.Behaviour;
 using UnityEngine.UI;
 using System;
@@ -43,7 +47,8 @@ public class PopupScript : MonoBehaviour {
     public Player Hilary;
     public bool _tutorial = true;
     public bool _newday = true;
-    public Dictionary<string, bool> clickedonregion = new Dictionary<string, bool>();
+    public Dictionary<string, List<Campaign>> storedcampaigns = new Dictionary<string, List<Campaign>>();
+    public int belowzero = 0;
 
     public float preferredwidth1;
     public float preferredwidth2;
@@ -382,43 +387,152 @@ public class PopupScript : MonoBehaviour {
 		}
 	}
 
+    public void addToAllCampaigns(Advisor adviser)
+    {
+        foreach (KeyValuePair<string, List<Campaign>> item in allcampaigns){
+            allcampaigns[item.Key].AddRange((adviser.campaigns.Except(allcampaigns[item.Key])).ToList());
+        }
+    }
+
+    public void removeFromAllCampaigns(Advisor adviser)
+    {
+        foreach (KeyValuePair<string, List<Campaign>> item in allcampaigns)
+        {
+            allcampaigns[item.Key] = allcampaigns[item.Key].Except(adviser.campaigns).ToList();
+            activecampaigns[item.Key] = activecampaigns[item.Key].Except(adviser.campaigns).ToList();
+        }
+    }
 
 	void makeRowsPurchase(string region) {
-        if (_newday ){
-            _newday = false;
-        float totalscreenwidth = RectTransformExtensions.GetWidth(purchasecampaignstable.GetComponent<RectTransform>());
-		var children = new List<GameObject>();
-		foreach (Transform child in purchasecampaignstable.transform) children.Add(child.gameObject);
-		children.ForEach(child => Destroy(child));
-		GameObject firstrow = Instantiate (rowski);
-		firstrow.transform.parent = purchasecampaignstable.transform;
-		GameObject firstcol = Instantiate (colski);
-		firstcol.GetComponent<Text> ().text = "Name";
-		firstcol.transform.parent = firstrow.transform;
-		GameObject secondcol = Instantiate (colski);
-		secondcol.GetComponent<Text> ().text = "Campaign Type";
-		secondcol.transform.parent = firstrow.transform;
-		GameObject thirdcol = Instantiate (colski);
-		thirdcol.GetComponent<Text> ().text = "Avg Cost/W";
-		thirdcol.transform.parent = firstrow.transform;
-		GameObject fourthcol = Instantiate (colski);
-		fourthcol.GetComponent<Text>().text = "Avg Votes/W";
-		fourthcol.transform.parent = firstrow.transform;
-		GameObject fifthcol = Instantiate (colski);
-		fifthcol.GetComponent<Text>().text = "";
-		fifthcol.transform.parent = firstrow.transform;
-        firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
-        secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
-        thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
-        fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
-        fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
+        
+        if (newday[region] ){
 
-		for (int i = 0; i < 4; i++) {
-            if (_tutorial && i == 0 && region == "West")
+            float totalscreenwidth = RectTransformExtensions.GetWidth(purchasecampaignstable.GetComponent<RectTransform>());
+		    var children = new List<GameObject>();
+		    foreach (Transform child in purchasecampaignstable.transform) children.Add(child.gameObject);
+		    children.ForEach(child => Destroy(child));
+		    GameObject firstrow = Instantiate (rowski);
+		    firstrow.transform.parent = purchasecampaignstable.transform;
+		    GameObject firstcol = Instantiate (colski);
+		    firstcol.GetComponent<Text> ().text = "Name";
+		    firstcol.transform.parent = firstrow.transform;
+		    GameObject secondcol = Instantiate (colski);
+		    secondcol.GetComponent<Text> ().text = "Campaign Type";
+		    secondcol.transform.parent = firstrow.transform;
+		    GameObject thirdcol = Instantiate (colski);
+		    thirdcol.GetComponent<Text> ().text = "Avg Cost/W";
+		    thirdcol.transform.parent = firstrow.transform;
+		    GameObject fourthcol = Instantiate (colski);
+		    fourthcol.GetComponent<Text>().text = "Avg Votes/W";
+		    fourthcol.transform.parent = firstrow.transform;
+		    GameObject fifthcol = Instantiate (colski);
+		    fifthcol.GetComponent<Text>().text = "";
+		    fifthcol.transform.parent = firstrow.transform;
+            firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+            secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+            thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+            fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+            fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
+
+		    for (int i = 0; i < 4; i++) {
+                if (_tutorial && i == 0 && region == "West")
+                {
+                    _tutorial = false;
+                    GameObject newrowski = Instantiate(rowski);
+                    Campaign campaign = tutorialcampaign;
+                    storedcampaigns[region].Add(campaign);
+
+                    newrowski.transform.parent = purchasecampaignstable.transform;
+                    GameObject namecol = Instantiate(colski);
+                    namecol.GetComponent<Text>().text = String.Format("{0}", campaign.name);
+                    namecol.transform.parent = newrowski.transform;
+                    GameObject typecol = Instantiate(colski);
+                    typecol.GetComponent<Text>().text = String.Format("{0}", campaign.type);
+                    typecol.transform.parent = newrowski.transform;
+                    GameObject cost2buycol = Instantiate(colski);
+                    cost2buycol.GetComponent<Text>().text = String.Format("{0:C}", campaign.averagecost * 1000.0F);
+                    cost2buycol.transform.parent = newrowski.transform;
+                    GameObject averagevotesw = Instantiate(colski);
+                    averagevotesw.GetComponent<Text>().text = String.Format("{0:n0}", campaign.avgvotes * 5000.0F);
+                    averagevotesw.transform.parent = newrowski.transform;
+                    Button addbutton = Instantiate(genericbutton);
+                    addbutton.transform.parent = newrowski.transform;
+                    addbutton.onClick.AddListener(delegate { startClick(region, campaign); });
+                    //addbutton.onClick.AddListener(delegate { tutorial.SendMessage("ThingClicked", "addcampaign"); });
+                    addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
+                    namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+                    typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+                    cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+                    averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+                }
+                else{
+                    int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
+            
+			        GameObject newrowski = Instantiate (rowski);
+			        Campaign campaign =  allcampaigns[region][campaignnum];
+                    storedcampaigns[region].Add(campaign);
+			        newrowski.transform.parent = purchasecampaignstable.transform;
+			        GameObject namecol = Instantiate (colski);
+			        namecol.GetComponent<Text> ().text = String.Format("{0}", campaign.name);
+			        namecol.transform.parent = newrowski.transform;
+			        GameObject typecol = Instantiate (colski);
+			        typecol.GetComponent<Text> ().text = String.Format("{0}", campaign.type);
+			        typecol.transform.parent = newrowski.transform;
+			        GameObject cost2buycol = Instantiate (colski);
+			        cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost * 1000.0F);
+			        cost2buycol.transform.parent = newrowski.transform;
+			        GameObject averagevotesw = Instantiate (colski);
+			        averagevotesw.GetComponent<Text> ().text = String.Format("{0:n0}", campaign.avgvotes * 5000.0F);
+			        averagevotesw.transform.parent = newrowski.transform;
+			        Button addbutton = Instantiate (genericbutton);
+			        addbutton.transform.parent = newrowski.transform;
+			        addbutton.onClick.AddListener(delegate{startClick(region, campaign);});
+                    addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
+                    namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+                    typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+                    cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+                    averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+                }
+
+			
+
+		    }
+        }
+        else
+        {
+            float totalscreenwidth = RectTransformExtensions.GetWidth(purchasecampaignstable.GetComponent<RectTransform>());
+            var children = new List<GameObject>();
+            foreach (Transform child in purchasecampaignstable.transform) children.Add(child.gameObject);
+            children.ForEach(child => Destroy(child));
+            GameObject firstrow = Instantiate(rowski);
+            firstrow.transform.parent = purchasecampaignstable.transform;
+            GameObject firstcol = Instantiate(colski);
+            firstcol.GetComponent<Text>().text = "Name";
+            firstcol.transform.parent = firstrow.transform;
+            GameObject secondcol = Instantiate(colski);
+            secondcol.GetComponent<Text>().text = "Campaign Type";
+            secondcol.transform.parent = firstrow.transform;
+            GameObject thirdcol = Instantiate(colski);
+            thirdcol.GetComponent<Text>().text = "Avg Cost/W";
+            thirdcol.transform.parent = firstrow.transform;
+            GameObject fourthcol = Instantiate(colski);
+            fourthcol.GetComponent<Text>().text = "Avg Votes/W";
+            fourthcol.transform.parent = firstrow.transform;
+            GameObject fifthcol = Instantiate(colski);
+            fifthcol.GetComponent<Text>().text = "";
+            fifthcol.transform.parent = firstrow.transform;
+            firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+            secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+            thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+            fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
+            fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
+
+            for (int i = 0; i < 4; i++)
             {
-                _tutorial = false;
+                
+
                 GameObject newrowski = Instantiate(rowski);
-                Campaign campaign = tutorialcampaign;
+                Campaign campaign = storedcampaigns[region][i];
                 newrowski.transform.parent = purchasecampaignstable.transform;
                 GameObject namecol = Instantiate(colski);
                 namecol.GetComponent<Text>().text = String.Format("{0}", campaign.name);
@@ -435,44 +549,16 @@ public class PopupScript : MonoBehaviour {
                 Button addbutton = Instantiate(genericbutton);
                 addbutton.transform.parent = newrowski.transform;
                 addbutton.onClick.AddListener(delegate { startClick(region, campaign); });
-                addbutton.onClick.AddListener(delegate { tutorial.SendMessage("ThingClicked", "addcampaign"); });
                 addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
                 namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
                 typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
                 cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
                 averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
-            }
-            else{
-                int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
-            
-			GameObject newrowski = Instantiate (rowski);
-			Campaign campaign =  allcampaigns[region][campaignnum];
-			newrowski.transform.parent = purchasecampaignstable.transform;
-			GameObject namecol = Instantiate (colski);
-			namecol.GetComponent<Text> ().text = String.Format("{0}", campaign.name);
-			namecol.transform.parent = newrowski.transform;
-			GameObject typecol = Instantiate (colski);
-			typecol.GetComponent<Text> ().text = String.Format("{0}", campaign.type);
-			typecol.transform.parent = newrowski.transform;
-			GameObject cost2buycol = Instantiate (colski);
-			cost2buycol.GetComponent<Text> ().text = String.Format("{0:C}", campaign.averagecost * 1000.0F);
-			cost2buycol.transform.parent = newrowski.transform;
-			GameObject averagevotesw = Instantiate (colski);
-			averagevotesw.GetComponent<Text> ().text = String.Format("{0:n0}", campaign.avgvotes * 5000.0F);
-			averagevotesw.transform.parent = newrowski.transform;
-			Button addbutton = Instantiate (genericbutton);
-			addbutton.transform.parent = newrowski.transform;
-			addbutton.onClick.AddListener(delegate{startClick(region, campaign);});
-            addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
-            namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
-            typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
-            cost2buycol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
-            averagevotesw.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
-            }
+                
 
-			
 
-		}
+
+            }
         }
 	}
 
@@ -533,6 +619,10 @@ public class PopupScript : MonoBehaviour {
 		newday.Add("Midwest", true);
 		newday.Add("South", true);
 		newday.Add("NewEngland", true);
+        storedcampaigns.Add("West", new List<Campaign>());
+        storedcampaigns.Add("Midwest", new List<Campaign>());
+        storedcampaigns.Add("South", new List<Campaign>());
+        storedcampaigns.Add("NewEngland", new List<Campaign>());
         moneyovertime.Add(getTotalMoney());
         votesovertime.Add(getTotalPopularity());
 	}
@@ -613,11 +703,15 @@ public class PopupScript : MonoBehaviour {
 
         foreach (Advisor advisor in adviserspanel.GetComponent<AdvisorScript>().myAdvisors)
         {
-            
+            for (int i = 0; i < advisor.type.Count; i++)
+            {
+                Hilary.campaignboosts[advisor.type[i]] += 0.10F * advisor.tier[i];
+                Hilary.corporateboosts[advisor.type[i]] += 0.10F * advisor.tier[i];
+            }
         }
         foreach (Corporation corporation in corporatepanel.GetComponent<CorpScript>().corporationsowned)
         {
-            Hilary.campaignboosts[corporation.type] -= 0.15F;
+            Hilary.campaignboosts[corporation.type] -= 0.15F * corporation.costtobuy/1000000.0F;
         }
     }
 
@@ -659,7 +753,31 @@ public class PopupScript : MonoBehaviour {
 		dailysummarypanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
         adviserspanel.GetComponent<AdvisorScript>()._newday = true;
         corporatepanel.GetComponent<CorpScript>()._newday = true;
-        _newday = true;
+        List<string> keys = newday.Keys.ToList();
+        foreach (string key in keys)
+        {
+            newday[key] = true;
+            storedcampaigns[key].Clear();
+        }
+        if (getTotalMoney() < 0.0F && belowzero < 3)
+        {
+            #if UNITY_EDITOR
+
+                EditorUtility.DisplayDialog("Ran Out of Money", "Don't worry Goldman just extended you a loan for 1M! Just try not to forget about the little guys on Wall Street, aight?", "Okay");
+            #endif
+                IncreaseMoney(1000000.0F);
+
+        }
+        if (getTotalMoney() < 0.0F && belowzero >= 3)
+        {
+#if UNITY_EDITOR
+            string str = String.Format("Ran Out of Money: {0:n0}", getTotalMoney());
+            if (EditorUtility.DisplayDialog(str, "Goldman doesn't think you're worth it.", "Okay"))
+            {
+                gameOver();
+            }
+#endif
+        }
 
 
 	}
@@ -723,10 +841,10 @@ public class Player
         campaignboosts["Finance"] = 0.0F;
         campaignboosts["Immigration"] = 0.0F;
         campaignboosts["Healthcare"] = 0.0F;
-        corporateboosts["Environment"] = 0.0F;
-        corporateboosts["Finance"] = 0.0F;
-        corporateboosts["Immigration"] = 0.0F;
-        corporateboosts["Healthcare"] = 0.0F;
+        corporateboosts["Environment"] = 0.1F;
+        corporateboosts["Finance"] = 0.1F;
+        corporateboosts["Immigration"] = 0.1F;
+        corporateboosts["Healthcare"] = 0.1F;
     }
 
 }

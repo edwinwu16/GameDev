@@ -148,6 +148,7 @@ public class CorpScript : MonoBehaviour
             remove.GetComponent<RemoveScript>().index = i;
             remove.GetComponent<RemoveScript>().corppanel = corppanel;
             remove.transform.parent = newrowski.transform;
+            
 
 
         }
