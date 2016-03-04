@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\Map Scripts\XCorpPanelScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\XPopupRegionScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\XVotePanelScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\Xattackpanelscript.cs" />
      <Compile Include="Assets\TSTableView\Examples\DynamicCellHeight\DynamicHeightCell.cs" />
      <Compile Include="Assets\TSTableView\Examples\DynamicCellHeight\DynamicHeightTableViewController.cs" />
      <Compile Include="Assets\TSTableView\Examples\Simple\ScrollingEventsHandler.cs" />

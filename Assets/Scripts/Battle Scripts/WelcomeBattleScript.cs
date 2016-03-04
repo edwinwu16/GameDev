@@ -9,6 +9,7 @@ public class WelcomeBattleScript : MonoBehaviour {
 	public GameObject battlecanvas;
 	public GameObject battleobj;
 	public string challenger;
+	public GameObject tutorial;
 	// Use this for initialization
 	void Start () {
 		continuebutton.onClick.AddListener(() => sendClick());
@@ -25,6 +26,7 @@ public class WelcomeBattleScript : MonoBehaviour {
 	void sendClick (){
 		self.transform.localPosition = new Vector3 (-1000.0F, -1000.0F, 0.0F);
 		battleobj.GetComponent<BattleScript> ().inbattle = true;
+		tutorial.SendMessage ("ThingClicked", "startbat");
 	}
 
 }

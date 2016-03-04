@@ -38,8 +38,9 @@ public class BattleScript : MonoBehaviour {
 	public bool attackHit;
 
 	public GameObject attackmenu;
-
 	public GameObject attackselector;
+
+	public GameObject tutorial;
 
 
 	private Vector3 attack1textselectionlocation = new Vector3(-156f, 47f, 0f);
@@ -117,14 +118,17 @@ public class BattleScript : MonoBehaviour {
 				} else {
 					if (_myturn) {
 						if (Input.GetKeyDown (KeyCode.UpArrow)) {
+							tutorial.SendMessage ("ThingClicked", "udclick");
 							NavigateMoveMenu (KeyCode.UpArrow);
 							updateAttackDescription (currentattackselectorchoice);
 						}
 						if (Input.GetKeyDown (KeyCode.DownArrow)) {
+							tutorial.SendMessage ("ThingClicked", "udclick");
 							NavigateMoveMenu (KeyCode.DownArrow);
 							updateAttackDescription (currentattackselectorchoice);
 						}
 						if (Input.GetKeyDown (KeyCode.Space)) {
+							tutorial.SendMessage ("ThingClicked", "spclick");
 							NavigateMoveMenu (KeyCode.Space);
 						}
 					}

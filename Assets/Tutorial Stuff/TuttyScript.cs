@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Timers;
 
 public class TuttyScript : MonoBehaviour {
 	private int stepintut = 0;
@@ -20,6 +21,12 @@ public class TuttyScript : MonoBehaviour {
 	public GameObject activecampaignsarrow;
 	public GameObject xcamparrow;
 	public GameObject votetutarrow;
+	public GameObject atkarrow;
+
+	public GameObject mapcanvas;
+	public GameObject battlecanvas;
+
+	public GameObject popup;
 
 	public AudioSource mysource;
 	public AudioClip mysound;
@@ -47,7 +54,7 @@ public class TuttyScript : MonoBehaviour {
 			new TutorialThing(null, "In this game, you are running for President of the United States of America (POTUS).",null),
 			new TutorialThing(null, "You need 150,000,000 votes to win.",null),
 			new TutorialThing(votestutarrow, "The number of votes you currently have is here.",null),
-			new TutorialThing(null, "There are four types of voters: \n Hippies, \n Immigrants, \n Geriatrics, \n and The 99%",null),
+			new TutorialThing(null, "There are four types of voters: \n Hippies, \n Immigrants, \n Geriatrics, \n and The 99%", null),
 			new TutorialThing(null, "There are four regions",null),
 			new TutorialThing(southtutarrow, "South,",null),
 			new TutorialThing(westtutarrow, "West,",null),
@@ -76,8 +83,19 @@ public class TuttyScript : MonoBehaviour {
 			new TutorialThing(votetutarrow, "Let's go buy some votes!", "votemark"),
 			new TutorialThing(null, "Gotcha! Votes are really expensive to buy, but save up! Remember, it takes 150,000,000 to win.", null),
 			new TutorialThing(null, "Let's go back to the main screen.","votesx"),
-			new TutorialThing(null, "Now is the moment you've been waiting for.", null),
-			new TutorialThing(daystutarrow, "You have 100 days",null),
+			new TutorialThing(null, "Now is the moment you've been waiting for...", null),
+			new TutorialThing(null, "...", null),
+			new TutorialThing(null, "...", null),
+			new TutorialThing(null, "!!!", null),
+			new TutorialThing(null, "Trump Challenges YOU to a debate! Press Continue to start.", "startbat"),
+			new TutorialThing(null, "Use the arrow keys to choose an attack.", "udclick"),
+			new TutorialThing(null, "Use the Space key to use it.", "spclick"),
+			new TutorialThing(null, "Winning and losing debates significantly affects the amount of votes you have. You can lose votes in a debate.", null),
+			new TutorialThing(atkarrow, "You can buy attacks in the marketplace. Let's check it out.", "atkclicked"),
+			new TutorialThing(null, "You may only have 4 attacks at a time. Attacks lose their effectiveness as you use them more, so make sure to buy new ones.", null),
+			new TutorialThing(null, "Let's go back to the main screen.", "atkx"),
+			new TutorialThing(null, "That's all! Good luck!", null),
+			new TutorialThing(daystutarrow, "You have 100 days.",null),
 		};
 		refreshTut ();
 	}
@@ -117,6 +135,15 @@ public class TuttyScript : MonoBehaviour {
 		if (tuttylist [stepintut].text == "Now is the moment you've been waiting for.") {
 			mysource.clip = mysound;
 			mysource.Play ();
+		}
+		if (tuttylist [stepintut].text == "Trump Challenges YOU to a debate! Press Continue to start.") {
+			Debug.Log ("AH!");
+			popup.GetComponent<PopupScript> ().switchtoBattleScene ();
+		}
+		if (tuttylist [stepintut].text == "Winning and losing debates significantly affects the amount of votes you have. You can lose votes in a debate."
+		) {
+			mapcanvas.SetActive (true);
+			battlecanvas.SetActive (false);
 		}
 	}
 
