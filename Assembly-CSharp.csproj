@@ -86,6 +86,11 @@
      <Compile Include="Assets\Scripts\Map Scripts\XPopupRegionScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\XVotePanelScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\Xattackpanelscript.cs" />
+     <Compile Include="Assets\Scripts\Picker Scripts\LeftPickerBtnScript.cs" />
+     <Compile Include="Assets\Scripts\Picker Scripts\PickerScript.cs" />
+     <Compile Include="Assets\Scripts\Picker Scripts\RightPickerBtnScript.cs" />
+     <Compile Include="Assets\Scripts\Tutorial Scripts\ContinueButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Tutorial Scripts\TuttyScript.cs" />
      <Compile Include="Assets\TSTableView\Examples\DynamicCellHeight\DynamicHeightCell.cs" />
      <Compile Include="Assets\TSTableView\Examples\DynamicCellHeight\DynamicHeightTableViewController.cs" />
      <Compile Include="Assets\TSTableView\Examples\Simple\ScrollingEventsHandler.cs" />
@@ -94,8 +99,6 @@
      <Compile Include="Assets\TSTableView\ITableViewDataSource.cs" />
      <Compile Include="Assets\TSTableView\TableView.cs" />
      <Compile Include="Assets\TSTableView\TableViewCell.cs" />
-     <Compile Include="Assets\Tutorial Stuff\ContinueButtonScript.cs" />
-     <Compile Include="Assets\Tutorial Stuff\TuttyScript.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Accordion.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\AccordionElement.cs" />
      <Compile Include="Assets\unity-ui-extensions\Scripts\Accordion\Tweening\FloatTween.cs" />
