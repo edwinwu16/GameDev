@@ -18,8 +18,10 @@ public class Attack{
 
 public class BattleScript : MonoBehaviour {
 	public bool inbattle = false;
+	public bool playerWon;
 	public GameObject trump;
 	public GameObject hilary;
+	public GameObject popupscript;
 //	private bool _textisavailable = true;
 	public Dictionary<GameObject, List<Attack>> movedict = new Dictionary<GameObject,  List<Attack>>();
 	private bool _myturn;
@@ -89,20 +91,25 @@ public class BattleScript : MonoBehaviour {
 					if (Input.GetKeyDown (KeyCode.Space)) {
 						Debug.Log ("space");
 						_pausestate = false;
+						// you LOSE
 						if (hilary.GetComponent<FighterScript> ().health <= 0) {
 							StartCoroutine (AnimateText (hilary.GetComponent<FighterScript> ().fightername + " loses!"));
-							Debug.Log ("someone lost");
+							playerWon = false;
+							IncOrDecPopularity (playerWon);
 							_gameover = true;
 							finishbattlepanel.SetActive (true);
 							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
+						// you WIN
 						} else if (trump.GetComponent<FighterScript> ().health <= 0) {
 							StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
+							playerWon = true;
+							IncOrDecPopularity (playerWon);
 							_gameover = true;
+							Debug.Log ("you win");
 							finishbattlepanel.SetActive (true);
 							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
-							Debug.Log ("someone lost");
 						} else {
 							if (_myturn) {
 								EndMyTurn ();
@@ -320,6 +327,7 @@ public class BattleScript : MonoBehaviour {
 		trump.GetComponent<FighterScript> ().health = trump.GetComponent<FighterScript> ().maxhealth;
 		hilary.GetComponent<FighterScript> ().health = hilary.GetComponent<FighterScript> ().maxhealth;
 		_gameover = false;
+
 		BeginMyTurn ();
 	}
 
@@ -337,6 +345,25 @@ public class BattleScript : MonoBehaviour {
 		else
 			return false;
 	}
+
+	public void IncOrDecPopularity(bool playerWon){
+		Debug.Log("Inc/Dec worked");
+		int currentPopularity = popupscript.GetComponent<PopupScript> ().getTotalPopularity ();
+		int popularityChange = (int)((float)currentPopularity * 0.10f);
+		if (playerWon == true) {
+			popupscript.GetComponent<PopupScript> ().regions ["West"].popularity += popularityChange;
+			Debug.Log ("popularity increasd by:  " + popularityChange);
+		} else{
+			popupscript.GetComponent<PopupScript> ().regions ["West"].popularity -= popularityChange;
+			Debug.Log ("popularity decreased by:  " + popularityChange);
+		}
+	}
+//	public void LoserRekt(){
+//		int currentPopularity = popupscript.GetComponent<PopupScript> ().getTotalPopularity ();
+//		int popularityDecrement = (int)((float)currentPopularity * 0.10f);
+//		popupscript.GetComponent<PopupScript>().regions["West"].popularity -= popularityDecrement;
+//		Debug.Log("popularity decreased by:  " + popularityDecrement);
+//	}
 
 	public List<Attack> GimmeMyAttacks() {
 		return movedict [hilary];

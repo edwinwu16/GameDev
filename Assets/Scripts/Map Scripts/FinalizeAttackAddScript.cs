@@ -19,6 +19,6 @@ public class FinalizeAttackAddScript : MonoBehaviour {
 
 	public void onClickAdd(int i) {
 		//			attackpanel.GetComponent<AttackMarketplaceScript>().AddAttack(i);
-		attackpanel.GetComponent<AttackMarketplaceScript> ().AddAttack ();
+		attackpanel.GetComponent<AttackMarketplaceScript> ().AddAttack (i);
 	}
 }

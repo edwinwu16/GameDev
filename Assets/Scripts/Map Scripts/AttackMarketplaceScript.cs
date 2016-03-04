@@ -41,7 +41,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
 //		corporationstobuy.Add (jp);
 		attackstobuy = new List<Attack>() {
-			new Attack("Did you see John Oliver last night?", 20.0F, 99),
+			new Attack("I support gun control!", 15.0F, 95),
+			new Attack("I don't support gun control!", 20.0F, 90),
+			new Attack("Cater to popular opinion", 12.0F, 97)
 		};
 		dropdownpanel.SetActive (false);
 //		makeRows ();
@@ -208,19 +210,20 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //	}
 	public void ShowDropdown(int i) {
 		Attack attacktoadd = attackstobuy [i];
-		attackstobuy.RemoveAt (i);
+		Debug.Log("to add: " + attackstobuy[i].name);
 		curattacktoadd = attacktoadd;
 		dropdown.ClearOptions ();
 		for (var j = 0; j < attacksowned.Count; j++) {
 			dropdown.AddOptions(new List<string>(){attacksowned[j].name});
 		}
+		//corpbuts[k].transform.parent.gameObject
 		dropdownpanel.SetActive (true);
 		xButton.SetActive (false);
 	}
-	public void AddAttack () {
-//		corporationstobuy.RemoveAt (i);
+	public void AddAttack (int i) {
 //		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 //		corporationsowned.Add (corptomove);
+		attackstobuy.RemoveAt (i);
 		battleobj.GetComponent<BattleScript>().SwapMyAttack(dropdown.value, curattacktoadd);
 		makeRows ();
 		dropdownpanel.SetActive (false);
