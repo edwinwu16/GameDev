@@ -458,7 +458,7 @@ public class PopupScript : MonoBehaviour {
                     Button addbutton = Instantiate(genericbutton);
                     addbutton.transform.parent = newrowski.transform;
                     addbutton.onClick.AddListener(delegate { startClick(region, campaign); });
-                    //addbutton.onClick.AddListener(delegate { tutorial.SendMessage("ThingClicked", "addcampaign"); });
+                    addbutton.onClick.AddListener(delegate { tutorial.SendMessage("ThingClicked", "addcampaign"); });
                     addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
                     namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
                     typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
