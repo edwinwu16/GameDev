@@ -55,7 +55,6 @@ public class PopupScript : MonoBehaviour {
     public float preferredwidth3;
     public float preferredwidth4;
     public float preferredwidth5;
-
 	public Region west = new Region(0.0F, "West", 100000);
 	public Region south = new Region(0.0F, "South", 100000);
 	public Region midwest = new Region (0.0F, "Midwest", 100000);
@@ -340,10 +339,10 @@ public class PopupScript : MonoBehaviour {
 		secondcol.GetComponent<Text> ().text = "Campaign Type";
 		secondcol.transform.parent = firstrow.transform;
 		GameObject thirdcol = Instantiate (colski);
-		thirdcol.GetComponent<Text> ().text = "Avg Cost/W";
+		thirdcol.GetComponent<Text> ().text = "Avg Cost/Day";
 		thirdcol.transform.parent = firstrow.transform;
 		GameObject fourthcol = Instantiate (colski);
-		fourthcol.GetComponent<Text>().text = "Avg Votes/W";
+		fourthcol.GetComponent<Text>().text = "Avg Votes/Day";
 		fourthcol.transform.parent = firstrow.transform;
 		GameObject fifthcol = Instantiate (colski);
 		fifthcol.GetComponent<Text>().text = "";
@@ -420,10 +419,10 @@ public class PopupScript : MonoBehaviour {
 		    secondcol.GetComponent<Text> ().text = "Campaign Type";
 		    secondcol.transform.parent = firstrow.transform;
 		    GameObject thirdcol = Instantiate (colski);
-		    thirdcol.GetComponent<Text> ().text = "Avg Cost/W";
+		    thirdcol.GetComponent<Text> ().text = "Avg Cost/Day";
 		    thirdcol.transform.parent = firstrow.transform;
 		    GameObject fourthcol = Instantiate (colski);
-		    fourthcol.GetComponent<Text>().text = "Avg Votes/W";
+		    fourthcol.GetComponent<Text>().text = "Avg Votes/Day";
 		    fourthcol.transform.parent = firstrow.transform;
 		    GameObject fifthcol = Instantiate (colski);
 		    fifthcol.GetComponent<Text>().text = "";
@@ -513,10 +512,10 @@ public class PopupScript : MonoBehaviour {
             secondcol.GetComponent<Text>().text = "Campaign Type";
             secondcol.transform.parent = firstrow.transform;
             GameObject thirdcol = Instantiate(colski);
-            thirdcol.GetComponent<Text>().text = "Avg Cost/W";
+            thirdcol.GetComponent<Text>().text = "Avg Cost/Day";
             thirdcol.transform.parent = firstrow.transform;
             GameObject fourthcol = Instantiate(colski);
-            fourthcol.GetComponent<Text>().text = "Avg Votes/W";
+            fourthcol.GetComponent<Text>().text = "Avg Votes/Day";
             fourthcol.transform.parent = firstrow.transform;
             GameObject fifthcol = Instantiate(colski);
             fifthcol.GetComponent<Text>().text = "";
@@ -733,7 +732,7 @@ public class PopupScript : MonoBehaviour {
                 float votes = GenerateFromGaussian (campaign.avgvotes*5000.0F, campaign.volvotes*5000.0F);
                 if (campaign.type !="General")
 				    votes = (1.0F + Hilary.campaignboosts[campaign.type]) *votes;
-                campaign.costovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
+				campaign.votesovertimecamp.Add(campaign.votesovertimecamp[campaign.votesovertimecamp.Count - 1] + votes);
                 Debug.Log(String.Format("Votes: {0}", votes));
                 if (votes >= 0)
                 {
@@ -809,7 +808,6 @@ public class PopupScript : MonoBehaviour {
 		maincanvas.SetActive (false);
 		//maincanvas.SetActive (false);
 	}
-
 }
 
 public class Region {

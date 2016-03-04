@@ -5,6 +5,7 @@ using System.Collections;
 public class IncrementWeekButton : MonoBehaviour {
 	public Button self;
 	public GameObject popup;
+	public GameObject breakdownpane;
 	// Use this for initialization
 	void Start () {
 		self.onClick.AddListener(() => { onClickAdd(); });
@@ -18,5 +19,6 @@ public class IncrementWeekButton : MonoBehaviour {
 	public void onClickAdd()
 	{
 		popup.GetComponent<PopupScript>().decrementDaysLeft();
+		breakdownpane.GetComponent<CampaignBreakdownScript> ().MakeRows ();
 	}
 }

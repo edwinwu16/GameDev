@@ -68,12 +68,12 @@ public class GeneralSummaryScript : MonoBehaviour {
 			if (votesdiff >= 0) {
 				votesearnedlosttext.GetComponent<Text> ().text = "Votes Earned";
 				votesearnedlosttext.color = Color.green;
-				votestext.GetComponent<Text> ().text = String.Format("{0}", votesdiff);
+				votestext.GetComponent<Text> ().text = String.Format("{0:n0}", votesdiff);
 
 			} else {
 				votesearnedlosttext.GetComponent<Text> ().text = "Votes Lost";
 				votesearnedlosttext.color = Color.red;
-				dollarstext.GetComponent<Text>().text = String.Format("{0}", votesdiff);
+				dollarstext.GetComponent<Text>().text = String.Format("{0:n0}", votesdiff);
 			}
 		}
 		if (voteslist.Count != 0)

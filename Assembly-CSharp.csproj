@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Battle Scripts\FinishBattleScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\HealthBarScript.cs" />
      <Compile Include="Assets\Scripts\Battle Scripts\WelcomeBattleScript.cs" />
+     <Compile Include="Assets\Scripts\Daily Summary Scripts\CampaignBreakdownScript.cs" />
      <Compile Include="Assets\Scripts\Daily Summary Scripts\GeneralSummaryScript.cs" />
      <Compile Include="Assets\Scripts\Daily Summary Scripts\GraphScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\AddAdvisorScript.cs" />
