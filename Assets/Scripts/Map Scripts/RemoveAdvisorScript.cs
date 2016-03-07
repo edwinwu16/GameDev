@@ -33,6 +33,14 @@ public class RemoveAdvisorScript : MonoBehaviour {
         foreach(KeyValuePair<string, List<Campaign>> value in GameObject.Find("PopupRegion").GetComponent<PopupScript>().activecampaigns)
         {
             List<Campaign> overlapping = advisorpanel.GetComponent<AdvisorScript>().myAdvisors[i].campaigns.Intersect(value.Value).ToList();
+            foreach (Advisor adv in advisorpanel.GetComponent<AdvisorScript>().myAdvisors)
+            {
+                if (adv != advisorpanel.GetComponent<AdvisorScript>().myAdvisors[i])
+                {
+                    overlapping = overlapping.Except(adv.campaigns).ToList();
+
+                }
+            }
             foreach (Campaign campaign in overlapping){
                 if (count == 0)
                 {
@@ -48,13 +56,17 @@ public class RemoveAdvisorScript : MonoBehaviour {
             }
                 
         }
-#if UNITY_EDITOR
+        if (str.Length >= 2)
+        {
+            Debug.Log(String.Format("str length: {0}", str.Length));
+            #if UNITY_EDITOR
             if (EditorUtility.DisplayDialog("Will Get Rid Of", str, "Okay", "Cancel")){
                 Debug.Log ("CLICKY Add");
 		    advisorpanel.GetComponent<AdvisorScript> ().RemoveAdvisor (i);
             }
-    
 #endif
+        }
+
 		
 	}
 }

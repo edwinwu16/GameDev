@@ -37,6 +37,15 @@ public class AddCorpScript : MonoBehaviour
        
         else
         {
+            if (corppanel.GetComponent<CorpScript>().corporationsowned.Count >= 5)
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayDialog("Too Many Corporations", "Maximum of Five Corprations. You're trying to run a Campaign, not a Conglomerate", "Okay");
+#endif
+            }
+            else
+            {
+            }
             corppanel.GetComponent<CorpScript>().AddCorporation(curcorp);
             self.interactable = false;
 

@@ -36,8 +36,18 @@ public class AddAdvisorScript : MonoBehaviour {
         }
         else
         {
-            advisorpanel.GetComponent<AdvisorScript>().AddAdvisor(curadvisor);
-            self.interactable = false;
+            if (advisorpanel.GetComponent<AdvisorScript>().myAdvisors.Count >= 5)
+            {
+#if UNITY_EDITOR
+                EditorUtility.DisplayDialog("Too Many Advisors", "Maximum of Five Advisors. Go All 'The Apprentice' on Somebody.", "Okay");
+#endif
+            }
+            else
+            {
+                advisorpanel.GetComponent<AdvisorScript>().AddAdvisor(curadvisor);
+                self.interactable = false;
+
+            }
         }
 	}
 }

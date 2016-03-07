@@ -51,38 +51,42 @@ public class AdvisorScript : MonoBehaviour {
 
 	public List<Advisor> availableAdvisors = new List<Advisor> ()
     {
-        new Advisor("Bulbasaur", new List<string>(){"Environment"}, 500000.0F, new List<int>(){1}),
-        new Advisor("Charmander", new List<string>(){"Finance"}, 500000.0F, new List<int>(){1}),
-        new Advisor("Pikachu", new List<string>(){"Immigration"}, 500000.0F, new List<int>(){1}),
-        new Advisor("Squirtle", new List<string>(){"Healthcare"}, 500000.0F, new List<int>(){1}),
-        new Advisor("Ivysaur", new List<string>(){"Environment"}, 750000.0F, new List<int>(){2}),
-        new Advisor("Charmeleon", new List<string>(){"Finance"}, 750000.0F, new List<int>(){2}),
-        new Advisor("Raichu", new List<string>(){"Immigration"}, 750000.0F, new List<int>(){2}),
-        new Advisor("Wartortle", new List<string>(){"Healthcare"}, 750000.0F, new List<int>(){2}),
-        new Advisor("Venosaur", new List<string>(){"Environment"}, 1000000.0F, new List<int>(){3}),
-        new Advisor("Charmeleon", new List<string>(){"Finance"}, 1000000.0F, new List<int>(){3}),
-        new Advisor("Shiny Pikachu", new List<string>(){"Immigration"}, 1000000.0F, new List<int>(){3}),
-        new Advisor("Blastoise", new List<string>(){"Healthcare"}, 1000000.0F, new List<int>(){3}),
-        
-        new Advisor("Koch Brothers", new List<string>(){"Finance"}, 1250000.0F, new List<int>(){3}),
-        new Advisor("John Oliver", new List<string>(){"Healthcare"}, 550000.0F, new List<int>(){1}, new List<Campaign>(){new Campaign ("Last Week Tonight Interviews", 100, 25, 50, 20, "General")}),
+        new Advisor("Bulbasaur", new List<string>(){"Environment"}, 100000.0F, new List<int>(){1}),
+        new Advisor("Charmander", new List<string>(){"Finance"}, 100000.0F, new List<int>(){1}),
+        new Advisor("Pikachu", new List<string>(){"Immigration"}, 100000.0F, new List<int>(){1}),
+        new Advisor("Squirtle", new List<string>(){"Healthcare"}, 100000.0F, new List<int>(){1}),
+        new Advisor("Ivysaur", new List<string>(){"Environment"}, 200000.0F, new List<int>(){2}),
+        new Advisor("Charmeleon", new List<string>(){"Finance"}, 200000.0F, new List<int>(){2}),
+        new Advisor("Raichu", new List<string>(){"Immigration"}, 200000.0F, new List<int>(){2}),
+        new Advisor("Wartortle", new List<string>(){"Healthcare"}, 200000.0F, new List<int>(){2}),
+        new Advisor("Venosaur", new List<string>(){"Environment"}, 300000.0F, new List<int>(){3}),
+        new Advisor("Charmeleon", new List<string>(){"Finance"}, 300000.0F, new List<int>(){3}),
+        new Advisor("Shiny Pikachu", new List<string>(){"Immigration"}, 300000.0F, new List<int>(){3}),
+        new Advisor("Blastoise", new List<string>(){"Healthcare"}, 300000.0F, new List<int>(){3}),
+  
+        new Advisor("Koch Brothers", new List<string>(){"Finance"}, 175000.0F, new List<int>(){2}),
+        new Advisor("John Oliver", new List<string>(){"Healthcare"}, 125000.0F, new List<int>(){1}, new List<Campaign>(){new Campaign ("Last Week Tonight Interviews", 100, 25, 40, 20, "General")}),
+        new Advisor("LLoyd Blankfein", new List<string>(){"Finance"}, 450000.0F, new List<int>(){4}, new List<Campaign>(){new Campaign("Let Goldman Get You NYC Voters", 1000, 100, 440, 20, "Finance")}),
+        new Advisor("Bill Nye", new List<string>(){"Environment", "Healthcare"}, 200000.0F, new List<int>(){2, 2}, new List<Campaign>(){new Campaign("Get Bill to Talk to Millenials for You", 500, 50, 230, 20, "General")}),
+        new Advisor("Queen Elizabeth", new List<string>(){"Immigration"}, 110000.0F, new List<int>(){1}, new List<Campaign>(){new Campaign("Get the British-American Vote", 800, 200, 400, 20, "General")}),
 
 
-        new Advisor("Bob", new List<string>(){"Finance"}, 100090.0F, new List<int>(){2}),
-        new Advisor("James", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
-        new Advisor("Charmander", new List<string>(){"Environment", "Finance"}, 100090.0F, new List<int>(){1, 2}),
-        new Advisor("imm", new List<string>(){"Immigration"}, 100090.0F, new List<int>(){2}),
-        new Advisor("John", new List<string>(){"Immigration"}, 100090.0F, new List<int>(){1}),
-        new Advisor("Koch Brothers", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
-        new Advisor("John Oliver", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
-        new Advisor("W.", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){1}),
-        new Advisor("James Bond", new List<string>(){"Environment", "Healthcare"}, 100090.0F, new List<int>(){1, 1}),
-        new Advisor("Robert", new List<string>(){"Healthcare", "Finance"}, 100090.0F, new List<int>(){1, 1}),
-        new Advisor("asdf", new List<string>(){"Environment", "Immigration"}, 100090.0F, new List<int>(){1, 2}),
-        new Advisor("Asshat", new List<string>(){"Finance"}, 100090.0F, new List<int>(){1}),
-        new Advisor("Tomorrow", new List<string>(){"Environment"}, 100090.0F, new List<int>(){1}),
-        new Advisor("Espn", new List<string>(){"Healthcare"}, 100090.0F, new List<int>(){2}),
-        new Advisor("Fuego", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
+
+        new Advisor("James Dimon", new List<string>(){"Finance"}, 280000.0F, new List<int>(){3}),
+        new Advisor("Bob Dudley", new List<string>(){"Environment", "Finance"}, 150000.0F, new List<int>(){1, 2}),
+
+        new Advisor("imm", new List<string>(){"Immigration"}, 210000.0F, new List<int>(){2}),
+        new Advisor("John", new List<string>(){"Immigration"}, 100000.0F, new List<int>(){1}),
+        new Advisor("", new List<string>(){"Finance"}, 290000.0F, new List<int>(){3}),
+        new Advisor("John Stewart", new List<string>(){"Immigration"}, 110000.0F, new List<int>(){1}),
+        new Advisor("", new List<string>(){"Healthcare"}, 90000.0F, new List<int>(){1}),
+        new Advisor("", new List<string>(){"Environment", "Healthcare"}, 100000.0F, new List<int>(){1, 1}),
+        new Advisor("", new List<string>(){"Healthcare", "Finance"}, 110000.0F, new List<int>(){1, 1}),
+        new Advisor("George W. Bush", new List<string>(){"Environment", "Finance", "Healthcare", "Immigration"}, 210000.0F, new List<int>(){1, 1, 1, 1}, new List <Campaign>(){new Campaign("Look Smarter By Comparison to George W.", 50, 25, 150, 15, "General")}),
+        new Advisor("Bob Greenhill", new List<string>(){"Finance"}, 100000.0F, new List<int>(){1}),
+        new Advisor("Bill Gates", new List<string>(){"Environment", "Finance", "Healthcare", "Immigration"}, 350000.0F, new List<int>(){2, 3, 2, 3}, new List<Campaign>(){new Campaign("Melinda & Gates Foundation Voice of Support", 600, 60, 350, 35, "General")}),
+        new Advisor("", new List<string>(){"Healthcare"}, 250000.0F, new List<int>(){2}),
+        new Advisor("", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
 
     };
 
@@ -270,8 +274,14 @@ public class AdvisorScript : MonoBehaviour {
             lstcol1.transform.parent = firstrowski1.transform;
             lstcol1.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
             _newday = false;
+            List<int> b = new List<int>();
 		    for (int j = 0; j < 3; j++) {
-                int i = UnityEngine.Random.Range(0, availableAdvisors.Count - 1);
+                
+                int i = UnityEngine.Random.Range(0, availableAdvisors.Count);
+                while (b.Contains(i)){
+                    i = UnityEngine.Random.Range(0, availableAdvisors.Count);
+                }
+                b.Add(i);
 			    Debug.Log ("availableAdvisors: " + availableAdvisors.Count);
 			    GameObject newrowski = Instantiate (rowski);
 			    Advisor curadvisor = availableAdvisors [i];

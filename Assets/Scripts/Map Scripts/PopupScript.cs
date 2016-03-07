@@ -96,7 +96,6 @@ public class PopupScript : MonoBehaviour {
 		new Campaign("Kick Down Walls", 150, 15, 37, 10, "Immigration"),
 		new Campaign("Sponsor Ethnic Minorities", 300, 25, 70, 20, "Immigration"),
 		new Campaign("Hispanic Grassroots", 300, 	25, 75, 20, "Immigration"),
-		new Campaign("Travel to China", 300, 25, 70, 20, "Immigration"),
 		new Campaign("Book Tour", 1500, 25, 200, 20, "Immigration")
 
 	};
@@ -119,10 +118,8 @@ public class PopupScript : MonoBehaviour {
 	};
 
     private List<Campaign> immigrationcampaigns1 = new List<Campaign>(){
-		new Campaign("Getting the best from Mexico", 200, 25, 67, 20, "Immigration"),
+		new Campaign("Get the best from Mexico", 200, 25, 67, 20, "Immigration"),
 		new Campaign("Promise not to ban Muslims", 150, 50, 0, 10, "Immigration"),
-		new Campaign("Blow up Trump Tower", 300, 25, 90, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 300, 25, 100, 20, "Immigration"),
 		new Campaign("Take Syrian Refuggees", 250, 25, 70, 20, "Immigration"),
 		new Campaign("Visit the Pyramids", 250, 25, 70, 20, "Immigration"),
 
@@ -154,19 +151,15 @@ public class PopupScript : MonoBehaviour {
     };
 
     private List<Campaign> financecampaigns2 = new List<Campaign>(){
-        new Campaign("Audit the Fed", 200, 25, 80, 20, "Finance"),
-		new Campaign("Break Up the Banks", 150, 60, 0, 10, "Finance"),
+        new Campaign("Stop Tax Inversions", 200, 25, 80, 20, "Finance"),
 		new Campaign("Rob the Rich", 300, 25, 110, 20, "Finance"),
-		new Campaign("Occupy Movement", 300, 25, 120, 20, "Finance"),
 		new Campaign("Occupy Wall Street", 250, 25, 100, 20, "Finance"),
 	};
 
     private List<Campaign> immigrationcampaigns2 = new List<Campaign>(){
-		new Campaign("Getting the best from Mexico", 200, 25, 80, 20, "Immigration"),
-		new Campaign("Promise not to ban Muslims", 150, 50, 60, 10, "Immigration"),
-		new Campaign("Blow up Trump Tower", 300, 25, 120, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 300, 25, 120, 20, "Immigration"),
-		new Campaign("Take Syrian Refuggees", 250, 25, 100, 20, "Immigration"),
+		new Campaign("Make Fairtrade Campaign T-Shirts", 300, 25, 120, 20, "Immigration"),
+		new Campaign("Build Ladders Next to Walls", 300, 25, 120, 20, "Immigration"),
+		new Campaign("Take Syrian Refugees", 250, 25, 100, 20, "Immigration"),
 		new Campaign("Visit the Pyramids", 250, 25, 90, 20, "Immigration"),
 
 
@@ -186,43 +179,31 @@ public class PopupScript : MonoBehaviour {
 
     private List<Campaign> environmentcampaigns2 = new List<Campaign>()
     {
-		new Campaign("Save the Swamps", 200, 25, 75, 20, "Environment"),
-		new Campaign("Dedicate Hospital Wings", 200, 25, 80, 20, "Environment"),
-		new Campaign("Sponsor Half-Marathon", 250, 25, 100, 20, "Envrionment"),
-        new Campaign("Sponsor Marathon", 500, 25, 200, 20, "Environment"),
-
-		new Campaign("ACA Enrollment Clinic", 300, 25, 115, 20, "Environment"),
-		new Campaign("Open Free Clinic", 1000, 15, 390, 10, "Enviroment")
+        new Campaign("Go Solar", 500, 25, 200, 20, "Environment"),
+		new Campaign("Go Nuclear", 300, 25, 115, 20, "Environment"),
+		new Campaign("Promise to Cover White House with Solar Panels", 1000, 15, 390, 10, "Enviroment")
 
 
     };
 
     private List<Campaign> financecampaigns3 = new List<Campaign>(){
-        new Campaign("Audit the Fed", 200, 25, 100, 20, "Finance"),
-		new Campaign("Break Up the Banks", 150, 50, 75, 10, "Finance"),
-		new Campaign("Rob the Rich", 300, 25, 150, 20, "Finance"),
-		new Campaign("Occupy Movement", 300, 25, 150, 20, "Finance"),
-		new Campaign("Occupy Wall Street", 250, 25, 120, 20, "Finance"),
+        new Campaign("Steal the Wall Street Bull", 1000, 100, 550, 55, "Finance"),
+		new Campaign("Colonize the Cayman Islands", 300, 25, 150, 20, "Finance"),
+		new Campaign("Rob Banks", 500, 25, 260, 20, "Finance"),
 	};
 
     private List<Campaign> immigrationcampaigns3 = new List<Campaign>(){
-		new Campaign("Getting the best from Mexico", 200, 25, 100, 20, "Immigration"),
-		new Campaign("Promise not to ban Muslims", 150, 50, 75, 10, "Immigration"),
-		new Campaign("Blow up Trump Tower", 300, 25, 150, 20, "Immigration"),
-		new Campaign("Kick Down Walls", 300, 25, 150, 20, "Immigration"),
-		new Campaign("Take Syrian Refuggees", 250, 25, 120, 20, "Immigration"),
-		new Campaign("Visit the Pyramids", 250, 25, 125, 20, "Immigration"),
+		new Campaign("Pitch Plan to Make Greencard Access Easier", 200, 25, 100, 20, "Immigration"),
+		new Campaign("Close Sweatshops", 300, 25, 150, 20, "Immigration"),
+		new Campaign("Build Tunnels Under Walls", 250, 25, 120, 20, "Immigration"),
+		new Campaign("Blow Up Trump Towers", 500, 25, 260, 20, "Immigration"),
 
 
 	};
     private List<Campaign> healthcarecampaigns3 = new List<Campaign>(){
-		new Campaign("Sponsor Single Payer", 200, 25, 100, 20, "Healthcare"),
-		new Campaign("Dedicate Hospital Wings", 200, 25, 110, 20, "Healthcare"),
-		new Campaign("Sponsor Half-Marathon", 250, 25, 120, 20, "Healthcare"),
-        new Campaign("Sponsor Marathon", 250, 25, 115, 20, "Healthcare"),
-
-		new Campaign("ACA Enrollment Clinic", 300, 25, 150, 20, "Healthcare"),
-		new Campaign("Open Free Clinic", 1000, 15, 510, 10, "Healthcare")
+		new Campaign("Find the Fountain of Youth", 200, 25, 100, 20, "Healthcare"),
+		new Campaign("Heal the Sick With Your Bare Hands", 300, 25, 150, 20, "Healthcare"),
+		new Campaign("Universal Healthcare", 1000, 15, 510, 10, "Healthcare")
 
 
 	};
@@ -230,13 +211,10 @@ public class PopupScript : MonoBehaviour {
 
     private List<Campaign> environmentcampaigns3 = new List<Campaign>()
     {
-		new Campaign("Save the Swamps", 200, 25, 100, 20, "Environment"),
+		new Campaign("Wash Birds Covered With Oil", 200, 25, 100, 20, "Environment"),
 		new Campaign("Dedicate Hospital Wings", 200, 25, 89, 20, "Environment"),
-		new Campaign("Sponsor Half-Marathon", 250, 25, 123, 20, "Envrionment"),
-        new Campaign("Sponsor Marathon", 250, 25, 129, 20, "Environment"),
-
-		new Campaign("ACA Enrollment Clinic", 300, 25, 155, 20, "Environment"),
-		new Campaign("Open Free Clinic", 1000, 15, 505, 10, "Enviroment")
+        new Campaign("Sponsor Triathlon", 250, 25, 129, 20, "Environment"),
+		new Campaign("Actually Make a Plan for a Productive FEMA", 1000, 15, 505, 10, "Enviroment")
 
 
     };
@@ -399,7 +377,17 @@ public class PopupScript : MonoBehaviour {
         foreach (KeyValuePair<string, List<Campaign>> item in allcampaigns)
         {
             allcampaigns[item.Key] = allcampaigns[item.Key].Except(adviser.campaigns).ToList();
-            activecampaigns[item.Key] = activecampaigns[item.Key].Except(adviser.campaigns).ToList();
+            List<Campaign> overlapping = activecampaigns[item.Key].Except(adviser.campaigns).ToList();
+            foreach (Advisor adv in adviserspanel.GetComponent<AdvisorScript>().myAdvisors)
+            {
+                if (adv != adviser)
+                {
+                    overlapping.AddRange((adv.campaigns.Except(overlapping)).ToList());
+                    addToAllCampaigns(adv);
+
+                }
+            }
+            activecampaigns[item.Key] = overlapping;
         }
     }
 
@@ -433,8 +421,9 @@ public class PopupScript : MonoBehaviour {
             thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
             fourthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth4;
             fifthcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth5;
-
-		    for (int i = 0; i < 4; i++) {
+            List<int> k = new List<int>();
+            for (int i = 0; i < 4; i++)
+            {
                 if (_tutorial && i == 0 && region == "West")
                 {
                     _tutorial = false;
@@ -467,7 +456,11 @@ public class PopupScript : MonoBehaviour {
                 }
                 else{
                     int campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
-            
+                    while (k.Contains(campaignnum))
+                    {
+                        campaignnum = UnityEngine.Random.Range(0, allcampaigns[region].Count);
+                    }
+                    k.Add(campaignnum);
 			        GameObject newrowski = Instantiate (rowski);
 			        Campaign campaign =  allcampaigns[region][campaignnum];
                     storedcampaigns[region].Add(campaign);
@@ -637,12 +630,22 @@ public class PopupScript : MonoBehaviour {
 	}			
 
 	private void startClick(string region, Campaign campaign){
-		allcampaigns[region].Remove(campaign);
-        campaign.region = region;
-        activecampaigns[region].Add(campaign);
-        
-		deleteCreated();
-		makeRowsActive(region);
+        if (activecampaigns[region].Count >= 3)
+        {
+            
+#if UNITY_EDITOR
+                EditorUtility.DisplayDialog("Too Many Campaigns", "You Can Only Have Three Campaigns in a Region", "Okay");
+#endif
+        }
+        else
+        {
+            allcampaigns[region].Remove(campaign);
+            campaign.region = region;
+            activecampaigns[region].Add(campaign);
+
+            deleteCreated();
+            makeRowsActive(region);
+        }
         
     }
 

@@ -189,10 +189,16 @@ public class CorpScript : MonoBehaviour
             //			remover = Instantiate (removecorpbtn);
             //			remover.GetComponent<RemoveScript> ().corppanel = corppanel;
             //			remover.transform.parent = firstrowski.transform;
+            List<int> j = new List<int>();
 
             for (int i = 0; i < 5; i++)
             {
-                int k = (int)UnityEngine.Random.RandomRange(0.0F, corporationstobuy.Count);
+                int k = (int)UnityEngine.Random.Range(0.0F, corporationstobuy.Count);
+                while (j.Contains(k))
+                {
+                    k = UnityEngine.Random.Range(0, corporationstobuy.Count);
+                }
+                j.Add(k);
                 Debug.Log(String.Format("k value = {0}", k));
                 GameObject newrowski = Instantiate(rowski);
                 Corporation curcorp = corporationstobuy[k];

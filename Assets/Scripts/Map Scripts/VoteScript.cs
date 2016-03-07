@@ -64,10 +64,15 @@ public class VoteScript : MonoBehaviour {
         secondcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
         thirdcol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
         fourthcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
-
+        List<int> k = new List<int>();
         for (int i = 0; i < 3; i++)
         {
-            int j = UnityEngine.Random.Range(0, voters.Count - 1);
+            int j = UnityEngine.Random.Range(0, voters.Count);
+            while (k.Contains(j))
+            {
+                j = UnityEngine.Random.Range(0, voters.Count);
+            }
+            k.Add(j);
             GameObject newrowski = Instantiate(rowski);
             Voter curvoter = voters[j];
             newrowski.transform.parent = votestbl.transform;
