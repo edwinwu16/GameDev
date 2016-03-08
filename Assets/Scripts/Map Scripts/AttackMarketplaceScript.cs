@@ -12,6 +12,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 	public GameObject colski;
 	public GameObject activeattackstbl;
 	public GameObject availableattackstbl;
+    public bool _newday = true;
 //	public GameObject removecorpbtn;
 //	public GameObject addcorpbtn;
 	public GameObject attackapnel;
@@ -120,66 +121,79 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 		}
 
-		var children2 = new List<GameObject>();
-		foreach (Transform child in availableattackstbl.transform) children2.Add(child.gameObject);
-		children2.ForEach(child => Destroy(child));
 
 		//		IN THIS PART, WE MAKE THE ATTACKS TO BUY
+        if (_newday)
+        {
+            _newday = false;
+            var children2 = new List<GameObject>();
+            foreach (Transform child in availableattackstbl.transform) children2.Add(child.gameObject);
+            children2.ForEach(child => Destroy(child));
 
-		GameObject firstrowski1 = Instantiate (rowski);
-		//		Attack curattack = attacksowned [i];
-		//		Debug.Log (curattack.name);
-		firstrowski1.transform.parent = availableattackstbl.transform;
-		namecol = Instantiate (colski);
-		namecol.GetComponent<Text> ().text = String.Format ("{0}", "Attack");
-		namecol.transform.parent = firstrowski1.transform;
-		dmgcol = Instantiate (colski);
-		dmgcol.GetComponent<Text> ().text = String.Format("{0}", "Damage");
-		dmgcol.transform.parent = firstrowski1.transform;
-		acccol = Instantiate (colski);
-		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
-		acccol.transform.parent = firstrowski1.transform;
-		costcol = Instantiate (colski);
-		costcol.GetComponent<Text> ().text = String.Format("{0}", "Cost");
-		costcol.transform.parent = firstrowski1.transform;
+            GameObject firstrowski1 = Instantiate(rowski);
+            //		Attack curattack = attacksowned [i];
+            //		Debug.Log (curattack.name);
+            firstrowski1.transform.parent = availableattackstbl.transform;
+            namecol = Instantiate(colski);
+            namecol.GetComponent<Text>().text = String.Format("{0}", "Attack");
+            namecol.transform.parent = firstrowski1.transform;
+            dmgcol = Instantiate(colski);
+            dmgcol.GetComponent<Text>().text = String.Format("{0}", "Damage");
+            dmgcol.transform.parent = firstrowski1.transform;
+            acccol = Instantiate(colski);
+            acccol.GetComponent<Text>().text = String.Format("{0}", "Accuracy");
+            acccol.transform.parent = firstrowski1.transform;
+            costcol = Instantiate(colski);
+            costcol.GetComponent<Text>().text = String.Format("{0}", "Cost");
+            costcol.transform.parent = firstrowski1.transform;
 
-		GameObject lastcol = Instantiate (colski);
-		lastcol.transform.parent = firstrowski1.transform;
-		lastcol.GetComponent<Text> ().text = "";
-		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
-		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
-		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-		costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
-		lastcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
+            GameObject lastcol = Instantiate(colski);
+            lastcol.transform.parent = firstrowski1.transform;
+            lastcol.GetComponent<Text>().text = "";
+            namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+            dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+            acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+            costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+            lastcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
+            List<int> b = new List<int>();
+            for (int i = 0; i < 3; i++)
+            {
+                int j = UnityEngine.Random.Range(0, attackstobuy.Count);
+                while (b.Contains(j))
+                {
+                    j = UnityEngine.Random.Range(0, attackstobuy.Count);
+                }
+                b.Add(j);
+                GameObject newrowski = Instantiate(rowski);
+                Attack curattack = attackstobuy[j];
+                Debug.Log(curattack.name);
+                newrowski.transform.parent = availableattackstbl.transform;
+                namecol = Instantiate(colski);
+                namecol.GetComponent<Text>().text = String.Format("{0}", curattack.name);
+                namecol.transform.parent = newrowski.transform;
+                dmgcol = Instantiate(colski);
+                dmgcol.GetComponent<Text>().text = String.Format("{0}", curattack.dmg);
+                dmgcol.transform.parent = newrowski.transform;
+                acccol = Instantiate(colski);
+                acccol.GetComponent<Text>().text = String.Format("{0}", curattack.acc);
+                acccol.transform.parent = newrowski.transform;
+                costcol = Instantiate(colski);
+                costcol.GetComponent<Text>().text = String.Format("{0:C0}", curattack.cost);
+                costcol.transform.parent = newrowski.transform;
 
-		for (int i = 0; i < attackstobuy.Count; i++) {
-			GameObject newrowski = Instantiate (rowski);
-			Attack curattack = attackstobuy [i];
-			Debug.Log (curattack.name);
-			newrowski.transform.parent = availableattackstbl.transform;
-			namecol = Instantiate (colski);
-			namecol.GetComponent<Text> ().text = String.Format ("{0}", curattack.name);
-			namecol.transform.parent = newrowski.transform;
-			dmgcol = Instantiate (colski);
-			dmgcol.GetComponent<Text> ().text = String.Format("{0}", curattack.dmg);
-			dmgcol.transform.parent = newrowski.transform;
-			acccol = Instantiate (colski);
-			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
-			acccol.transform.parent = newrowski.transform;
-			costcol = Instantiate (colski);
-			costcol.GetComponent<Text> ().text = String.Format("{0:C0}", curattack.cost);
-			costcol.transform.parent = newrowski.transform;
+                GameObject addy = Instantiate(addattackbutton);
+                addy.GetComponent<AddAttackScript>().index = curattack;
+                //			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
+                addy.transform.parent = newrowski.transform;
+                namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
+                dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
+                acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+                costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+                addy.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
+            }
+        }
 
-			GameObject addy = Instantiate (addattackbutton);
-			addy.GetComponent<AddAttackScript> ().index = i;
-			//			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
-			addy.transform.parent = newrowski.transform;
-			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
-			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
-			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-			costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
-			addy.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
-		}
+		
 
 
 
@@ -227,9 +241,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
 ////		corporationstobuy.Add (corptomove);
 //		makeRows ();
 //	}
-	public void ShowDropdown(int i) {
-		Attack attacktoadd = attackstobuy [i];
-		Debug.Log("to add: " + attackstobuy[i].name);
+	public void ShowDropdown(Attack i) {
+		Attack attacktoadd = i;
+		Debug.Log("to add: " + i.name);
 		curattacktoadd = attacktoadd;
 		dropdown.ClearOptions ();
 		for (var j = 0; j < attacksowned.Count; j++) {
@@ -239,10 +253,21 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		dropdownpanel.SetActive (true);
 		xButton.SetActive (false);
 	}
-	public void AddAttack (int i) {
+	public void AddAttack (Attack i) {
 //		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 //		corporationsowned.Add (corptomove);
-		attackstobuy.RemoveAt (i);
+		attackstobuy.Remove (i);
+        GameObject[] attackbut = GameObject.FindGameObjectsWithTag("AttBut");
+        for (int j = 0; j < attackbut.Length; j++)
+        {
+            if (attackbut[j].GetComponent<AddAttackScript>().index == i)
+            {
+                Debug.Log("WHATTT");
+
+                Destroy(attackbut[j].transform.parent.gameObject);
+
+            }
+        }
 		battleobj.GetComponent<BattleScript>().SwapMyAttack(dropdown.value, curattacktoadd);
 		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-curattacktoadd.cost);
 		makeRows ();

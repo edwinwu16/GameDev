@@ -14,6 +14,7 @@ public class PopupScript : MonoBehaviour {
 	public GameObject popupregion;
 	public GameObject USA;
 	public GameObject maincanvas;
+    public GameObject attackcanvas;
 	public Text daysuntilelection;
 	public GameObject gameoverpopup;
 	private bool initializedalready = false;
@@ -771,6 +772,7 @@ public class PopupScript : MonoBehaviour {
         adviserspanel.GetComponent<AdvisorScript>()._newday = true;
         corporatepanel.GetComponent<CorpScript>()._newday = true;
         voterpanel.GetComponent<VoteScript>()._newday = true;
+        attackcanvas.GetComponent<AttackMarketplaceScript>()._newday = true;
         List<string> keys = newday.Keys.ToList();
         foreach (string key in keys)
         {

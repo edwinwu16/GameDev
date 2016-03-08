@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class FinalizeAttackAddScript : MonoBehaviour {
-	public int index;
+	public Attack index;
 	public GameObject attackpanel;
 	public Button self;
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class FinalizeAttackAddScript : MonoBehaviour {
 
 	}
 
-	public void onClickAdd(int i) {
+	public void onClickAdd(Attack i) {
 		//			attackpanel.GetComponent<AttackMarketplaceScript>().AddAttack(i);
 		attackpanel.GetComponent<AttackMarketplaceScript> ().AddAttack (i);
 	}

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class AddAttackScript: MonoBehaviour {
-	public int index;
+	public Attack index;
 	public GameObject attackpanel;
 	public GameObject popup;
 	public Button self;
@@ -21,9 +24,19 @@ public class AddAttackScript: MonoBehaviour {
 
 	}
 
-	public void onClickAdd(int i) {
-		Debug.Log ("ONCLICKADD" + i);
-//			attackpanel.GetComponent<AttackMarketplaceScript>().AddAttack(i);
-		attackpanel.GetComponent<AttackMarketplaceScript> ().ShowDropdown (i);
+	public void onClickAdd(Attack i) {
+        if (i.cost > popup.GetComponent<PopupScript>().getTotalMoney())
+        {
+#if UNITY_EDITOR
+            EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
+#endif
+        }
+        else
+        {
+            Debug.Log("ONCLICKADD" + i);
+            //			attackpanel.GetComponent<AttackMarketplaceScript>().AddAttack(i);
+            attackpanel.GetComponent<AttackMarketplaceScript>().ShowDropdown(i);
+
+        }
 	}
 }
