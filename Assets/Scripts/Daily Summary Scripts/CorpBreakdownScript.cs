@@ -23,9 +23,9 @@ public class CorpBreakdownScript : MonoBehaviour {
 
 	public void MakeRows() {
 		float totalscreenwidth = RectTransformExtensions.GetWidth(breakdowntable.GetComponent<RectTransform>());
-		float preferredwidth1 = totalscreenwidth * 0.2F;
-		float preferredwidth2 = totalscreenwidth * 0.4F;
-		float preferredwidth3 = totalscreenwidth * 0.4F;
+		float preferredwidth1 = totalscreenwidth * 0.33333F;
+		float preferredwidth2 = totalscreenwidth * 0.33333F;
+		float preferredwidth3 = totalscreenwidth * 0.33333F;
 //		float preferredwidth4 = totalscreenwidth * 0.20F;
 //		float preferredwidth5 = totalscreenwidth * 0.20F;
 
