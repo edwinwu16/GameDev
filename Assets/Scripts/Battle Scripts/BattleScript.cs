@@ -97,12 +97,8 @@ public class BattleScript : MonoBehaviour {
 		welcomebattlepanel.GetComponent<WelcomeBattleScript> ().challenger = trump.GetComponent<FighterScript> ().fightername;
 
 //		Start opoponent move import
-		ImportMe();
+		//ImportMe();
 		ImportOpponents(opponents);
-
-		initAttackText();
-
-		updateAttackDescription (currentattackselectorchoice);
 
 		BeginMyTurn ();
 	}
@@ -320,7 +316,7 @@ public class BattleScript : MonoBehaviour {
 			movedict.Add(curopponent, opponentattacks);
 		}
 	}
-	void ImportMe() {
+	public void ImportMe() {
 		List<Attack> myattacks = new List<Attack> ();
 //		string attack1name = hilary.GetComponent<FighterScript>().attack1name;
 //		string attack2name = hilary.GetComponent<FighterScript>().attack2name;
@@ -336,12 +332,23 @@ public class BattleScript : MonoBehaviour {
 //		int attack2accuracy = hilary.GetComponent<FighterScript>().attack2accuracy;
 //		int attack3accuracy = hilary.GetComponent<FighterScript>().attack3accuracy;
 //		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
-
-		myattacks.Add(new Attack ("Send Classified Private Email", 12, 20, 100000, 6));
-		myattacks.Add(new Attack ("Three Way Bill Monica Kiss", 20, 90, 1000000, 4));
-		myattacks.Add(new Attack ("Beep Boop Beep Boop", 14, 50, 500000, 6));
-		myattacks.Add(new Attack ("Take Things Away From You", 22, 18, 100000, 8));
+		string name = hilary.GetComponent<FighterScript>().fightername;
+		Debug.Log ("fighter name is: " + name);
+		if (name == "Hillary") {
+			myattacks.Add (new Attack ("Send Classified Private Email", 12, 75, 100000, 6));
+			myattacks.Add (new Attack ("Three Way Bill Monica Kiss", 20, 55, 1000000, 4));
+			myattacks.Add (new Attack ("Beep Boop Beep Boop", 14, 65, 500000, 6));
+			myattacks.Add (new Attack ("Take Things Away From You", 22, 50, 100000, 8));
+		}else if (name == "Bernie"){
+			myattacks.Add (new Attack ("Education is a Right", 12, 75, 10000, 6));
+			myattacks.Add (new Attack ("F#$@ Wall Street!", 20, 55, 100000, 4));
+			myattacks.Add (new Attack ("I Smoked Marijuana Twice", 14, 70, 50000, 6));
+			myattacks.Add (new Attack ("Finger Wag", 22, 50, 10000, 8));
+		}
 		movedict.Add(hilary, myattacks);
+		initAttackText();
+		updateAttackDescription (currentattackselectorchoice);
+
 	}
 
 	void initAttackLocations(){

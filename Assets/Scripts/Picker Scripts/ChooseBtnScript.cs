@@ -6,6 +6,7 @@ public class ChooseBtnScript : MonoBehaviour {
 	public Button self;
 	public GameObject popup;
 	public GameObject picker;
+//	public GameObject fighter;
 	// Use this for initialization
 	void Start () {
 		self.onClick.AddListener(() => sendClick());

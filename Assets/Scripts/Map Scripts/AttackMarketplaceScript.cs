@@ -28,6 +28,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 	public float preferredwidth3 = 0.2F;
 	public float preferredwidth4 = 0.2F;
 	public float preferredwidth5 = 0.2F;
+	public float preferredwidth6 = 0.2F;
 
 	// Use this for initialization
 	void Start () {
@@ -87,6 +88,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		float thirdrowwidth = totalscreenwidth * preferredwidth3;
 		float fourthrowwidth = totalscreenwidth * preferredwidth4;
 		float fifthrowwidth = totalscreenwidth * preferredwidth5;
+		float sixthrowwidth = totalscreenwidth * preferredwidth6;
 		var children = new List<GameObject>();
 		foreach (Transform child in activeattackstbl.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
@@ -106,6 +108,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		GameObject acccol = Instantiate (colski);
 		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
 		acccol.transform.parent = firstrowski.transform;
+		GameObject ppcol = Instantiate (colski);
+		ppcol.GetComponent<Text> ().text = String.Format("{0}", "PP");
+		ppcol.transform.parent = firstrowski.transform;
 		GameObject costcol = Instantiate (colski);
 		costcol.GetComponent<Text> ().text = String.Format("{0}", "Cost");
 		costcol.transform.parent = firstrowski.transform;
@@ -113,7 +118,8 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-		costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+		ppcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+		costcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
 
 		for (int i = 0; i < attacksowned.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
@@ -124,11 +130,14 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			namecol.GetComponent<Text> ().text = String.Format ("{0}", curattack.name);
 			namecol.transform.parent = newrowski.transform;
 			dmgcol = Instantiate (colski);
-			dmgcol.GetComponent<Text> ().text = String.Format("{0}", curattack.dmg);
+			dmgcol.GetComponent<Text> ().text = String.Format("{0}/{1}", (int)curattack.dmg, curattack.basedmg);
 			dmgcol.transform.parent = newrowski.transform;
 			acccol = Instantiate (colski);
 			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
 			acccol.transform.parent = newrowski.transform;
+			ppcol = Instantiate (colski);
+			ppcol.GetComponent<Text> ().text = String.Format("{0}/{1}", curattack.pp, curattack.basepp);
+			ppcol.transform.parent = newrowski.transform;
 			costcol = Instantiate (colski);
 			costcol.GetComponent<Text> ().text = String.Format("{0:C0}", curattack.cost);
 			costcol.transform.parent = newrowski.transform;
@@ -139,7 +148,8 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-			costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+			ppcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+			costcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
 		}
 
 
@@ -164,6 +174,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
             acccol = Instantiate(colski);
             acccol.GetComponent<Text>().text = String.Format("{0}", "Accuracy");
             acccol.transform.parent = firstrowski1.transform;
+			ppcol = Instantiate(colski);
+			ppcol.GetComponent<Text>().text = String.Format("{0}", "PP");
+			ppcol.transform.parent = firstrowski1.transform;
             costcol = Instantiate(colski);
             costcol.GetComponent<Text>().text = String.Format("{0}", "Cost");
             costcol.transform.parent = firstrowski1.transform;
@@ -174,8 +187,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
             namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
             dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
             acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-            costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
-            lastcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
+			ppcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+			costcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
+			lastcol.GetComponent<LayoutElement>().preferredWidth = sixthrowwidth;
             List<int> b = new List<int>();
             for (int i = 0; i < 3; i++)
             {
@@ -198,6 +212,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
                 acccol = Instantiate(colski);
                 acccol.GetComponent<Text>().text = String.Format("{0}", curattack.acc);
                 acccol.transform.parent = newrowski.transform;
+				ppcol = Instantiate(colski);
+				ppcol.GetComponent<Text>().text = String.Format("{0}", curattack.pp);
+				ppcol.transform.parent = newrowski.transform;
                 costcol = Instantiate(colski);
                 costcol.GetComponent<Text>().text = String.Format("{0:C0}", curattack.cost);
                 costcol.transform.parent = newrowski.transform;
@@ -209,7 +226,8 @@ public class AttackMarketplaceScript : MonoBehaviour {
                 namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
                 dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
                 acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-                costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+				ppcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+				costcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
                 addy.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
             }
         }
