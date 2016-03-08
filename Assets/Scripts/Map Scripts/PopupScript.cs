@@ -19,6 +19,8 @@ public class PopupScript : MonoBehaviour {
 	public GameObject gameoverpopup;
 	private bool initializedalready = false;
     public GameObject tutorial;
+	public GameObject tutorialpanel;
+	public GameObject pickercanvas;
 	public GameObject battlecanvas;
 	private string clickedregion;
 	public List<GameObject> createdCampaigns = new List<GameObject>();
@@ -51,6 +53,11 @@ public class PopupScript : MonoBehaviour {
     public bool _newday = true;
     public Dictionary<string, List<Campaign>> storedcampaigns = new Dictionary<string, List<Campaign>>();
     public int belowzero = 0;
+
+	public Sprite bernsprite;
+	public Sprite hilsprite;
+
+	public GameObject fighterobj;
 
     public float preferredwidth1;
     public float preferredwidth2;
@@ -231,10 +238,10 @@ public class PopupScript : MonoBehaviour {
 
 	void Start () {
 		if (!initializedalready) {
+			tutorialpanel.SetActive (false);
 			InitializeShit ();
 			InitializeCampaigns();
 			initializedalready = true;
-            Hilary = new Player();
 		}
 
 	}
@@ -707,6 +714,8 @@ public class PopupScript : MonoBehaviour {
 		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incmon[incmonoption].Value[1];
 	}*/
 
+
+
     void generateBoosters(){
         
 
@@ -829,6 +838,19 @@ public class PopupScript : MonoBehaviour {
 		maincanvas.SetActive (false);
 		//maincanvas.SetActive (false);
 	}
+
+	public void ChoosePlayer(string p) {
+		if (p == "Hillary Clinton") {
+			Hilary = new Player("Hillary", "Clinton", 0.0f, 0.0f, 0.0f, 0.0f, 0.1f, 0.1f, 0.1f, 0.1f);
+			fighterobj.GetComponent<Image> ().sprite = hilsprite;
+		}
+		if (p == "Bernie Sanders") {
+			Hilary = new Player("Bernie", "Sanders", 0.1f, 0.1f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f);
+			fighterobj.GetComponent<Image> ().sprite = bernsprite;
+		}
+		pickercanvas.SetActive (false);
+		tutorialpanel.SetActive (true);
+	}
 }
 
 public class Region {
@@ -852,21 +874,24 @@ public class Player
     public Dictionary<String, float> corporateboosts = new Dictionary<String, float>();
     public string firstname;
     public string lastname;
-    public Player()
+	public Player(string firstnm, string lastnm, float cmpenvboost, float cmpfinboost, float cmpimmboost, float cmphealthboost,
+		float corpenvboost, float corpfinboost, float corpimmboost, float corphealthboost)
     {
-        firstname = "Hilary";
-        lastname = "Clinton";
-        campaignboosts["Environment"] = 0.0F;
-        campaignboosts["Finance"] = 0.0F;
-        campaignboosts["Immigration"] = 0.0F;
-        campaignboosts["Healthcare"] = 0.0F;
-        corporateboosts["Environment"] = 0.1F;
-        corporateboosts["Finance"] = 0.1F;
-        corporateboosts["Immigration"] = 0.1F;
-        corporateboosts["Healthcare"] = 0.1F;
+		firstname = firstnm;
+        lastname = lastnm;
+		campaignboosts["Environment"] = cmpenvboost;
+		campaignboosts["Finance"] = cmpfinboost;
+		campaignboosts["Immigration"] = cmpimmboost;
+		campaignboosts["Healthcare"] = cmphealthboost;
+		corporateboosts["Environment"] = corpenvboost;
+		corporateboosts["Finance"] = corpfinboost;
+		corporateboosts["Immigration"] = corpimmboost;
+		corporateboosts["Healthcare"] = corphealthboost;
     }
 
 }
+
+
 
 public class Campaign {
 	public string name;

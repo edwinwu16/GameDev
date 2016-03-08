@@ -88,6 +88,7 @@
      <Compile Include="Assets\Scripts\Map Scripts\XPopupRegionScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\XVotePanelScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\Xattackpanelscript.cs" />
+     <Compile Include="Assets\Scripts\Picker Scripts\ChooseBtnScript.cs" />
      <Compile Include="Assets\Scripts\Picker Scripts\LeftPickerBtnScript.cs" />
      <Compile Include="Assets\Scripts\Picker Scripts\PickerScript.cs" />
      <Compile Include="Assets\Scripts\Picker Scripts\RightPickerBtnScript.cs" />
