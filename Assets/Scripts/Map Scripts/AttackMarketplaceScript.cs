@@ -16,17 +16,17 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //	public GameObject addcorpbtn;
 	public GameObject attackapnel;
 	public GameObject xButton;
-//	public GameObject popupregion;
+	public GameObject popupregion;
 	public GameObject addattackbutton;
 	public GameObject hilary;
 	public GameObject battleobj;
 	public List<Attack> attacksowned = new List<Attack>();
 	public List<Attack> attackstobuy = new List<Attack>();
-	public float preferredwidth1 = 0.3F;
-	public float preferredwidth2 = 0.3F;
+	public float preferredwidth1 = 0.2F;
+	public float preferredwidth2 = 0.2F;
 	public float preferredwidth3 = 0.2F;
 	public float preferredwidth4 = 0.2F;
-
+	public float preferredwidth5 = 0.2F;
 
 	// Use this for initialization
 	void Start () {
@@ -64,6 +64,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		float secondrowwidth = totalscreenwidth * preferredwidth2;
 		float thirdrowwidth = totalscreenwidth * preferredwidth3;
 		float fourthrowwidth = totalscreenwidth * preferredwidth4;
+		float fifthrowwidth = totalscreenwidth * preferredwidth5;
 		var children = new List<GameObject>();
 		foreach (Transform child in activeattackstbl.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
@@ -83,9 +84,14 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		GameObject acccol = Instantiate (colski);
 		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
 		acccol.transform.parent = firstrowski.transform;
+		GameObject costcol = Instantiate (colski);
+		costcol.GetComponent<Text> ().text = String.Format("{0}", "Cost");
+		costcol.transform.parent = firstrowski.transform;
+
 		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
+		costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 
 		for (int i = 0; i < attacksowned.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
@@ -101,6 +107,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			acccol = Instantiate (colski);
 			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
 			acccol.transform.parent = newrowski.transform;
+			costcol = Instantiate (colski);
+			costcol.GetComponent<Text> ().text = String.Format("{0:C0}", curattack.cost);
+			costcol.transform.parent = newrowski.transform;
 //			GameObject remove = Instantiate (removecorpbtn);
 //			remove.GetComponent<RemoveScript> ().index = i;
 //			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
@@ -108,7 +117,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-
+			costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
 		}
 
 		var children2 = new List<GameObject>();
@@ -130,13 +139,18 @@ public class AttackMarketplaceScript : MonoBehaviour {
 		acccol = Instantiate (colski);
 		acccol.GetComponent<Text> ().text = String.Format("{0}", "Accuracy");
 		acccol.transform.parent = firstrowski1.transform;
+		costcol = Instantiate (colski);
+		costcol.GetComponent<Text> ().text = String.Format("{0}", "Cost");
+		costcol.transform.parent = firstrowski1.transform;
+
 		GameObject lastcol = Instantiate (colski);
 		lastcol.transform.parent = firstrowski1.transform;
 		lastcol.GetComponent<Text> ().text = "";
 		namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 		dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 		acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-		lastcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+		costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+		lastcol.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
 
 		for (int i = 0; i < attackstobuy.Count; i++) {
 			GameObject newrowski = Instantiate (rowski);
@@ -152,6 +166,10 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			acccol = Instantiate (colski);
 			acccol.GetComponent<Text> ().text = String.Format("{0}", curattack.acc);
 			acccol.transform.parent = newrowski.transform;
+			costcol = Instantiate (colski);
+			costcol.GetComponent<Text> ().text = String.Format("{0:C0}", curattack.cost);
+			costcol.transform.parent = newrowski.transform;
+
 			GameObject addy = Instantiate (addattackbutton);
 			addy.GetComponent<AddAttackScript> ().index = i;
 			//			remove.GetComponent<RemoveScript> ().corppanel = corppanel;
@@ -159,7 +177,8 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			namecol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
 			dmgcol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
 			acccol.GetComponent<LayoutElement>().preferredWidth = thirdrowwidth;
-			addy.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+			costcol.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
+			addy.GetComponent<LayoutElement>().preferredWidth = fifthrowwidth;
 		}
 
 
@@ -225,6 +244,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //		corporationsowned.Add (corptomove);
 		attackstobuy.RemoveAt (i);
 		battleobj.GetComponent<BattleScript>().SwapMyAttack(dropdown.value, curattacktoadd);
+		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-curattacktoadd.cost);
 		makeRows ();
 		dropdownpanel.SetActive (false);
 		xButton.SetActive (true);

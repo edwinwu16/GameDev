@@ -10,6 +10,8 @@ public class Attack{
 	public int acc; // range 0-100
 	public float cost;
 	public int pp;
+	public int basepp;
+	public float basedmg;
 
 	public Attack(string n, float damage, int accuracy, float cst, int peep) {
 		name = n;
@@ -17,13 +19,23 @@ public class Attack{
 		acc = accuracy;
 		cost = cst;
 		pp = peep;
+		basedmg = damage;
+		basepp = peep;
 	}
-
 	public Attack(string n, float damage, int accuracy) {
 		name = n;
 		dmg = damage;
 		acc = accuracy;
+		basedmg = damage;
 	}
+
+	public void DecrementPP(){
+		pp -= 1;
+	}
+	public void ResetAttack(){
+		pp = basepp;
+		dmg = basedmg;
+		}
 }
 
 public class BattleScript : MonoBehaviour {
@@ -146,6 +158,7 @@ public class BattleScript : MonoBehaviour {
 						}
 						if (Input.GetKeyDown (KeyCode.Space)) {
 							tutorial.SendMessage ("ThingClicked", "spclick");
+							updateAttackDescription (currentattackselectorchoice);
 							NavigateMoveMenu (KeyCode.Space);
 						}
 					}
@@ -190,9 +203,12 @@ public class BattleScript : MonoBehaviour {
 		if (attackHit == true) {
 			float atkDmg = (float)Math.Round (GenerateFromGaussian (attack.dmg, 3), 0);
 			opponent.GetComponent<FighterScript> ().health -= atkDmg;
+			attack.DecrementPP ();
+			updateAttackDescription (attackindex);
 			Debug.Log ("You dealt " + atkDmg + " damage.");
 			StartCoroutine (AnimateText (me.name + " used " + attack.name + "\u25BC"));
 			StartCoroutine (AnimateSprite (opponent, 8));
+
 		} else {
 			Debug.Log ("attack missed");
 			StartCoroutine (AnimateText (attack.name + " missed! " + "\u25BC"));
@@ -289,10 +305,10 @@ public class BattleScript : MonoBehaviour {
 //			int attack3accuracy = curopponent.GetComponent<FighterScript>().attack3accuracy;
 //			int attack4accuracy = curopponent.GetComponent<FighterScript>().attack4accuracy;
 
-			opponentattacks.Add(new Attack ("Build Wall.", 42, 12));
+			opponentattacks.Add(new Attack ("Build Wall", 42, 12));
 			opponentattacks.Add(new Attack ("China! China! China!", 51, 15));
 			opponentattacks.Add(new Attack ("You Know What They Say About Big Hands...", 40, 20));
-			opponentattacks.Add(new Attack ("I Know Words.", 23, 40));
+			opponentattacks.Add(new Attack ("I Know Words", 23, 40));
 			movedict.Add(curopponent, opponentattacks);
 		}
 	}
@@ -313,10 +329,10 @@ public class BattleScript : MonoBehaviour {
 //		int attack3accuracy = hilary.GetComponent<FighterScript>().attack3accuracy;
 //		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
 
-		myattacks.Add(new Attack ("Send Classified Private Email.", 12, 20, 100000, 6));
-		myattacks.Add(new Attack ("Three Way Bill Monica Kiss.", 20, 50, 1000000, 4));
-		myattacks.Add(new Attack ("Beep Boop Beep Boop.", 14, 50, 500000, 6));
-		myattacks.Add(new Attack ("Take Things Away From You On Behalf Of The Common Good.", 22, 18, 100000, 8));
+		myattacks.Add(new Attack ("Send Classified Private Email", 12, 20, 100000, 6));
+		myattacks.Add(new Attack ("Three Way Bill Monica Kiss", 20, 50, 1000000, 4));
+		myattacks.Add(new Attack ("Beep Boop Beep Boop", 14, 50, 500000, 6));
+		myattacks.Add(new Attack ("Take Things Away From You", 22, 18, 100000, 8));
 		movedict.Add(hilary, myattacks);
 	}
 
@@ -349,7 +365,7 @@ public class BattleScript : MonoBehaviour {
 	void updateAttackDescription(int i){
 		attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
 		+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc
-			+ "\nPP: " + movedict[hilary][currentattackselectorchoice].pp;
+			+ "\nPP: " + movedict[hilary][currentattackselectorchoice].pp + "/" + movedict[hilary][currentattackselectorchoice].basepp;
 	}
 
 	bool determineAttackHit(Attack att){
