@@ -42,9 +42,30 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
 //		corporationstobuy.Add (jp);
 		attackstobuy = new List<Attack>() {
-			new Attack("I support gun control!", 15.0F, 95, 1000000, 7),
-			new Attack("I don't support gun control!", 20.0F, 90, 50000, 4),
-			new Attack("Cater to popular opinion", 12.0F, 97, 90000, 5)
+			new Attack("What Died on Trumps Head", 10.0F, 95, 100000, 10),
+			new Attack("Trump = Oompa Loompa", 20.0F, 90, 400000, 5),
+			new Attack("Chapter 11 is my fav", 40.0F, 80, 750000, 5),
+            new Attack("9/11", 25.0F, 75, 750000, 10),
+            new Attack("Donald Drumpf", 15.0F, 85, 100000, 7),
+            new Attack("Donald Duck Would Be Better ):", 10.0F, 95, 100000, 10),
+            new Attack("Treason", 100.0F, 20, 750000, 3),
+            new Attack("New Tax on Tanning Salons", 25.0F, 85, 400000, 5),
+            new Attack("Isn't Your Wife an Immigrant?", 15.0F, 95, 400000, 8),
+            new Attack("Isn't This a Donald Glover Concert?", 8.0F, 100, 100000, 15),
+            new Attack("Donald Driver, TD?", 10.0F, 95, 100000, 10),
+            new Attack("Thought This Was a Scrubs Q&A", 15.0F, 85, 100000, 7),
+            new Attack("'Damnit Donald!' - Manning", 10.0F, 100, 400000, 10),
+            new Attack("You're Fired", 30.0F, 75, 750000, 5),
+            new Attack("Trump's Super Tuesday is at a Ruby Tuesday", 20.0F, 60, 100000, 4),
+            new Attack("Word is the Longest Word Trump Knows", 18.0F, 100, 750000, 8),
+            new Attack("Miss USA is Creepy", 25.0F, 95, 750000, 7),
+            new Attack("America is Already Great", 25.0F, 55, 100000, 4),
+            new Attack("No Taxes For Anyone", 30.0F, 90, 750000, 5),
+            new Attack("Free Healthcare For Everyone", 50.0F, 40, 750000, 3),
+            new Attack("Make Marijuana Legal", 30.0F, 75, 400000, 4),
+            new Attack("Free College", 30.0F, 50, 100000, 4),
+            new Attack("Capitalism is Dumb", 15.0F, 90, 100000, 7),
+            new Attack("It's Not Socialism, It's Communism", 10.0F, 95, 100000, 4)
 		};
 		dropdownpanel.SetActive (false);
 //		makeRows ();
