@@ -100,10 +100,6 @@ public class BattleScript : MonoBehaviour {
 		//ImportMe();
 		ImportOpponents(opponents);
 
-		initAttackText();
-
-		updateAttackDescription (currentattackselectorchoice);
-
 		BeginMyTurn ();
 	}
 	
@@ -337,6 +333,7 @@ public class BattleScript : MonoBehaviour {
 //		int attack3accuracy = hilary.GetComponent<FighterScript>().attack3accuracy;
 //		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
 		string name = hilary.GetComponent<FighterScript>().fightername;
+		Debug.Log (name);
 		if (name == "Hillary") {
 			myattacks.Add (new Attack ("Send Classified Private Email", 12, 90, 100000, 6));
 			myattacks.Add (new Attack ("Three Way Bill Monica Kiss", 20, 70, 1000000, 4));
@@ -349,6 +346,9 @@ public class BattleScript : MonoBehaviour {
 			myattacks.Add (new Attack ("Finger Wag", 22, 50, 10000, 8));
 		}
 		movedict.Add(hilary, myattacks);
+		initAttackText();
+		updateAttackDescription (currentattackselectorchoice);
+
 	}
 
 	void initAttackLocations(){

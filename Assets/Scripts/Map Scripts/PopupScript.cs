@@ -840,14 +840,18 @@ public class PopupScript : MonoBehaviour {
 	}
 
 	public void ChoosePlayer(string p) {
+		Debug.Log (p);
 		if (p == "Hillary Clinton") {
 			Hilary = new Player("Hillary", "Clinton", 0.0f, 0.0f, 0.0f, 0.0f, 0.1f, 0.1f, 0.1f, 0.1f);
 			fighterobj.GetComponent<Image> ().sprite = hilsprite;
             corporatepanel.GetComponent<CorpScript>().hilaryGoldman(true);
+			Debug.Log ("A");
 			fighterobj.GetComponent<FighterScript> ().fightername = "Hillary";
-			battlecanvas.GetComponent<BattleScript>().ImportMe ();
-			tutorial.GetComponent<TuttyScript>().tuttylist.Insert(20, new TutorialThing(null, "Since you chose Hillary, you own Goldman!", null);
-			tutorial.GetComponent<TuttyScript>().refreshTut ();
+			Debug.Log ("B");
+			battleobject.GetComponent<BattleScript>().ImportMe ();
+			Debug.Log ("C");
+//			tutorial.GetComponent<TuttyScript>().tuttylist.Insert(20, new TutorialThing(null, "Since you chose Hillary, you own Goldman!", null));
+//			tutorial.GetComponent<TuttyScript>().refreshTut ();
 		}
 		if (p == "Bernie Sanders") {
 			Hilary = new Player("Bernie", "Sanders", 0.1f, 0.1f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -855,10 +859,11 @@ public class PopupScript : MonoBehaviour {
             corporatepanel.GetComponent<CorpScript>().hilaryGoldman(false);
             bernieCampaigns();
 			fighterobj.GetComponent<FighterScript> ().fightername = "Bernie";
-			battlecanvas.GetComponent<BattleScript>().ImportMe ();
-			tutorial.GetComponent<TuttyScript>().refreshTut ();
+//			battleobject.GetComponent<BattleScript>().ImportMe ();
+//			tutorial.GetComponent<TuttyScript>().refreshTut ();
 		}
-		pickercanvas.SetActive (false);
+		Debug.Log ("CP2");
+		pickercanvas.SetActive(false);
 		tutorialpanel.SetActive (true);
 	}
 
