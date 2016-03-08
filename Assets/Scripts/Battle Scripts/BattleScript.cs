@@ -333,16 +333,16 @@ public class BattleScript : MonoBehaviour {
 //		int attack3accuracy = hilary.GetComponent<FighterScript>().attack3accuracy;
 //		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
 		string name = hilary.GetComponent<FighterScript>().fightername;
-		Debug.Log (name);
+		Debug.Log ("fighter name is: " + name);
 		if (name == "Hillary") {
-			myattacks.Add (new Attack ("Send Classified Private Email", 12, 90, 100000, 6));
-			myattacks.Add (new Attack ("Three Way Bill Monica Kiss", 20, 70, 1000000, 4));
-			myattacks.Add (new Attack ("Beep Boop Beep Boop", 14, 80, 500000, 6));
+			myattacks.Add (new Attack ("Send Classified Private Email", 12, 75, 100000, 6));
+			myattacks.Add (new Attack ("Three Way Bill Monica Kiss", 20, 55, 1000000, 4));
+			myattacks.Add (new Attack ("Beep Boop Beep Boop", 14, 65, 500000, 6));
 			myattacks.Add (new Attack ("Take Things Away From You", 22, 50, 100000, 8));
 		}else if (name == "Bernie"){
-			myattacks.Add (new Attack ("Education == Right, Not Privilege", 12, 90, 10000, 6));
-			myattacks.Add (new Attack ("F#$@ Wall Street!", 20, 70, 100000, 4));
-			myattacks.Add (new Attack ("I Smoked Marijuana Twice", 14, 80, 50000, 6));
+			myattacks.Add (new Attack ("Education is a Right", 12, 75, 10000, 6));
+			myattacks.Add (new Attack ("F#$@ Wall Street!", 20, 55, 100000, 4));
+			myattacks.Add (new Attack ("I Smoked Marijuana Twice", 14, 70, 50000, 6));
 			myattacks.Add (new Attack ("Finger Wag", 22, 50, 10000, 8));
 		}
 		movedict.Add(hilary, myattacks);
