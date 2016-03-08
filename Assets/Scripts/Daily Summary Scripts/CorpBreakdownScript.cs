@@ -23,9 +23,9 @@ public class CorpBreakdownScript : MonoBehaviour {
 
 	public void MakeRows() {
 		float totalscreenwidth = RectTransformExtensions.GetWidth(breakdowntable.GetComponent<RectTransform>());
-		float preferredwidth1 = totalscreenwidth * 0.33F;
-		float preferredwidth2 = totalscreenwidth * 0.33F;
-		float preferredwidth3 = totalscreenwidth * 0.33F;
+		float preferredwidth1 = totalscreenwidth * 0.2F;
+		float preferredwidth2 = totalscreenwidth * 0.4F;
+		float preferredwidth3 = totalscreenwidth * 0.4F;
 //		float preferredwidth4 = totalscreenwidth * 0.20F;
 //		float preferredwidth5 = totalscreenwidth * 0.20F;
 
@@ -81,13 +81,13 @@ public class CorpBreakdownScript : MonoBehaviour {
 			secondcol = Instantiate (colski);
 
 			thirdcol = Instantiate (colski);
-			string moneystr = String.Format ("{0:C0}", corp.weeklymonies [corp.weeklymonies.Count - 1]);
+			string moneystr = String.Format ("{0:C2}", corp.weeklymonies [corp.weeklymonies.Count - 1]);
 			thirdcol.GetComponent<Text> ().text = moneystr;
 			thirdcol.transform.parent = firstrow.transform;
 
-			firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
-			secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
-			thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
+//			firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
+//			secondcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
+//			thirdcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth3;
 					// do something with entry.Value or entr
 
 
