@@ -25,7 +25,7 @@ public class PickerScript : MonoBehaviour {
 	public Image image;
 
 	public List<PickerThing> things = new List<PickerThing>();
-	private int thingindex = 0;
+	public int thingindex = 0;
 	// Use this for initialization
 	void Start () {
 		PickerThing hillaryPick = new PickerThing ("Hillary Clinton", "Hillary is a fierce, corporate America-loving, Democrat. She loves long walks on the beach with Bill" +
@@ -37,7 +37,7 @@ public class PickerScript : MonoBehaviour {
 		                        " money and being in the spotlight. He's got a great relationship with big fence companies, but watch out, he'll hurt you with the Immigrant voters.", TrumpSprite);
 			 
 
-		things = new List<PickerThing> () {hillaryPick, berniePick, trumpPick};
+		things = new List<PickerThing> () {hillaryPick, berniePick};
 		ShowPick (thingindex);
 	}
 	
