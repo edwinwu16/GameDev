@@ -66,6 +66,8 @@ public class RemoveAdvisorScript : MonoBehaviour {
             }
 #endif
         }
+		advisorpanel.GetComponent<AdvisorScript> ().RemoveAdvisor (i);
+
 
 		
 	}

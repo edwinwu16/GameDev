@@ -446,7 +446,7 @@ public class PopupScript : MonoBehaviour {
                     averagevotesw.transform.parent = newrowski.transform;
                     Button addbutton = Instantiate(genericbutton);
                     addbutton.transform.parent = newrowski.transform;
-                    addbutton.onClick.AddListener(delegate { startClick(region, campaign); });
+					addbutton.onClick.AddListener(delegate { startClick(region, campaign, addbutton); });
                     addbutton.onClick.AddListener(delegate { tutorial.SendMessage("ThingClicked", "addcampaign"); });
                     addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
                     namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
@@ -479,7 +479,7 @@ public class PopupScript : MonoBehaviour {
 			        averagevotesw.transform.parent = newrowski.transform;
 			        Button addbutton = Instantiate (genericbutton);
 			        addbutton.transform.parent = newrowski.transform;
-			        addbutton.onClick.AddListener(delegate{startClick(region, campaign);});
+					addbutton.onClick.AddListener(delegate{startClick(region, campaign, addbutton);});
                     addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
                     namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
                     typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
@@ -541,7 +541,7 @@ public class PopupScript : MonoBehaviour {
                 averagevotesw.transform.parent = newrowski.transform;
                 Button addbutton = Instantiate(genericbutton);
                 addbutton.transform.parent = newrowski.transform;
-                addbutton.onClick.AddListener(delegate { startClick(region, campaign); });
+				addbutton.onClick.AddListener(delegate { startClick(region, campaign, addbutton); });
                 addbutton.onClick.AddListener(delegate { addbutton.interactable = false; });
                 namecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
                 typecol.GetComponent<LayoutElement>().preferredWidth = preferredwidth2;
@@ -629,17 +629,20 @@ public class PopupScript : MonoBehaviour {
 		makeRowsActive(region);
 	}			
 
-	private void startClick(string region, Campaign campaign){
+	private void startClick(string region, Campaign campaign, Button addbutton){
         if (activecampaigns[region].Count >= 3)
         {
             
 #if UNITY_EDITOR
                 EditorUtility.DisplayDialog("Too Many Campaigns", "You Can Only Have Three Campaigns in a Region", "Okay");
 #endif
+			addbutton.interactable = true;
+
         }
         else
         {
             allcampaigns[region].Remove(campaign);
+			storedcampaigns [region].Remove (campaign);
             campaign.region = region;
             activecampaigns[region].Add(campaign);
 

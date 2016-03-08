@@ -41,9 +41,9 @@ public class AttackMarketplaceScript : MonoBehaviour {
 //		Corporation jp = new Corporation (2000000, 80000, "Finance", "JP Morgan");
 //		corporationstobuy.Add (jp);
 		attackstobuy = new List<Attack>() {
-			new Attack("I support gun control!", 15.0F, 95),
-			new Attack("I don't support gun control!", 20.0F, 90),
-			new Attack("Cater to popular opinion", 12.0F, 97)
+			new Attack("I support gun control!", 15.0F, 95, 1000000, 7),
+			new Attack("I don't support gun control!", 20.0F, 90, 50000, 4),
+			new Attack("Cater to popular opinion", 12.0F, 97, 90000, 5)
 		};
 		dropdownpanel.SetActive (false);
 //		makeRows ();

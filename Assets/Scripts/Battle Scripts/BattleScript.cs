@@ -8,6 +8,16 @@ public class Attack{
 	public string name;
 	public float dmg;
 	public int acc; // range 0-100
+	public float cost;
+	public int pp;
+
+	public Attack(string n, float damage, int accuracy, float cst, int peep) {
+		name = n;
+		dmg = damage;
+		acc = accuracy;
+		cost = cst;
+		pp = peep;
+	}
 
 	public Attack(string n, float damage, int accuracy) {
 		name = n;
@@ -264,49 +274,49 @@ public class BattleScript : MonoBehaviour {
 			GameObject curopponent = opponents [i];
 			List<Attack> opponentattacks = new List<Attack> ();
 
-			string attack1name = curopponent.GetComponent<FighterScript>().attack1name;
-			string attack2name = curopponent.GetComponent<FighterScript>().attack2name;
-			string attack3name = curopponent.GetComponent<FighterScript>().attack3name;
-			string attack4name = curopponent.GetComponent<FighterScript>().attack4name;
+//			string attack1name = curopponent.GetComponent<FighterScript>().attack1name;
+//			string attack2name = curopponent.GetComponent<FighterScript>().attack2name;
+//			string attack3name = curopponent.GetComponent<FighterScript>().attack3name;
+//			string attack4name = curopponent.GetComponent<FighterScript>().attack4name;
+//
+//			float attack1damage = curopponent.GetComponent<FighterScript>().attack1damage;
+//			float attack2damage = curopponent.GetComponent<FighterScript>().attack2damage;
+//			float attack3damage = curopponent.GetComponent<FighterScript>().attack3damage;
+//			float attack4damage = curopponent.GetComponent<FighterScript>().attack4damage;
+//
+//			int attack1accuracy = curopponent.GetComponent<FighterScript>().attack1accuracy;
+//			int attack2accuracy = curopponent.GetComponent<FighterScript>().attack2accuracy;
+//			int attack3accuracy = curopponent.GetComponent<FighterScript>().attack3accuracy;
+//			int attack4accuracy = curopponent.GetComponent<FighterScript>().attack4accuracy;
 
-			float attack1damage = curopponent.GetComponent<FighterScript>().attack1damage;
-			float attack2damage = curopponent.GetComponent<FighterScript>().attack2damage;
-			float attack3damage = curopponent.GetComponent<FighterScript>().attack3damage;
-			float attack4damage = curopponent.GetComponent<FighterScript>().attack4damage;
-
-			int attack1accuracy = curopponent.GetComponent<FighterScript>().attack1accuracy;
-			int attack2accuracy = curopponent.GetComponent<FighterScript>().attack2accuracy;
-			int attack3accuracy = curopponent.GetComponent<FighterScript>().attack3accuracy;
-			int attack4accuracy = curopponent.GetComponent<FighterScript>().attack4accuracy;
-
-			opponentattacks.Add(new Attack (attack1name, attack1damage, attack1accuracy));
-			opponentattacks.Add(new Attack (attack2name, attack2damage, attack2accuracy));
-			opponentattacks.Add(new Attack (attack3name, attack3damage, attack3accuracy));
-			opponentattacks.Add(new Attack (attack4name, attack4damage, attack4accuracy));
+			opponentattacks.Add(new Attack ("Build Wall.", 42, 12));
+			opponentattacks.Add(new Attack ("China! China! China!", 51, 15));
+			opponentattacks.Add(new Attack ("You Know What They Say About Big Hands...", 40, 20));
+			opponentattacks.Add(new Attack ("I Know Words.", 23, 40));
 			movedict.Add(curopponent, opponentattacks);
 		}
 	}
 	void ImportMe() {
 		List<Attack> myattacks = new List<Attack> ();
-		string attack1name = hilary.GetComponent<FighterScript>().attack1name;
-		string attack2name = hilary.GetComponent<FighterScript>().attack2name;
-		string attack3name = hilary.GetComponent<FighterScript>().attack3name;
-		string attack4name = hilary.GetComponent<FighterScript>().attack4name;
+//		string attack1name = hilary.GetComponent<FighterScript>().attack1name;
+//		string attack2name = hilary.GetComponent<FighterScript>().attack2name;
+//		string attack3name = hilary.GetComponent<FighterScript>().attack3name;
+//		string attack4name = hilary.GetComponent<FighterScript>().attack4name;
+//
+//		float attack1damage = hilary.GetComponent<FighterScript>().attack1damage;
+//		float attack2damage = hilary.GetComponent<FighterScript>().attack2damage;
+//		float attack3damage = hilary.GetComponent<FighterScript>().attack3damage;
+//		float attack4damage = hilary.GetComponent<FighterScript>().attack4damage;
+//
+//		int attack1accuracy = hilary.GetComponent<FighterScript>().attack1accuracy;
+//		int attack2accuracy = hilary.GetComponent<FighterScript>().attack2accuracy;
+//		int attack3accuracy = hilary.GetComponent<FighterScript>().attack3accuracy;
+//		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
 
-		float attack1damage = hilary.GetComponent<FighterScript>().attack1damage;
-		float attack2damage = hilary.GetComponent<FighterScript>().attack2damage;
-		float attack3damage = hilary.GetComponent<FighterScript>().attack3damage;
-		float attack4damage = hilary.GetComponent<FighterScript>().attack4damage;
-
-		int attack1accuracy = hilary.GetComponent<FighterScript>().attack1accuracy;
-		int attack2accuracy = hilary.GetComponent<FighterScript>().attack2accuracy;
-		int attack3accuracy = hilary.GetComponent<FighterScript>().attack3accuracy;
-		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
-
-		myattacks.Add(new Attack (attack1name, attack1damage, attack1accuracy));
-		myattacks.Add(new Attack (attack2name, attack2damage, attack2accuracy));
-		myattacks.Add(new Attack (attack3name, attack3damage, attack3accuracy));
-		myattacks.Add(new Attack (attack4name, attack4damage, attack4accuracy));
+		myattacks.Add(new Attack ("Send Classified Private Email.", 12, 20, 100000, 6));
+		myattacks.Add(new Attack ("Three Way Bill Monica Kiss.", 20, 50, 1000000, 4));
+		myattacks.Add(new Attack ("Beep Boop Beep Boop.", 14, 50, 500000, 6));
+		myattacks.Add(new Attack ("Take Things Away From You On Behalf Of The Common Good.", 22, 18, 100000, 8));
 		movedict.Add(hilary, myattacks);
 	}
 
@@ -338,7 +348,8 @@ public class BattleScript : MonoBehaviour {
 	// battle scene sometimes exits out... I think its because of this function but idk why
 	void updateAttackDescription(int i){
 		attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
-		+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc;
+		+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc
+			+ "\nPP: " + movedict[hilary][currentattackselectorchoice].pp;
 	}
 
 	bool determineAttackHit(Attack att){
