@@ -846,6 +846,8 @@ public class PopupScript : MonoBehaviour {
             corporatepanel.GetComponent<CorpScript>().hilaryGoldman(true);
 			fighterobj.GetComponent<FighterScript> ().fightername = "Hillary";
 			battlecanvas.GetComponent<BattleScript>().ImportMe ();
+			tutorial.GetComponent<TuttyScript>().tuttylist.Insert(20, new TutorialThing(null, "Since you chose Hillary, you own Goldman!", null);
+			tutorial.GetComponent<TuttyScript>().refreshTut ();
 		}
 		if (p == "Bernie Sanders") {
 			Hilary = new Player("Bernie", "Sanders", 0.1f, 0.1f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -854,6 +856,7 @@ public class PopupScript : MonoBehaviour {
             bernieCampaigns();
 			fighterobj.GetComponent<FighterScript> ().fightername = "Bernie";
 			battlecanvas.GetComponent<BattleScript>().ImportMe ();
+			tutorial.GetComponent<TuttyScript>().refreshTut ();
 		}
 		pickercanvas.SetActive (false);
 		tutorialpanel.SetActive (true);

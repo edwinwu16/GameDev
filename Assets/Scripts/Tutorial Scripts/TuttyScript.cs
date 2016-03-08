@@ -4,6 +4,17 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Timers;
 
+public class TutorialThing {
+	public GameObject arrow;
+	public string text;
+	public string thingtoproceed;
+
+	public TutorialThing (GameObject tutorialarrow, string tutorialtext, string thingtoproc) {
+		arrow = tutorialarrow;
+		text = tutorialtext;
+		thingtoproceed = thingtoproc;
+	}
+}
 public class TuttyScript : MonoBehaviour {
 	private int stepintut = 0;
 	public Text tuttext;
@@ -32,17 +43,7 @@ public class TuttyScript : MonoBehaviour {
 	public AudioClip mysound;
 
 	private string thingtoproceed;
-	public class TutorialThing {
-		public GameObject arrow;
-		public string text;
-		public string thingtoproceed;
 
-		public TutorialThing (GameObject tutorialarrow, string tutorialtext, string thingtoproc) {
-			arrow = tutorialarrow;
-			text = tutorialtext;
-			thingtoproceed = thingtoproc;
-		}
-	}
 	private List<GameObject> arrows = new List<GameObject>();
 	public List<TutorialThing> tuttylist = new List<TutorialThing> ();
 
@@ -97,7 +98,6 @@ public class TuttyScript : MonoBehaviour {
 			new TutorialThing(null, "That's all! Good luck!", null),
 			new TutorialThing(daystutarrow, "You have 100 days.",null),
 		};
-		refreshTut ();
 	}
 
 	// Update is called once per frame
@@ -110,7 +110,7 @@ public class TuttyScript : MonoBehaviour {
 		}
 		refreshTut ();
 	}
-	void refreshTut() {
+	public void refreshTut() {
 		List<GameObject> arrows = new List<GameObject> ();
 		foreach (TutorialThing tutt in tuttylist) {
 			GameObject arr = tutt.arrow;
