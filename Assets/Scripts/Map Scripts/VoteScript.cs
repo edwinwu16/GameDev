@@ -89,6 +89,7 @@ public class VoteScript : MonoBehaviour {
             buybtn1.GetComponent<VoteBuyScript>().index = curvoter;
             buybtn1.GetComponent<VoteBuyScript>().amount = curvoter.costtobuy;
             buybtn1.GetComponent<VoteBuyScript>().votespanel = votestbl;
+			buybtn1.GetComponent<LayoutElement>().preferredWidth = fourthrowwidth;
             buybtn1.transform.parent = newrowski.transform;
             cost2buycol.GetComponent<LayoutElement>().preferredWidth = firstrowwidth;
             namecol.GetComponent<LayoutElement>().preferredWidth = secondrowwidth;
