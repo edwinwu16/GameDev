@@ -202,23 +202,27 @@ public class BattleScript : MonoBehaviour {
 
 	void GenerateMyAttack(int attackindex, GameObject opponent, GameObject me) {
 		Attack attack = movedict [me] [attackindex];
-		attackHit = determineAttackHit (attack);
-		if (attackHit == true) {
-			float atkDmg = (float)Math.Round (GenerateFromGaussian (attack.dmg, 3), 0);
-			opponent.GetComponent<FighterScript> ().health -= atkDmg;
-			attack.DecrementPP ();
-			attack.DecrementDmg ();
-			updateAttackDescription (attackindex);
-			Debug.Log ("You dealt " + atkDmg + " damage.");
-			StartCoroutine (AnimateText (me.name + " used " + attack.name + "\u25BC"));
-			StartCoroutine (AnimateSprite (opponent, 8));
-
+		if (attack.pp <= 0) {
+			StartCoroutine (AnimateText ("Cannot use " + attack.name + " - out of PP! Swap in a new attack in Attack Marketplace." + "\u25BC"));
 		} else {
-			Debug.Log ("attack missed");
-			StartCoroutine (AnimateText (attack.name + " missed! " + "\u25BC"));
+			attackHit = determineAttackHit (attack);
+			if (attackHit == true) {
+				float atkDmg = (float)Math.Round (GenerateFromGaussian (attack.dmg, 3), 0);
+				opponent.GetComponent<FighterScript> ().health -= atkDmg;
+				attack.DecrementPP ();
+				attack.DecrementDmg ();
+				updateAttackDescription (attackindex);
+				Debug.Log ("You dealt " + atkDmg + " damage.");
+				StartCoroutine (AnimateText (me.name + " used " + attack.name + "\u25BC"));
+				StartCoroutine (AnimateSprite (opponent, 8));
+			} else {
+				Debug.Log ("attack missed");
+				StartCoroutine (AnimateText (attack.name + " missed! " + "\u25BC"));
+			}
 		}
 		_pausestate = true;
 	}
+
 
 	IEnumerator AnimateText(string strComplete){
 		int i = 0;
@@ -334,7 +338,7 @@ public class BattleScript : MonoBehaviour {
 //		int attack4accuracy = hilary.GetComponent<FighterScript>().attack4accuracy;
 
 		myattacks.Add(new Attack ("Send Classified Private Email", 12, 20, 100000, 6));
-		myattacks.Add(new Attack ("Three Way Bill Monica Kiss", 20, 50, 1000000, 4));
+		myattacks.Add(new Attack ("Three Way Bill Monica Kiss", 20, 90, 1000000, 4));
 		myattacks.Add(new Attack ("Beep Boop Beep Boop", 14, 50, 500000, 6));
 		myattacks.Add(new Attack ("Take Things Away From You", 22, 18, 100000, 8));
 		movedict.Add(hilary, myattacks);
@@ -368,7 +372,7 @@ public class BattleScript : MonoBehaviour {
 	// battle scene sometimes exits out... I think its because of this function but idk why
 	void updateAttackDescription(int i){
 		string bp = String.Format ("{0:N0}", movedict [hilary] [currentattackselectorchoice].dmg);
-		attackDescription.GetComponent<Text> ().text = "Base Power: " + bp 
+		attackDescription.GetComponent<Text> ().text = "Power: " + bp 
 		+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc
 			+ "\nPP: " + movedict[hilary][currentattackselectorchoice].pp + "/" + movedict[hilary][currentattackselectorchoice].basepp;
 	}
