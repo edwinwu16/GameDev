@@ -35,7 +35,10 @@ public class Attack{
 	public void ResetAttack(){
 		pp = basepp;
 		dmg = basedmg;
-		}
+	}
+	public void DecrementDmg() {
+		dmg = ((float)pp / (float)basepp) * (float)0.5 * basedmg + (float)0.5 * basedmg;
+	}
 }
 
 public class BattleScript : MonoBehaviour {
@@ -204,6 +207,7 @@ public class BattleScript : MonoBehaviour {
 			float atkDmg = (float)Math.Round (GenerateFromGaussian (attack.dmg, 3), 0);
 			opponent.GetComponent<FighterScript> ().health -= atkDmg;
 			attack.DecrementPP ();
+			attack.DecrementDmg ();
 			updateAttackDescription (attackindex);
 			Debug.Log ("You dealt " + atkDmg + " damage.");
 			StartCoroutine (AnimateText (me.name + " used " + attack.name + "\u25BC"));
@@ -363,7 +367,8 @@ public class BattleScript : MonoBehaviour {
 
 	// battle scene sometimes exits out... I think its because of this function but idk why
 	void updateAttackDescription(int i){
-		attackDescription.GetComponent<Text> ().text = "Base Power: " + movedict [hilary] [currentattackselectorchoice].dmg
+		string bp = String.Format ("{0:N0}", movedict [hilary] [currentattackselectorchoice].dmg);
+		attackDescription.GetComponent<Text> ().text = "Base Power: " + bp 
 		+ "\nAccuracy: " + movedict [hilary] [currentattackselectorchoice].acc
 			+ "\nPP: " + movedict[hilary][currentattackselectorchoice].pp + "/" + movedict[hilary][currentattackselectorchoice].basepp;
 	}
