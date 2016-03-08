@@ -239,7 +239,7 @@ public class PopupScript : MonoBehaviour {
 	void Start () {
 		if (!initializedalready) {
 			tutorialpanel.SetActive (false);
-			InitializeShit ();
+			InitializeThings ();
 			InitializeCampaigns();
 			initializedalready = true;
 		}
@@ -564,7 +564,7 @@ public class PopupScript : MonoBehaviour {
 	}
 
 
-	void InitializeShit() {
+	void InitializeThings() {
 		USA.GetComponent<USAScript>().money = 1000000.0F;
 		regions.Add ("West", west);
 		regions.Add ("South", south);
@@ -843,14 +843,27 @@ public class PopupScript : MonoBehaviour {
 		if (p == "Hillary Clinton") {
 			Hilary = new Player("Hillary", "Clinton", 0.0f, 0.0f, 0.0f, 0.0f, 0.1f, 0.1f, 0.1f, 0.1f);
 			fighterobj.GetComponent<Image> ().sprite = hilsprite;
+            corporatepanel.GetComponent<CorpScript>().hilaryGoldman(true);
 		}
 		if (p == "Bernie Sanders") {
 			Hilary = new Player("Bernie", "Sanders", 0.1f, 0.1f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f);
 			fighterobj.GetComponent<Image> ().sprite = bernsprite;
+            corporatepanel.GetComponent<CorpScript>().hilaryGoldman(false);
+            bernieCampaigns();
+
 		}
 		pickercanvas.SetActive (false);
 		tutorialpanel.SetActive (true);
 	}
+
+    public void bernieCampaigns()
+    {
+        List<string> keys = new List<string>(activecampaigns.Keys);
+        foreach (string key in keys)
+        {
+            activecampaigns[key].Add(new Campaign("Feel the Bern", 0, 0, 50, 20, "General"));
+        }
+    }
 }
 
 public class Region {

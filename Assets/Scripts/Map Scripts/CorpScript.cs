@@ -59,8 +59,6 @@ public class CorpScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Corporation goldman = new Corporation(3000000, 700000, "Finance", "Goldman Sachs");
-        corporationsowned.Add(goldman);
         makeRows();
     }
 
@@ -68,6 +66,22 @@ public class CorpScript : MonoBehaviour
     void Update()
     {
         //		makeToBuyRows ();
+    }
+
+    public void hilaryGoldman(bool val)
+    {
+                    Corporation goldman = new Corporation(3000000, 700000, "Finance", "Goldman Sachs");
+
+        if (val)
+        {
+            corporationsowned.Add(goldman);
+
+        }
+        else
+        {
+            corporationstobuy.Add(goldman);
+        }
+
     }
 
     public void makeRows()
