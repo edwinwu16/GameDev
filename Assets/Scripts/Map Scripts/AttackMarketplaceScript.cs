@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 
 public class AttackMarketplaceScript : MonoBehaviour {
-	private Attack curattacktoadd;
+	public Attack curattacktoadd;
 	public GameObject dropdownpanel;
 	public Dropdown dropdown;
 	public GameObject rowski;
@@ -256,18 +256,20 @@ public class AttackMarketplaceScript : MonoBehaviour {
 	public void AddAttack (Attack i) {
 //		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-corptomove.costtobuy);
 //		corporationsowned.Add (corptomove);
-		attackstobuy.Remove (i);
         GameObject[] attackbut = GameObject.FindGameObjectsWithTag("AttBut");
         for (int j = 0; j < attackbut.Length; j++)
         {
+            Debug.Log("Attacki" + i.name);
+            Debug.Log("Attack:" + attackbut[j].GetComponent<AddAttackScript>().index.name);
             if (attackbut[j].GetComponent<AddAttackScript>().index == i)
             {
                 Debug.Log("WHATTT");
-
                 Destroy(attackbut[j].transform.parent.gameObject);
 
             }
         }
+        attackstobuy.Remove(i);
+
 		battleobj.GetComponent<BattleScript>().SwapMyAttack(dropdown.value, curattacktoadd);
 		popupregion.GetComponent<PopupScript> ().IncreaseMoney (-curattacktoadd.cost);
 		makeRows ();

@@ -9,7 +9,7 @@ public class FinalizeAttackAddScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		attackpanel = GameObject.Find ("AttackMarketplacePanel");
-		self.onClick.AddListener(() => { onClickAdd(index);});
+		self.onClick.AddListener(() => { onClickAdd(attackpanel.GetComponent<AttackMarketplaceScript>().curattacktoadd);});
 	}
 
 	// Update is called once per frame
