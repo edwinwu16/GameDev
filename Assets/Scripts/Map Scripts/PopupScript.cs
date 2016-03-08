@@ -844,13 +844,16 @@ public class PopupScript : MonoBehaviour {
 			Hilary = new Player("Hillary", "Clinton", 0.0f, 0.0f, 0.0f, 0.0f, 0.1f, 0.1f, 0.1f, 0.1f);
 			fighterobj.GetComponent<Image> ().sprite = hilsprite;
             corporatepanel.GetComponent<CorpScript>().hilaryGoldman(true);
+			fighterobj.GetComponent<FighterScript> ().fightername = "Hillary";
+			battlecanvas.GetComponent<BattleScript>().ImportMe ();
 		}
 		if (p == "Bernie Sanders") {
 			Hilary = new Player("Bernie", "Sanders", 0.1f, 0.1f, 0.1f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f);
 			fighterobj.GetComponent<Image> ().sprite = bernsprite;
             corporatepanel.GetComponent<CorpScript>().hilaryGoldman(false);
             bernieCampaigns();
-
+			fighterobj.GetComponent<FighterScript> ().fightername = "Bernie";
+			battlecanvas.GetComponent<BattleScript>().ImportMe ();
 		}
 		pickercanvas.SetActive (false);
 		tutorialpanel.SetActive (true);
