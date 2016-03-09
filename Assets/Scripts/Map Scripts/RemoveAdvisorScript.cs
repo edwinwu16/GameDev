@@ -80,11 +80,6 @@ public class RemoveAdvisorScript : MonoBehaviour {
             dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.onClick.AddListener(delegate { settrueorFalse(i, false); });
             dialoguepanel.GetComponent<DisplayDialogScript>().tempvalue = i;
 
-            if (dialoguepanel.GetComponent<DisplayDialogScript>().buttonvalue)
-            {
-                dialoguepanel.GetComponent<DisplayDialogScript>().buttonclicked = false;
-                advisorpanel.GetComponent<AdvisorScript>().RemoveAdvisor(i);
-            }
         }
         else
         {
