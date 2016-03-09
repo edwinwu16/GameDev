@@ -238,7 +238,8 @@ public class PopupScript : MonoBehaviour {
 
 	void Start () {
 		if (!initializedalready) {
-			tutorialpanel.SetActive (false);
+			tutorialpanel.GetComponent<TuttyScript> ().CleanArrows ();
+			tutorialpanel.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (4000f, 4000f);
 			InitializeThings ();
 			InitializeCampaigns();
 			initializedalready = true;
@@ -850,7 +851,7 @@ public class PopupScript : MonoBehaviour {
 			Debug.Log ("B");
 			battleobject.GetComponent<BattleScript>().ImportMe ();
 			Debug.Log ("C");
-//			tutorial.GetComponent<TuttyScript>().tuttylist.Insert(20, new TutorialThing(null, "Since you chose Hillary, you own Goldman!", null));
+			tutorial.GetComponent<TuttyScript>().tuttylist.Insert(20, new TutorialThing(null, "Since you chose Hillary, you own Goldman!", null));
 //			tutorial.GetComponent<TuttyScript>().refreshTut ();
 		}
 		if (p == "Bernie Sanders") {
@@ -859,12 +860,13 @@ public class PopupScript : MonoBehaviour {
             corporatepanel.GetComponent<CorpScript>().hilaryGoldman(false);
             bernieCampaigns();
 			fighterobj.GetComponent<FighterScript> ().fightername = "Bernie";
-//			battleobject.GetComponent<BattleScript>().ImportMe ();
+			tutorial.GetComponent<TuttyScript> ().tuttylist.Insert (16, new TutorialThing (null, "Since you chose Bernie, every region has a 'Feel The Bern' campaign!", null));
+			battleobject.GetComponent<BattleScript>().ImportMe ();
 //			tutorial.GetComponent<TuttyScript>().refreshTut ();
 		}
 		Debug.Log ("CP2");
 		pickercanvas.SetActive(false);
-		tutorialpanel.SetActive (true);
+		tutorialpanel.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, 0f);
 	}
 
     public void bernieCampaigns()

@@ -33,7 +33,7 @@ public class TuttyScript : MonoBehaviour {
 	public GameObject xcamparrow;
 	public GameObject votetutarrow;
 	public GameObject atkarrow;
-
+	public GameObject self;
 	public GameObject mapcanvas;
 	public GameObject battlecanvas;
 
@@ -98,6 +98,9 @@ public class TuttyScript : MonoBehaviour {
 			new TutorialThing(null, "That's all! Good luck!", null),
 			new TutorialThing(daystutarrow, "You have 100 days.",null),
 		};
+
+		refreshTut();
+//		self.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -110,8 +113,17 @@ public class TuttyScript : MonoBehaviour {
 		}
 		refreshTut ();
 	}
-	public void refreshTut() {
-		List<GameObject> arrows = new List<GameObject> ();
+	public void CleanArrows() {
+		Debug.Log ("CLEAAAAN" + tuttylist.Count);
+		foreach (TutorialThing tutt in tuttylist) {
+			GameObject arr = tutt.arrow;
+			if (arr != null) {
+				arr.SetActive (false);
+			}
+		}
+	}
+
+	void refreshTut() {
 		foreach (TutorialThing tutt in tuttylist) {
 			GameObject arr = tutt.arrow;
 			if (arr != null) {
