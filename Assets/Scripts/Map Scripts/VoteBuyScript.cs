@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine.UI;
 
 public class VoteBuyScript : MonoBehaviour
@@ -12,6 +9,9 @@ public class VoteBuyScript : MonoBehaviour
     public GameObject votespanel;
     public Button self;
     public GameObject popup;
+    public GameObject dialoguecanvas;
+    public GameObject dialoguepanel;
+
     // Use this for initialization
     void Start()
     {
@@ -28,11 +28,18 @@ public class VoteBuyScript : MonoBehaviour
     }
 
     public void onClickVote(Voter i, int a) {
+        dialoguecanvas = popup.GetComponent<PopupScript>().dialoguecanvas;
+        dialoguepanel = popup.GetComponent<PopupScript>().dialoguepanel;
+
         if (popup.GetComponent<PopupScript>().getTotalMoney() < i.costtobuy)
         {
-#if UNITY_EDITOR
-            EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
-#endif
+            dialoguecanvas.SetActive(true);
+            dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = "Too Little Money";
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Yo, You Broke Son.";
+            dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
         }
         else{		votespanel.GetComponent<VoteScript> ().buyVotes(i, a);
         self.interactable = false;

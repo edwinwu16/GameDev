@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Map Scripts\ClickTest.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\CorpScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\DaysUntilElectionScript.cs" />
+     <Compile Include="Assets\Scripts\Map Scripts\DisplayDialogScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\FinalizeAttackAddScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\FlashTextScript.cs" />
      <Compile Include="Assets\Scripts\Map Scripts\GameOverPopupScript.cs" />
