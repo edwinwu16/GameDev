@@ -44,10 +44,10 @@ public class CampaignBreakdownScript : MonoBehaviour {
 		secondcol.transform.parent = firstrow.transform;
 		
         GameObject thirdcol = Instantiate (colski);
-		thirdcol.GetComponent<Text> ().text = "Votes Earned Yesterday";
+		thirdcol.GetComponent<Text> ().text = "Votes Earned";
 		thirdcol.transform.parent = firstrow.transform;
 		GameObject fourthcol = Instantiate (colski);
-		fourthcol.GetComponent<Text> ().text = "Money Spent Yesterday";
+		fourthcol.GetComponent<Text> ().text = "Money Spent";
 		fourthcol.transform.parent = firstrow.transform;
 
 		firstcol.GetComponent<LayoutElement>().preferredWidth = preferredwidth1;
