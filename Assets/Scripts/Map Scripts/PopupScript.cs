@@ -830,10 +830,17 @@ public class PopupScript : MonoBehaviour {
 	}
 	public void switchtoBattleScene()
 	{
+        tutorial.GetComponent<TuttyScript>().mysource.Play();
+        battleobject.SetActive(true);
+
+
+
 		// move call to popupscript
 		welcomebattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
 		welcomebattlepanel.GetComponent<WelcomeBattleScript> ().challenger = trump.GetComponent<FighterScript> ().fightername;
-		battleobject.GetComponent<BattleScript> ().resetBattle ();
+		
+        battleobject.GetComponent<BattleScript> ().resetBattle ();
+        
 		battlecanvas.SetActive (true);
 		battlecanvas.GetComponent<BattleCanvasScript> ().movePanel ();
 		maincanvas.SetActive (false);
@@ -874,7 +881,9 @@ public class PopupScript : MonoBehaviour {
         List<string> keys = new List<string>(activecampaigns.Keys);
         foreach (string key in keys)
         {
-            activecampaigns[key].Add(new Campaign("Feel the Bern", 0, 0, 50, 20, "General"));
+            Campaign camp = new Campaign("Feel the Bern", 0, 0, 50, 20, "General");
+            camp.region = key;
+            activecampaigns[key].Add(camp);
         }
     }
 }

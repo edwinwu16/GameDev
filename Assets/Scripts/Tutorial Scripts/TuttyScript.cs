@@ -36,6 +36,7 @@ public class TuttyScript : MonoBehaviour {
 	public GameObject self;
 	public GameObject mapcanvas;
 	public GameObject battlecanvas;
+    public GameObject battleobject;
 
 	public GameObject popup;
 
@@ -90,7 +91,10 @@ public class TuttyScript : MonoBehaviour {
 			new TutorialThing(null, "!!!", null),
 			new TutorialThing(null, "Trump Challenges YOU to a debate! Press Continue to start.", "startbat"),
 			new TutorialThing(null, "Use the arrow keys to choose an attack.", "udclick"),
-			new TutorialThing(null, "Use the Space key to use it.", "spclick"),
+			new TutorialThing(null, "Use the Return key to use it.", "rtclick"),
+            new TutorialThing(null, "Make sure you keep track of your PP. If it hits zero, then you cannot use the move anymore.", "rtclick"),
+            new TutorialThing(null, "Also, everytime your move hits, its power decreases.", "rtclick"),
+            new TutorialThing(null, "Go ahead finish the battle.", "spclick"),
 			new TutorialThing(null, "Winning and losing debates significantly affects the amount of votes you have. You can lose votes in a debate.", null),
 			new TutorialThing(atkarrow, "You can buy attacks in the marketplace. Let's check it out.", "atkclicked"),
 			new TutorialThing(null, "You may only have 4 attacks at a time. Attacks lose their effectiveness as you use them more, so make sure to buy new ones.", null),
@@ -144,7 +148,7 @@ public class TuttyScript : MonoBehaviour {
 				continuebtn.SetActive (true);
 			}
 		}
-		if (tuttylist [stepintut].text == "Now is the moment you've been waiting for.") {
+		if (tuttylist [stepintut].text == "Now is the moment you've been waiting for...") {
 			mysource.clip = mysound;
 			mysource.Play ();
 		}
@@ -152,11 +156,15 @@ public class TuttyScript : MonoBehaviour {
 			Debug.Log ("AH!");
 			popup.GetComponent<PopupScript> ().switchtoBattleScene ();
 		}
-		if (tuttylist [stepintut].text == "Winning and losing debates significantly affects the amount of votes you have. You can lose votes in a debate."
-		) {
-			mapcanvas.SetActive (true);
-			battlecanvas.SetActive (false);
-		}
+        if (tuttylist[stepintut].text == "Winning and losing debates significantly affects the amount of votes you have. You can lose votes in a debate.")
+        {
+            mysource.Stop();
+            mapcanvas.SetActive(true);
+            battlecanvas.SetActive(false);
+            battleobject.GetComponent<BattleScript>().ImportMe();
+            battleobject.SetActive(false);
+
+        }
 	}
 
 	public void ThingClicked(string thing) {

@@ -56,6 +56,7 @@ public class BattleScript : MonoBehaviour {
 	public Text trumpHealthText;
 	private bool _pausestate = false;
 	public bool _gameover = false;
+    private bool _firsttime = true;
 
 	public Text attack1text;
 	public Text attack2text;
@@ -110,7 +111,7 @@ public class BattleScript : MonoBehaviour {
 			HealthUpdate (trump, trumpHealthText);
 			if (!_gameover) {
 				if (_pausestate) {
-					if (Input.GetKeyDown (KeyCode.Space)) {
+					if (Input.GetKeyDown (KeyCode.Return)) {
 						Debug.Log ("space");
 						_pausestate = false;
 						// you LOSE
@@ -119,9 +120,18 @@ public class BattleScript : MonoBehaviour {
 							playerWon = false;
 							IncOrDecPopularity (playerWon);
 							_gameover = true;
-							finishbattlepanel.SetActive (true);
-							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
-							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = trump.GetComponent<FighterScript> ().fightername;
+                            if (!_firsttime)
+                            {
+                                finishbattlepanel.SetActive(true);
+                                finishbattlepanel.transform.localPosition = new Vector3(0.0F, 0.0F, 0.0F);
+                                finishbattlepanel.GetComponent<FinishBattleScript>().winner = trump.GetComponent<FighterScript>().fightername;
+                                tutorial.GetComponent<TuttyScript>().mysource.Stop();
+                            }
+                            else
+                            {
+                                tutorial.SendMessage("ThingClicked", "spclick");
+                                _firsttime = false;
+                            }
 						// you WIN
 						} else if (trump.GetComponent<FighterScript> ().health <= 0) {
 							StartCoroutine (AnimateText (trump.GetComponent<FighterScript> ().fightername + " loses!"));
@@ -129,9 +139,18 @@ public class BattleScript : MonoBehaviour {
 							IncOrDecPopularity (playerWon);
 							_gameover = true;
 							Debug.Log ("you win");
-							finishbattlepanel.SetActive (true);
-							finishbattlepanel.transform.localPosition = new Vector3 (0.0F, 0.0F, 0.0F);
-							finishbattlepanel.GetComponent<FinishBattleScript> ().winner = hilary.GetComponent<FighterScript> ().fightername;
+                            if (!_firsttime)
+                            {
+                                finishbattlepanel.SetActive(true);
+                                finishbattlepanel.transform.localPosition = new Vector3(0.0F, 0.0F, 0.0F);
+                                finishbattlepanel.GetComponent<FinishBattleScript>().winner = hilary.GetComponent<FighterScript>().fightername;
+                                tutorial.GetComponent<TuttyScript>().mysource.Stop();
+                            }
+                            else
+                            {
+                                tutorial.SendMessage("ThingClicked", "spclick");
+                                _firsttime = false;
+                            }
 						} else {
 							if (_myturn) {
 								EndMyTurn ();
@@ -155,10 +174,9 @@ public class BattleScript : MonoBehaviour {
 							NavigateMoveMenu (KeyCode.DownArrow);
 							updateAttackDescription (currentattackselectorchoice);
 						}
-						if (Input.GetKeyDown (KeyCode.Space)) {
-							tutorial.SendMessage ("ThingClicked", "spclick");
+						if (Input.GetKeyDown (KeyCode.Return)) {
 							updateAttackDescription (currentattackselectorchoice);
-							NavigateMoveMenu (KeyCode.Space);
+							NavigateMoveMenu (KeyCode.Return);
 						}
 					}
 				}
@@ -209,7 +227,7 @@ public class BattleScript : MonoBehaviour {
 				attack.DecrementDmg ();
 				updateAttackDescription (attackindex);
 				Debug.Log ("You dealt " + atkDmg + " damage.");
-				StartCoroutine (AnimateText (me.name + " used " + attack.name + "\u25BC"));
+				StartCoroutine (AnimateText (hilary.GetComponent<FighterScript>().fightername + " used " + attack.name + "\u25BC"));
 				StartCoroutine (AnimateSprite (opponent, 8));
 			} else {
 				Debug.Log ("attack missed");
@@ -269,11 +287,13 @@ public class BattleScript : MonoBehaviour {
 			}
 		}
 		attackselector.transform.localPosition = attacktextselectionlocations [currentattackselectorchoice];
-		if (key == KeyCode.Space) {
+		if (key == KeyCode.Return) {
 			GenerateMyAttack (currentattackselectorchoice, trump, hilary);
 //			Debug.Log ("HIT RETURN YO");
 			HideMoveMenu ();
 			ShowPokeText ();
+            tutorial.SendMessage("ThingClicked", "rtclick");
+
 		}
 	}
 	void HideMoveMenu(){
@@ -345,7 +365,7 @@ public class BattleScript : MonoBehaviour {
 			myattacks.Add (new Attack ("I Smoked Marijuana Twice", 14, 70, 50000, 6));
 			myattacks.Add (new Attack ("Finger Wag", 22, 50, 10000, 8));
 		}
-		movedict.Add(hilary, myattacks);
+		movedict[hilary] = myattacks;
 		initAttackText();
 		updateAttackDescription (currentattackselectorchoice);
 
