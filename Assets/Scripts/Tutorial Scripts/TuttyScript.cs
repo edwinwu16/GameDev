@@ -75,7 +75,7 @@ public class TuttyScript : MonoBehaviour {
 			new TutorialThing(null, "But beware, the bigger the corporation, the more they hurt your campaign.", null),
 			new TutorialThing(null, "Owning Goldman Sachs makes your finance campaigns less effective.", null),
 			new TutorialThing(null, "Owning Exxon makes your environmental campaigns less effective.", null),
-			new TutorialThing(moneyarrow, "By the way, the money you have is shown here", null),
+			new TutorialThing(moneyarrow, "By the way, the money you have is shown here.", null),
 			new TutorialThing(null, "Let's go back to the main screen.", "corpx"),
 			new TutorialThing(adviserarrow, "Now let's check out the advisers available.", "manageadvisers"),
 			new TutorialThing(null, "Advisers enhance the effectiveness of your campaigns. They also open up certain campaigns.", null),
