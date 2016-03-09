@@ -19,7 +19,8 @@ public class XPopupRegionScript : MonoBehaviour {
 	}
 	private void sendClick() {
 		maincamera.SendMessage ("HideBox");
- q
+        tutorial.SendMessage("ThingClicked", "popupx");
+
 	}
 
 }

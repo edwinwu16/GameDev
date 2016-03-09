@@ -2,9 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 //using UnityEngine.Behaviour;
 using UnityEngine.UI;
 using System;
@@ -644,11 +641,15 @@ public class PopupScript : MonoBehaviour {
 	private void startClick(string region, Campaign campaign, Button addbutton){
         if (activecampaigns[region].Count >= 3)
         {
-            
-#if UNITY_EDITOR
-                EditorUtility.DisplayDialog("Too Many Campaigns", "You Can Only Have Three Campaigns in a Region", "Okay");
-#endif
-			addbutton.interactable = true;
+
+            dialoguecanvas.SetActive(true);
+            dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = "Too Many Campaigns in" + region;
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Maximum of Three Campaigns in a Region.";
+            dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
+            addbutton.interactable = true;
 
         }
         else
@@ -796,12 +797,24 @@ public class PopupScript : MonoBehaviour {
             newday[key] = true;
             storedcampaigns[key].Clear();
         }
+        if (getTotalMoney() < -1000000.0F)
+        {
+            string str = String.Format("Ran Out of Money: {0:C}", getTotalMoney());
+            dialoguecanvas.SetActive(true);
+            dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = str;
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Whoa Nelly, you really Scott Walker-ed this election cycle. Nobody is willing to lend you more than $1,000,000.";
+            dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { gameOver(); });
+        }
         if (getTotalMoney() < 0.0F && belowzero < 3)
         {
             dialoguecanvas.SetActive(true);
             dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
-            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = "Ran Out of Money";
-            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Don't worry Goldman just extended you a loan for 1M! Just try not to forget about the little guys on Wall Street, aight?";
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = String.Format("Ran Out of Money: {0:C}", getTotalMoney());
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = String.Format("Don't worry Goldman just extended you a loan for 1M! So you have now have {0:C}. Just try not to forget about the little guys on Wall Street, aight?", (getTotalMoney()+1000000.0F));
             dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
             dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
             dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
@@ -811,7 +824,7 @@ public class PopupScript : MonoBehaviour {
         }
         if (getTotalMoney() < 0.0F && belowzero >= 3)
         {
-            string str = String.Format("Ran Out of Money: {0:n0}", getTotalMoney());
+            string str = String.Format("Ran Out of Money: {0:C}", getTotalMoney());
             dialoguecanvas.SetActive(true);
             dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
             dialoguepanel.GetComponent<DisplayDialogScript>().title.text = str;
@@ -819,7 +832,8 @@ public class PopupScript : MonoBehaviour {
             dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
             dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
             dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
-            gameOver();
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { gameOver(); });
+
         }
 
 

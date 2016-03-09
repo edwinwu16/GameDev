@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-#if UNITY_EDITOR 
-    using UnityEditor;
-#endif
+
 
 
 public class AddAdvisorScript : MonoBehaviour {
@@ -41,6 +39,8 @@ public class AddAdvisorScript : MonoBehaviour {
             dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Yo, You Broke Son.";
             dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
             dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
+
         }
         else
         {
@@ -52,6 +52,8 @@ public class AddAdvisorScript : MonoBehaviour {
                 dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Maximum of Five Advisors. Go All 'The Apprentice' on Somebody.";
                 dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
                 dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+                dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
+
 
 
             }

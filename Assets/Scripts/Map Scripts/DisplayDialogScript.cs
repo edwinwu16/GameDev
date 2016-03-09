@@ -20,4 +20,5 @@ public class DisplayDialogScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
 }
