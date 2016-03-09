@@ -34,6 +34,8 @@ public class PopupScript : MonoBehaviour {
 	public GameObject dailysummarypanel;
 	public GameObject corporatepanel;
 	public GameObject battleobject;
+    public GameObject dialoguepanel;
+    public GameObject dialoguecanvas;
 	public GameObject welcomebattlepanel;
 	public GameObject trump;
 	private List<Corporation> activecorporations;
@@ -243,6 +245,7 @@ public class PopupScript : MonoBehaviour {
 			InitializeThings ();
 			InitializeCampaigns();
 			initializedalready = true;
+
 		}
 
 	}
@@ -715,6 +718,10 @@ public class PopupScript : MonoBehaviour {
 		incmoneybutton.GetComponent<IncreasePopularityorMoneyScript>().amounttoIncreasePop = buttons_general_incmon[incmonoption].Value[1];
 	}*/
 
+    public void turnonCanvas()
+    {
+        dialoguecanvas.SetActive(true);
+    }
 
 
     void generateBoosters(){
@@ -791,22 +798,28 @@ public class PopupScript : MonoBehaviour {
         }
         if (getTotalMoney() < 0.0F && belowzero < 3)
         {
-            #if UNITY_EDITOR
-
-                EditorUtility.DisplayDialog("Ran Out of Money", "Don't worry Goldman just extended you a loan for 1M! Just try not to forget about the little guys on Wall Street, aight?", "Okay");
-            #endif
-                IncreaseMoney(1000000.0F);
+            dialoguecanvas.SetActive(true);
+            dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = "Ran Out of Money";
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Don't worry Goldman just extended you a loan for 1M! Just try not to forget about the little guys on Wall Street, aight?";
+            dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
+            IncreaseMoney(1000000.0F);
+            belowzero++;
 
         }
         if (getTotalMoney() < 0.0F && belowzero >= 3)
         {
-#if UNITY_EDITOR
             string str = String.Format("Ran Out of Money: {0:n0}", getTotalMoney());
-            if (EditorUtility.DisplayDialog(str, "Goldman doesn't think you're worth it.", "Okay"))
-            {
-                gameOver();
-            }
-#endif
+            dialoguecanvas.SetActive(true);
+            dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = str;
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Goldman Doesn't Think Your Worth It Anymore";
+            dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.onClick.AddListener(delegate { dialoguecanvas.SetActive(false); });
+            gameOver();
         }
 
 

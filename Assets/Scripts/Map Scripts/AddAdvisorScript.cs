@@ -11,6 +11,8 @@ public class AddAdvisorScript : MonoBehaviour {
 	public Advisor curadvisor;
 	public GameObject advisorpanel;
     public GameObject popup;
+    public GameObject dialoguecanvas;
+    public GameObject dialoguepanel;
 
 	public Button self;
 	// Use this for initialization
@@ -26,21 +28,32 @@ public class AddAdvisorScript : MonoBehaviour {
 	}
 
 	public void onClickAdd(Advisor curadvisor) {
+        dialoguecanvas = popup.GetComponent<PopupScript>().dialoguecanvas;
+        dialoguepanel = popup.GetComponent<PopupScript>().dialoguepanel;
+
 		Debug.Log ("CLICKY Add");
         
         if (popup.GetComponent<PopupScript>().getTotalMoney() < curadvisor.price)
         {
-#if UNITY_EDITOR
-            EditorUtility.DisplayDialog("Too Little Money", "Yo you broke son", "Okay");
-#endif
+            dialoguecanvas.SetActive(true);
+            dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+            dialoguepanel.GetComponent<DisplayDialogScript>().title.text = "Too Little Money";
+            dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Yo, You Broke Son.";
+            dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+            dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
         }
         else
         {
             if (advisorpanel.GetComponent<AdvisorScript>().myAdvisors.Count >= 5)
             {
-#if UNITY_EDITOR
-                EditorUtility.DisplayDialog("Too Many Advisors", "Maximum of Five Advisors. Go All 'The Apprentice' on Somebody.", "Okay");
-#endif
+                dialoguecanvas.SetActive(true);
+                dialoguepanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0F, 0.0F);
+                dialoguepanel.GetComponent<DisplayDialogScript>().title.text = "Too Many Advisors";
+                dialoguepanel.GetComponent<DisplayDialogScript>().message.text = "Maximum of Five Advisors. Go All 'The Apprentice' on Somebody.";
+                dialoguepanel.GetComponent<DisplayDialogScript>().falsebutton.gameObject.SetActive(false);
+                dialoguepanel.GetComponent<DisplayDialogScript>().truebutton.GetComponentInChildren<Text>().text = "Continue";
+
+
             }
             else
             {
