@@ -37,6 +37,7 @@ public class TuttyScript : MonoBehaviour {
 	public GameObject mapcanvas;
 	public GameObject battlecanvas;
     public GameObject battleobject;
+	public GameObject gainlosstext;
 
 	public GameObject popup;
 
@@ -163,7 +164,7 @@ public class TuttyScript : MonoBehaviour {
             battlecanvas.SetActive(false);
             battleobject.GetComponent<BattleScript>().ImportMe();
             battleobject.SetActive(false);
-
+			gainlosstext.SetActive (false);
         }
 	}
 

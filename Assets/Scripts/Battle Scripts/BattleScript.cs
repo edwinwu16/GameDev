@@ -65,6 +65,8 @@ public class BattleScript : MonoBehaviour {
 	public Text attackDescription;
 	public bool attackHit;
 
+	public GameObject gainlosttext;
+
 	public GameObject attackmenu;
 	public GameObject attackselector;
 
@@ -417,12 +419,24 @@ public class BattleScript : MonoBehaviour {
 		Debug.Log("Inc/Dec worked");
 		int currentPopularity = popupscript.GetComponent<PopupScript> ().getTotalPopularity ();
 		int popularityChange = (int)((float)currentPopularity * 0.10f);
+		int tempy;
+		if (popularityChange < 0) {
+			tempy = -popularityChange;
+		} else {
+			tempy = popularityChange;
+		}
+		string popchancestr;
+		popchancestr = String.Format ("{0:N0}", tempy);
 		if (playerWon == true) {
 			popupscript.GetComponent<PopupScript> ().regions ["West"].popularity += popularityChange;
-			Debug.Log ("popularity increasd by:  " + popularityChange);
+			gainlosttext.GetComponent<Text> ().text = "Increased by " + popchancestr;
+			gainlosttext.SetActive (true);
+			Debug.Log ("popularity increasd by:  " + popchancestr);
 		} else{
+			gainlosttext.GetComponent<Text> ().text = "Decreased by " + popchancestr;
+			gainlosttext.SetActive (true);
 			popupscript.GetComponent<PopupScript> ().regions ["West"].popularity -= popularityChange;
-			Debug.Log ("popularity decreased by:  " + popularityChange);
+			Debug.Log ("popularity decreased by:  " + popchancestr);
 		}
 	}
 //	public void LoserRekt(){
