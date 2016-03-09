@@ -75,18 +75,18 @@ public class AdvisorScript : MonoBehaviour {
         new Advisor("James Dimon", new List<string>(){"Finance"}, 280000.0F, new List<int>(){3}),
         new Advisor("Bob Dudley", new List<string>(){"Environment", "Finance"}, 150000.0F, new List<int>(){1, 2}),
 
-        new Advisor("imm", new List<string>(){"Immigration"}, 210000.0F, new List<int>(){2}),
-        new Advisor("John", new List<string>(){"Immigration"}, 100000.0F, new List<int>(){1}),
-        new Advisor("", new List<string>(){"Finance"}, 290000.0F, new List<int>(){3}),
+		new Advisor("Hector Sanchez", new List<string>(){"Immigration"}, 210000.0F, new List<int>(){2}),
+		new Advisor("Cecilia Muñoz", new List<string>(){"Immigration"}, 100000.0F, new List<int>(){1}),
+		new Advisor("Alan Greenspan", new List<string>(){"Finance"}, 290000.0F, new List<int>(){3}),
         new Advisor("John Stewart", new List<string>(){"Immigration"}, 110000.0F, new List<int>(){1}),
-        new Advisor("", new List<string>(){"Healthcare"}, 90000.0F, new List<int>(){1}),
-        new Advisor("", new List<string>(){"Environment", "Healthcare"}, 100000.0F, new List<int>(){1, 1}),
-        new Advisor("", new List<string>(){"Healthcare", "Finance"}, 110000.0F, new List<int>(){1, 1}),
+        new Advisor("Chris Jennings", new List<string>(){"Healthcare"}, 90000.0F, new List<int>(){1}),
+		new Advisor("Howard Frumkin", new List<string>(){"Environment", "Healthcare"}, 100000.0F, new List<int>(){1, 1}),
+		new Advisor("Barack Obama", new List<string>(){"Healthcare", "Finance"}, 220000.0F, new List<int>(){2, 2}),
         new Advisor("George W. Bush", new List<string>(){"Environment", "Finance", "Healthcare", "Immigration"}, 210000.0F, new List<int>(){1, 1, 1, 1}, new List <Campaign>(){new Campaign("Look Smarter By Comparison to George W.", 50, 25, 150, 15, "General")}),
         new Advisor("Bob Greenhill", new List<string>(){"Finance"}, 100000.0F, new List<int>(){1}),
         new Advisor("Bill Gates", new List<string>(){"Environment", "Finance", "Healthcare", "Immigration"}, 350000.0F, new List<int>(){2, 3, 2, 3}, new List<Campaign>(){new Campaign("Melinda & Gates Foundation Voice of Support", 600, 60, 350, 35, "General")}),
-        new Advisor("", new List<string>(){"Healthcare"}, 250000.0F, new List<int>(){2}),
-        new Advisor("", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
+		new Advisor("Scott Serota", new List<string>(){"Healthcare"}, 250000.0F, new List<int>(){2}),
+        new Advisor("Ben Bernanke", new List<string>(){"Finance"}, 100090.0F, new List<int>(){3}),
 
     };
 
