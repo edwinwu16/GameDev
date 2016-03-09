@@ -48,7 +48,7 @@ public class AttackMarketplaceScript : MonoBehaviour {
 			new Attack("Chapter 11 is my fav", 40.0F, 80, 750000, 5),
             new Attack("9/11", 25.0F, 75, 750000, 10),
             new Attack("Donald Drumpf", 15.0F, 85, 100000, 7),
-            new Attack("Donald Duck Would Be Better ):", 10.0F, 95, 100000, 10),
+            new Attack("Donald Duck Would Be Better", 10.0F, 95, 100000, 10),
             new Attack("Treason", 100.0F, 20, 750000, 3),
             new Attack("New Tax on Tanning Salons", 25.0F, 85, 400000, 5),
             new Attack("Isn't Your Wife an Immigrant?", 15.0F, 95, 400000, 8),
