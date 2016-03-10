@@ -857,8 +857,9 @@ public class PopupScript : MonoBehaviour {
 	}
 	public void switchtoBattleScene()
 	{
-        tutorial.GetComponent<TuttyScript>().mysource.Play();
+        
         battleobject.SetActive(true);
+		battleobject.GetComponent<BattleScript>().mysource.Play();
 
 
 

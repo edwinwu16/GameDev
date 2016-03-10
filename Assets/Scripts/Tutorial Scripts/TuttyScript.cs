@@ -150,8 +150,7 @@ public class TuttyScript : MonoBehaviour {
 			}
 		}
 		if (tuttylist [stepintut].text == "Now is the moment you've been waiting for...") {
-			mysource.clip = mysound;
-			mysource.Play ();
+			//battleobject.GetComponent<BattleScript>().mysource.Play();
 		}
 		if (tuttylist [stepintut].text == "Trump Challenges YOU to a debate! Press Continue to start.") {
 			Debug.Log ("AH!");

@@ -70,6 +70,9 @@ public class BattleScript : MonoBehaviour {
 	public GameObject attackmenu;
 	public GameObject attackselector;
 
+	public AudioSource mysource;
+	public AudioClip mysound;
+
 	public GameObject tutorial;
 
 
@@ -127,12 +130,13 @@ public class BattleScript : MonoBehaviour {
                                 finishbattlepanel.SetActive(true);
                                 finishbattlepanel.transform.localPosition = new Vector3(0.0F, 0.0F, 0.0F);
                                 finishbattlepanel.GetComponent<FinishBattleScript>().winner = trump.GetComponent<FighterScript>().fightername;
-                                tutorial.GetComponent<TuttyScript>().mysource.Stop();
+								mysource.Stop();
                             }
                             else
                             {
                                 tutorial.SendMessage("ThingClicked", "spclick");
                                 _firsttime = false;
+								mysource.Stop();
                             }
 						// you WIN
 						} else if (trump.GetComponent<FighterScript> ().health <= 0) {
